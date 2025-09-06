@@ -8,9 +8,14 @@ const variants = {
   ghost: "bg-transparent text-orange-400 hover:bg-orange-50 font-semibold",
 } as const;
 
-export default function Button({ variant = "primary", children }: Props) {
+export default function Button({
+  variant = "primary",
+  children,
+  type = "button",
+  ...rest
+}: Props) {
   return (
-    <button className={`cursor-pointer ${variants[variant]}`}>
+    <button className={`cursor-pointer ${variants[variant]}`} {...rest}>
       {children}
     </button>
   );
