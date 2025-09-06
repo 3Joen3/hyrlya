@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Hyrlya.Controllers
+namespace HyrLya.Controllers
 {
     [ApiController]
     [Route("[controller]")]

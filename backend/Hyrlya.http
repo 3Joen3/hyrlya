@@ -1,6 +1,6 @@
-@Hyrlya_HostAddress = http://localhost:5269
+@HyrLya_HostAddress = http://localhost:5082
 
-GET {{Hyrlya_HostAddress}}/weatherforecast/
+GET {{HyrLya_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###

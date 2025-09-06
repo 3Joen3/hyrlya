@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36414.22 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyrlya", "Hyrlya.csproj", "{BD17C1EC-25F5-4F26-9971-28B07A39D4A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HyrLya", "HyrLya.csproj", "{C041DA39-BD20-4E64-A94C-7801DEAC7369}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BD17C1EC-25F5-4F26-9971-28B07A39D4A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BD17C1EC-25F5-4F26-9971-28B07A39D4A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BD17C1EC-25F5-4F26-9971-28B07A39D4A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BD17C1EC-25F5-4F26-9971-28B07A39D4A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C041DA39-BD20-4E64-A94C-7801DEAC7369}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C041DA39-BD20-4E64-A94C-7801DEAC7369}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C041DA39-BD20-4E64-A94C-7801DEAC7369}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C041DA39-BD20-4E64-A94C-7801DEAC7369}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {A19A6619-38D6-4ED9-BB80-76C6AF0140F4}
+		SolutionGuid = {39F32CBD-E504-4FBF-B94C-336F1714138E}
 	EndGlobalSection
 EndGlobal

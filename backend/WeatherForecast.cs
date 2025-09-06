@@ -1,4 +1,4 @@
-namespace Hyrlya
+namespace HyrLya
 {
     public class WeatherForecast
     {
