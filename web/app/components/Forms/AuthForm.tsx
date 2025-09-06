@@ -35,7 +35,7 @@ function SignUpForm() {
       <TextField id="firstName" label="Efternamn" />
       <TextField className="col-span-2" id="email" label="Ange e-postadress" />
       <TextField className="col-span-2" id="password" label="Ange lösenord" />
-      <Submit label="Registrera" />
+      <Button type="submit">Registrera</Button>
     </Form>
   );
 }
