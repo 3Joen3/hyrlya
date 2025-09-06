@@ -4,5 +4,9 @@ interface Props {
 }
 
 export default function Page({ className, children }: Props) {
-  return <main className={`w-11/12 mx-auto ${className}`}>{children}</main>;
+  return (
+    <main className={`w-11/12 mx-auto bg-white shadow p-6 ${className}`}>
+      {children}
+    </main>
+  );
 }
