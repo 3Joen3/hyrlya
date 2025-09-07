@@ -4,11 +4,11 @@ import Button from "../Button";
 import Form from "./Form";
 import TextField from "./TextField";
 
-import { post } from "@/lib/api/utils";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { RegisterData, registerSchema } from "@/lib/schemas/registerSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { login, register } from "@/lib/api/auth";
 
 export default function AuthForm() {
   const [showRegisterForm, setShowRegisterForm] = useState(true);
@@ -42,6 +42,8 @@ function RegisterForm() {
   });
 
   async function handleSubmit(data: RegisterData) {
+    await register(data);
+    await login(data);
   }
 
   return (
