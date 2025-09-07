@@ -4,44 +4,44 @@ import Button from "../Button";
 import Form from "./Form";
 import TextField from "./TextField";
 
+import { post } from "@/lib/api/utils";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { SignUpData, signUpSchema } from "@/lib/schemas/signUpSchema";
+import { RegisterData, registerSchema } from "@/lib/schemas/registerSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function AuthForm() {
-  const [showSignUpForm, setshowSignUpForm] = useState(true);
+  const [showRegisterForm, setShowRegisterForm] = useState(true);
 
   return (
     <>
       <div className="flex">
         <Button
           className="flex-1"
-          onClick={() => setshowSignUpForm(false)}
-          variant={showSignUpForm ? undefined : "ghost"}
+          onClick={() => setShowRegisterForm(false)}
+          variant={showRegisterForm ? undefined : "ghost"}
         >
           Logga in
         </Button>
         <Button
           className="flex-1"
-          onClick={() => setshowSignUpForm(true)}
-          variant={showSignUpForm ? "ghost" : undefined}
+          onClick={() => setShowRegisterForm(true)}
+          variant={showRegisterForm ? "ghost" : undefined}
         >
           Registrera konto
         </Button>
       </div>
-      {showSignUpForm ? <SignUpForm /> : <LoginForm />}
+      {showRegisterForm ? <RegisterForm /> : <LoginForm />}
     </>
   );
 }
 
-function SignUpForm() {
-  const methods = useForm<SignUpData>({
-    resolver: zodResolver(signUpSchema),
+function RegisterForm() {
+  const methods = useForm<RegisterData>({
+    resolver: zodResolver(registerSchema),
   });
 
-  function handleSubmit(data: SignUpData) {
-    console.log(data);
+  async function handleSubmit(data: RegisterData) {
   }
 
   return (
@@ -50,8 +50,6 @@ function SignUpForm() {
       onSubmit={handleSubmit}
       methods={methods}
     >
-      <TextField id="firstName" label="Förnamn" />
-      <TextField id="lastName" label="Efternamn" />
       <TextField className="col-span-2" id="email" label="Ange e-postadress" />
       <TextField className="col-span-2" id="password" label="Ange lösenord" />
       <Button className="col-start-2" type="submit">
