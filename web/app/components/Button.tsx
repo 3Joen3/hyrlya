@@ -1,5 +1,6 @@
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: keyof typeof variants;
+  className?: string;
   children: React.ReactNode;
 }
 
@@ -10,12 +11,15 @@ const variants = {
 
 export default function Button({
   variant = "primary",
+  className,
   children,
   type = "button",
   ...rest
 }: Props) {
+  const classNames = variants[variant] + " " + className;
+
   return (
-    <button className={`cursor-pointer ${variants[variant]}`} {...rest}>
+    <button className={`cursor-pointer ${classNames}`} {...rest}>
       {children}
     </button>
   );
