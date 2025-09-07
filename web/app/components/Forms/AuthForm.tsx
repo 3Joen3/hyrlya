@@ -14,14 +14,16 @@ export default function AuthForm() {
 
   return (
     <>
-      <div>
+      <div className="flex">
         <Button
+          className="flex-1"
           onClick={() => setshowSignUpForm(false)}
           variant={showSignUpForm ? undefined : "ghost"}
         >
           Logga in
         </Button>
         <Button
+          className="flex-1"
           onClick={() => setshowSignUpForm(true)}
           variant={showSignUpForm ? "ghost" : undefined}
         >
@@ -52,7 +54,9 @@ function SignUpForm() {
       <TextField id="lastName" label="Efternamn" />
       <TextField className="col-span-2" id="email" label="Ange e-postadress" />
       <TextField className="col-span-2" id="password" label="Ange lösenord" />
-      <Button type="submit">Registrera</Button>
+      <Button className="col-start-2" type="submit">
+        Registrera
+      </Button>
     </Form>
   );
 }

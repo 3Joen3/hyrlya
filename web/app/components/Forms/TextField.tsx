@@ -11,12 +11,12 @@ export default function TextField({ className, label, id }: Props) {
   const { register } = useFormContext();
 
   return (
-    <div className={`${className} space-y-1`}>
-      <label className="block text-sm font-medium text-gray-700" htmlFor={id}>
+    <div className={`${className} flex flex-col gap-1`}>
+      <label className="text-lg text-neutral-800" htmlFor={id}>
         {label}
       </label>
       <input
-        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+        className="text-neutral-800 border border-neutral-300 px-2 py-1.5 placeholder:text-neutral-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
         type="text"
         id={id}
         {...register(id)}
