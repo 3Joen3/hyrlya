@@ -1,5 +1,5 @@
-import Page from "../components/Page";
-import AuthForm from "../components/Forms/AuthForm";
+import Page from "../../components/Page";
+import AuthForm from "../../components/Forms/AuthForm";
 
 export default function page() {
   return (
@@ -8,3 +8,4 @@ export default function page() {
     </Page>
   );
 }
+  
