@@ -15,20 +15,26 @@ export default function AuthForm() {
 
   return (
     <>
-      <div className="flex">
+      <div className="grid grid-cols-2">
         <Button
-          className="flex-1"
+          color={showRegisterForm ? "ghost" : "secondary"}
+          variant="none"
+          className={`rounded-t py-2 transition-colors duration-200 ${
+            showRegisterForm ? "" : "font-semibold"
+          }`}
           onClick={() => setShowRegisterForm(false)}
-          variant={showRegisterForm ? undefined : "ghost"}
         >
           Logga in
         </Button>
         <Button
-          className="flex-1"
+          color={showRegisterForm ? "secondary" : "ghost"}
+          variant="none"
+          className={`rounded-t py-2 transition-colors duration-200 ${
+            showRegisterForm ? "font-semibold" : ""
+          }`}
           onClick={() => setShowRegisterForm(true)}
-          variant={showRegisterForm ? "ghost" : undefined}
         >
-          Registrera konto
+          Skapa konto
         </Button>
       </div>
       {showRegisterForm ? <RegisterForm /> : <LoginForm />}
@@ -47,15 +53,11 @@ function RegisterForm() {
   }
 
   return (
-    <Form
-      className="grid grid-cols-2 gap-4"
-      onSubmit={handleSubmit}
-      methods={methods}
-    >
-      <TextField className="col-span-2" id="email" label="Ange e-postadress" />
-      <TextField className="col-span-2" id="password" label="Ange lösenord" />
-      <Button className="col-start-2" type="submit">
-        Registrera
+    <Form className="space-y-4" onSubmit={handleSubmit} methods={methods}>
+      <TextField id="email" label="Ange e-postadress" />
+      <TextField id="password" label="Ange lösenord" />
+      <Button className="w-full" type="submit">
+        Skapa konto
       </Button>
     </Form>
   );

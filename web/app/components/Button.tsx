@@ -1,25 +1,33 @@
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: keyof typeof variants;
+  color?: keyof typeof colors;
   className?: string;
   children: React.ReactNode;
 }
 
 const variants = {
-  primary: "bg-orange-400 text-white font-bold",
-  ghost: "bg-transparent text-orange-400 hover:bg-orange-50 font-semibold",
+  primary: "rounded py-2 font-semibold",
+  none: "",
+} as const;
+
+const colors = {
+  primary: "bg-sky-600 hover:bg-sky-700 text-white",
+  secondary: "bg-neutral-600 hover:bg-neutral-700 text-white",
+  ghost: "text-neutral-400 hover:bg-neutral-50",
 } as const;
 
 export default function Button({
   variant = "primary",
+  color = "primary",
   className,
   children,
   type = "button",
   ...rest
 }: Props) {
-  const classNames = variants[variant] + " " + className;
+  const classNames = variants[variant] + " " + colors[color] + " " + className;
 
   return (
-    <button className={`cursor-pointer ${classNames}`} {...rest}>
+    <button type={type} className={`cursor-pointer ${classNames}`} {...rest}>
       {children}
     </button>
   );
