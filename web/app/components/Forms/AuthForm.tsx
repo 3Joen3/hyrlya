@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "../Button";
+import Block from "../Block";
 import Form from "./Form";
 import TextField from "./TextField";
 
@@ -10,11 +11,15 @@ import { RegisterData, registerSchema } from "@/lib/schemas/registerSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { login, register } from "@/lib/api/auth";
 
-export default function AuthForm() {
+interface Props {
+  className?: string;
+}
+
+export default function AuthForm({ className }: Props) {
   const [showRegisterForm, setShowRegisterForm] = useState(true);
 
   return (
-    <>
+    <div className={className}>
       <div className="grid grid-cols-2">
         <Button
           color={showRegisterForm ? "ghost" : "secondary"}
@@ -37,8 +42,8 @@ export default function AuthForm() {
           Skapa konto
         </Button>
       </div>
-      {showRegisterForm ? <RegisterForm /> : <LoginForm />}
-    </>
+      <Block>{showRegisterForm ? <RegisterForm /> : <LoginForm />}</Block>
+    </div>
   );
 }
 
