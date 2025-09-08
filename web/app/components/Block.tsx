@@ -3,7 +3,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export default function Section({ className, children }: Props) {
+export default function Block({ className, children }: Props) {
   return (
     <div className={`${className} p-4 bg-white shadow`}>
       {children}
