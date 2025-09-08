@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { RegisterData, registerSchema } from "@/lib/schemas/registerSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { login, register } from "@/lib/api/auth";
+import { LoginData, loginSchema } from "@/lib/schemas/loginSchema";
 
 interface Props {
   className?: string;
@@ -69,5 +70,21 @@ function RegisterForm() {
 }
 
 function LoginForm() {
-  return <div></div>;
+  const methods = useForm<LoginData>({
+    resolver: zodResolver(loginSchema),
+  });
+
+  async function handleSubmit(data: LoginData) {
+    await login(data);
+  }
+
+  return (
+    <Form className="space-y-4" methods={methods} onSubmit={handleSubmit}>
+      <TextField id="email" label="Ange e-postadress" />
+      <TextField id="password" label="Ange lösenord" />
+      <Button className="w-full" type="submit">
+        Logga in
+      </Button>
+    </Form>
+  );
 }
