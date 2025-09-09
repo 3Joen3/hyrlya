@@ -24,6 +24,7 @@ export default function AuthForm({ className }: Props) {
       <div className="grid grid-cols-2">
         <Button
           color={showRegisterForm ? "ghost" : "secondary"}
+          useHoverEffects={showRegisterForm ? true : false}
           variant="none"
           className={`rounded-t py-2 transition-colors duration-200 ${
             showRegisterForm ? "" : "font-semibold shadow-md"
@@ -34,6 +35,7 @@ export default function AuthForm({ className }: Props) {
         </Button>
         <Button
           color={showRegisterForm ? "secondary" : "ghost"}
+          useHoverEffects={showRegisterForm ? false : true}
           variant="none"
           className={`rounded-t py-2 transition-colors duration-200 ${
             showRegisterForm ? "font-semibold" : ""
