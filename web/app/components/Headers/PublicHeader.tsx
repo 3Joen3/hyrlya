@@ -3,9 +3,8 @@ import Link from "next/link";
 
 export default function PublicHeader() {
   return (
-    <Header>
-      <Link href="/">Logo</Link>
-      <Link href="/auth">Hyr ut din bostad</Link>
+    <Header className="justify-between" logoHref="/">
+      <Link className="underline font-semibold" href="/auth">Hyr ut din bostad</Link>
     </Header>
   );
 }
