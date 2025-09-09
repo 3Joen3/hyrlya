@@ -26,7 +26,7 @@ export default function AuthForm({ className }: Props) {
           color={showRegisterForm ? "ghost" : "secondary"}
           variant="none"
           className={`rounded-t py-2 transition-colors duration-200 ${
-            showRegisterForm ? "" : "font-semibold"
+            showRegisterForm ? "" : "font-semibold shadow-md"
           }`}
           onClick={() => setShowRegisterForm(false)}
         >

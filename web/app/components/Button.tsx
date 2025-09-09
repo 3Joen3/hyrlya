@@ -11,8 +11,8 @@ const variants = {
 } as const;
 
 const colors = {
-  primary: "bg-sky-600 hover:bg-sky-700 text-white",
-  secondary: "bg-neutral-600 hover:bg-neutral-700 text-white",
+  primary: "bg-neutral-700 hover:bg-neutral-800 text-white",
+  secondary: "bg-sky-600 hover:bg-sky-700 text-white",
   ghost: "text-neutral-400 hover:bg-neutral-50",
 } as const;
 

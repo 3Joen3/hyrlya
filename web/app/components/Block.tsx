@@ -5,7 +5,7 @@ interface Props {
 
 export default function Block({ className, children }: Props) {
   return (
-    <div className={`${className} p-4 bg-white shadow`}>
+    <div className={`${className} p-4 bg-white shadow-md`}>
       {children}
     </div>
   );
