@@ -9,7 +9,7 @@ interface Props {
 }
 
 const variants = {
-  primary: "rounded py-2 font-semibold",
+  primary: "rounded px-3 py-2 font-semibold",
   none: "",
 } as const;
 

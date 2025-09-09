@@ -12,7 +12,6 @@ export default function LandlordHeader() {
             key={`header-link-${index}`}
             href={link.href}
             color="primary"
-            className="px-4"
           >
             {link.title}
           </NavLink>
