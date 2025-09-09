@@ -1,4 +1,4 @@
-const backendUrl = "https://localhost:7090";
+const backendUrl = process.env.BACKEND_URL;
 
 export async function postNoResponse(endpoint: string, data: any) {
   const url = `${backendUrl}/${endpoint}`;

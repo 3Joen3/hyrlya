@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { RegisterData, registerSchema } from "@/lib/schemas/registerSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { login, register } from "@/lib/api/auth";
+import { login, register } from "@/app/(public)/auth/actions";
 import { LoginData, loginSchema } from "@/lib/schemas/loginSchema";
 
 interface Props {
