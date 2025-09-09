@@ -15,8 +15,8 @@ export async function login(data: LoginData) {
 
   const bufferedExpiry = response.expiresIn - 60;
 
-  setAuthCookie("accessToken", response.accessToken, bufferedExpiry);
+  await setAuthCookie("accessToken", response.accessToken, bufferedExpiry);
 
   //SET A REAL EXPIRY DATE, SHOULD NOT BE SAME AS AT
-  setAuthCookie("refresh", response.refreshToken, bufferedExpiry);
+  await setAuthCookie("refresh", response.refreshToken, bufferedExpiry);
 }
