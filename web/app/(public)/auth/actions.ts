@@ -34,7 +34,7 @@ function setAuthCookie(
   value: string,
   maxAge: number
 ) {
-  cookieStore.set(`__HOST-${name}`, value, {
+  cookieStore.set(`__Host-${name}`, value, {
     httpOnly: true,
     secure: true,
     sameSite: "lax",
