@@ -52,7 +52,7 @@ export default function AuthForm({ className }: Props) {
 
 function RegisterForm() {
   const methods = useForm<RegisterData>({
-    resolver: zodResolver(registerSchema),
+    resolver: zodResolver(registerSchema)
   });
 
   async function handleSubmit(data: RegisterData) {
