@@ -1,4 +1,5 @@
-﻿using HyrLya.Infrastructure.Data;
+﻿using HyrLya.Infrastructure.Auth;
+using HyrLya.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +17,7 @@ namespace HyrLya.Infrastructure
             services.AddAuthentication()
                 .AddBearerToken(IdentityConstants.BearerScheme);
 
-            services.AddIdentityCore<User>()
+            services.AddIdentityCore<AppUser>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddApiEndpoints();
 
