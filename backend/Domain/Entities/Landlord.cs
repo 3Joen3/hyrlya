@@ -8,8 +8,10 @@ namespace Domain.Entities
 
         public Landlord(string identityId)
         {
+            ArgumentNullException.ThrowIfNull(identityId);
+
             if (string.IsNullOrWhiteSpace(identityId))
-                throw new ArgumentNullException(nameof(identityId));
+                throw new ArgumentException("IdentityId cannot be empty or whitespace.", nameof(identityId));
 
             IdentityId = identityId;
         }
