@@ -1,4 +1,4 @@
-﻿using HyrLya.Infrastructure.Data;
+﻿using HyrLya.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace HyrLya.Extensions
