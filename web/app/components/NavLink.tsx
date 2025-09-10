@@ -5,18 +5,19 @@ interface Props {
   children: React.ReactNode;
   variant?: keyof typeof variants;
   color?: keyof typeof colors;
-  useHoverEffects?: boolean;
   className?: string;
 }
 
 const variants = {
-  primary: "rounded px-3 py-2 font-semibold",
+  primary: "underline font-semibold",
+  buttonPrimary: "rounded px-3 py-2 font-semibold",
   none: "",
 } as const;
 
 const colors = {
-  primary: { base: "bg-neutral-700 text-white", hover: "hover:bg-neutral-800" },
-  secondary: { base: "bg-sky-600 text-white", hover: "hover:bg-sky-700" },
+  primary: "",
+  buttonPrimary: "bg-neutral-700 text-white hover:bg-neutral-800",
+  buttonSecondary: "bg-sky-600 text-white hover:bg-sky-700",
 } as const;
 
 export default function NavLink({
@@ -24,19 +25,9 @@ export default function NavLink({
   children,
   variant = "primary",
   color = "primary",
-  useHoverEffects = true,
   className,
 }: Props) {
-  const { base, hover } = colors[color];
-
-  const classNames = [
-    variants[variant],
-    base,
-    useHoverEffects && hover,
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const classNames = [variants[variant], colors[color], className].join(" ");
 
   return (
     <Link className={classNames} href={href}>
