@@ -8,7 +8,7 @@ interface Props {
 
 export default function Header({ className, children, logoHref }: Props) {
   return (
-    <header className={`bg-white shadow-md`}>
+    <header className={`bg-neutral-700 text-white`}>
       <div className={`${className} w-11/12 mx-auto py-4 flex items-center`}>
         <Link className="my-auto text-3xl font-bold" href={logoHref}>
           hyrlya
