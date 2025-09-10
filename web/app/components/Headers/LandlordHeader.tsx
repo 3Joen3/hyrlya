@@ -1,21 +1,12 @@
-import Header from "./Header";
 import NavLink from "../NavLink";
+import Header from "./Header";
+import Link from "next/link";
 
 export default function LandlordHeader() {
-  const headerLinks = [{ href: "/landlord/listings", title: "Annonser" }];
-
   return (
     <Header className="gap-12" logoHref="/landlord">
       <div className="space-x-6">
-        {headerLinks.map((link, index) => (
-          <NavLink
-            key={`header-link-${index}`}
-            href={link.href}
-            color="primary"
-          >
-            {link.title}
-          </NavLink>
-        ))}
+        <NavLink href="/landlord/listings">Annonser</NavLink>
       </div>
     </Header>
   );
