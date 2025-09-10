@@ -10,8 +10,7 @@ namespace Domain.Entities
         {
             ArgumentNullException.ThrowIfNull(identityId);
 
-            if (string.IsNullOrWhiteSpace(identityId))
-                throw new ArgumentException("IdentityId cannot be empty or whitespace.", nameof(identityId));
+            ArgumentException.ThrowIfNullOrWhiteSpace(identityId);
 
             IdentityId = identityId;
         }
