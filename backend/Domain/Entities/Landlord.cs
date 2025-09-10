@@ -4,19 +4,19 @@ namespace HyrLya.Domain.Entities
 {
     public class Landlord : Entity
     {
-        public string UserId { get; private set; }
+        public string IdentityId { get; private set; }
 
-        public Landlord(string userId)
+        public Landlord(string identityId)
         {
-            if (string.IsNullOrWhiteSpace(userId))
-                throw new ArgumentNullException(nameof(userId));
+            if (string.IsNullOrWhiteSpace(identityId))
+                throw new ArgumentNullException(nameof(identityId));
 
-            UserId = userId;
+            IdentityId = identityId;
         }
 
         private Landlord() 
         {
-            UserId = default!;
+            IdentityId = default!;
         }
     }
 }

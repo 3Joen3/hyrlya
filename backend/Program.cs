@@ -1,5 +1,6 @@
 using HyrLya.Infrastructure;
 using HyrLya.Extensions;
+using HyrLya.Infrastructure.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +25,7 @@ app.UseCors("Frontend");
 
 app.UseHttpsRedirection();
 
-app.MapIdentityApi<User>();
+app.MapIdentityApi<AppUser>();
 app.MapControllers();
 
 app.Run();
