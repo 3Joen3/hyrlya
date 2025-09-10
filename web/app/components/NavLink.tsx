@@ -5,6 +5,7 @@ interface Props {
   children: React.ReactNode;
   variant?: keyof typeof variants;
   color?: keyof typeof colors;
+  useHoverEffects?: boolean;
   className?: string;
 }
 
@@ -14,8 +15,8 @@ const variants = {
 } as const;
 
 const colors = {
-  primary: "bg-neutral-700 hover:bg-neutral-800 text-white",
-  secondary: "bg-sky-600 hover:bg-sky-700 text-white",
+  primary: { base: "bg-neutral-700 text-white", hover: "hover:bg-neutral-800" },
+  secondary: { base: "bg-sky-600 text-white", hover: "hover:bg-sky-700" },
 } as const;
 
 export default function NavLink({
@@ -23,9 +24,19 @@ export default function NavLink({
   children,
   variant = "primary",
   color = "primary",
+  useHoverEffects = true,
   className,
 }: Props) {
-  const classNames = [variants[variant], colors[color], className].join(" ");
+  const { base, hover } = colors[color];
+
+  const classNames = [
+    variants[variant],
+    base,
+    useHoverEffects && hover,
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <Link className={classNames} href={href}>
