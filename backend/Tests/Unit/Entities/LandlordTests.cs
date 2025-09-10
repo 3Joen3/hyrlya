@@ -15,19 +15,11 @@ namespace Tests.Unit.Entities
             Assert.Equal(identityId, landlord.IdentityId);
         }
 
-        [Fact]
-        public void Constructor_WithNullIdentityId_ShouldThrow()
-        {
-            string? identityId = null;
-
-            Assert.Throws<ArgumentNullException>(() 
-                => new Landlord(identityId!));
-        }
-
         [Theory]
+        [InlineData(null)]
         [InlineData("")]
         [InlineData("  ")]
-        public void Constructor_WithEmptyIdentityId_ShouldThrow(string identityId)
+        public void Constructor_WithInvalidIdentityId_ShouldThrow(string identityId)
         {
             Assert.Throws<ArgumentException>(()
                 => new Landlord(identityId));

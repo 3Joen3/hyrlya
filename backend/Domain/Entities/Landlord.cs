@@ -8,8 +8,6 @@ namespace Domain.Entities
 
         public Landlord(string identityId)
         {
-            ArgumentNullException.ThrowIfNull(identityId);
-
             ArgumentException.ThrowIfNullOrWhiteSpace(identityId);
 
             IdentityId = identityId;
