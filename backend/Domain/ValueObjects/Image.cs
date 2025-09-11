@@ -13,7 +13,5 @@
             Url = url;
             AltText = altText;
         }
-
-        private Image() { Url = default!; AltText = default!; }
     }
 }

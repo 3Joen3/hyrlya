@@ -16,7 +16,5 @@
 
             Value = url;
         }
-
-        private WebAddress() { Value = default!; }
     }
 }

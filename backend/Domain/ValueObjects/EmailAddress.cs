@@ -20,7 +20,5 @@ namespace Domain.ValueObjects
 
         [GeneratedRegex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.Compiled)]
         private static partial Regex EmailRegex();
-
-        private EmailAddress() { Value = default!; }
     }
 }

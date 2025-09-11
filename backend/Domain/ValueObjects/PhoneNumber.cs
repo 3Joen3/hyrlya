@@ -23,7 +23,5 @@ namespace Domain.ValueObjects
 
         [GeneratedRegex(@"^(?:\+46|0)7\d{8}$", RegexOptions.Compiled)]
         private static partial Regex SwedishPhoneRegex();
-
-        private PhoneNumber() { Value = default!; }
     }
 }
