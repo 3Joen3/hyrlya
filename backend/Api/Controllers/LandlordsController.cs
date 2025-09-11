@@ -1,10 +1,31 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
-    public class LandlordsController : ControllerBase
+    [Authorize]
+    public class LandlordsController(ILandlordService landlordService) : ControllerBase
     {
+        private readonly ILandlordService _landlordService = landlordService;
+
+        private string? IdentityId 
+            => User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        [HttpGet]
+        public async Task<IActionResult> GetMyLandlord()
+        {
+            if (string.IsNullOrEmpty(IdentityId))
+                return Unauthorized();
+
+            var landlord = await _landlordService.GetByIdentityId(IdentityId);
+
+            return landlord is null 
+                ? NotFound() 
+                : Ok(landlord);
+        }
     }
 }
