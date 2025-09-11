@@ -1,4 +1,4 @@
-const backendUrl = process.env.BACKEND_URL;
+import { backendUrl } from "./utils";
 
 export async function postNoResponse(endpoint: string, data: any) {
   const url = `${backendUrl}/${endpoint}`;
