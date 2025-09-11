@@ -19,7 +19,7 @@ namespace Domain.ValueObjects
         }
 
         private static string Normalize(string input) 
-            => input.Trim().Replace(" ", "").Replace("-", "");
+            => input.Replace(" ", "").Replace("-", "");
 
         [GeneratedRegex(@"^(?:\+46|0)7\d{8}$", RegexOptions.Compiled)]
         private static partial Regex SwedishPhoneRegex();
