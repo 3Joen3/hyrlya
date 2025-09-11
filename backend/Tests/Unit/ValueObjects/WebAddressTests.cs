@@ -7,7 +7,6 @@ namespace Tests.Unit.ValueObjects
         [Theory]
         [InlineData("https://example.com")]
         [InlineData("https://www.example.com")]
-        [InlineData("http://localhost:5000")]
         public void Constructor_WithValidUrl_ShouldSucceed(string url)
         {
             var webAddress = new WebAddress(url);
@@ -30,6 +29,8 @@ namespace Tests.Unit.ValueObjects
         [InlineData("SomeWords")]
         [InlineData("example.com")]
         [InlineData("htps://example.com")]
+        [InlineData("https://")]
+        [InlineData("https://example")]
         public void Constructor_WithInvalidUrl_ShouldThrow(string url)
         {
             Assert.Throws<ArgumentException>(()

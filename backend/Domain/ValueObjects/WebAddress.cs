@@ -10,7 +10,8 @@
 
             if (!Uri.TryCreate(url, UriKind.Absolute, out var uri)
                 || (uri.Scheme != Uri.UriSchemeHttp && uri.Scheme != Uri.UriSchemeHttps)
-                || string.IsNullOrWhiteSpace(uri.Host))
+                || string.IsNullOrWhiteSpace(uri.Host)
+                || !uri.Host.Contains('.'))
                 throw new ArgumentException("Invalid web address.", nameof(url));
 
             Value = url;
