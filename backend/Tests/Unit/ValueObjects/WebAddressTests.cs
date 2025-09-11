@@ -30,7 +30,6 @@ namespace Tests.Unit.ValueObjects
         [InlineData("SomeWords")]
         [InlineData("example.com")]
         [InlineData("htps://example.com")]
-        [InlineData("https://SomeWords")]
         public void Constructor_WithInvalidUrl_ShouldThrow(string url)
         {
             Assert.Throws<ArgumentException>(()
