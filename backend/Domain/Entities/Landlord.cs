@@ -5,6 +5,7 @@ namespace Domain.Entities
     public class Landlord : Entity
     {
         public string IdentityId { get; private set; }
+        public LandlordProfile? Profile { get; private set; }
 
         public Landlord(string identityId)
         {

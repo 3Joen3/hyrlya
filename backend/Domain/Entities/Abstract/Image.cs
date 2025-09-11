@@ -5,7 +5,7 @@
         public string Url { get; private set; }
         public string? AltText { get; private set; }
 
-        protected Image(string url, string? altText = null)
+        protected Image(string url, string? altText)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(url);
 
