@@ -2,9 +2,10 @@
 
 import { RegisterData } from "@/lib/schemas/registerSchema";
 import { LoginData } from "@/lib/schemas/loginSchema";
-import { post, postNoResponse } from "@/lib/utils/api";
+import { post, postNoResponse } from "@/lib/api/client";
 import { LoginResponse } from "@/types/LoginResponse";
 import { setAuthCookie } from "@/lib/auth/cookies";
+import { getAuthenticated } from "@/lib/api/server";
 
 export async function register(request: RegisterData) {
   await postNoResponse("register", request);
@@ -19,4 +20,5 @@ export async function login(data: LoginData) {
 
   //SET A REAL EXPIRY DATE, SHOULD NOT BE SAME AS AT
   await setAuthCookie("refresh", response.refreshToken, bufferedExpiry);
+  await getAuthenticated("landlords");
 }
