@@ -9,11 +9,11 @@ namespace Tests.Unit.ValueObjects
         [InlineData("+46701234567", "+46701234567")]
         [InlineData(" 0701234567 ", "0701234567")]
         [InlineData("070-123 45 67", "0701234567")]
-        public void Constructor_WithValidPhoneNumber_ShouldSucceed(string value, string expected)
+        public void Constructor_WithValidPhoneNumber_ShouldSucceed(string inputValue, string expectedOutput)
         {
-            var phoneNumber = new PhoneNumber(value);
+            var phoneNumber = new PhoneNumber(inputValue);
 
-            Assert.Equal(expected, phoneNumber.Value);
+            Assert.Equal(expectedOutput, phoneNumber.Value);
         }
 
         [Theory]
