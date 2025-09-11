@@ -16,7 +16,18 @@ namespace Tests.Unit.ValueObjects
             Assert.Equal(expectedOutput, phoneNumber.Value);
         }
 
+        [Fact]
+        public void Constructor_WithNullPhoneNumber_ShouldThrow()
+        {
+            string? phoneNumber = null;
+
+            Assert.Throws<ArgumentNullException>(()
+                => new PhoneNumber(phoneNumber!));
+        }
+
         [Theory]
+        [InlineData("")]
+        [InlineData(" ")]
         [InlineData("SomeWords")]
         [InlineData("033111111")]
         [InlineData("+4741234567")]
