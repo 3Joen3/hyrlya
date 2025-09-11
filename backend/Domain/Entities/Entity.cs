@@ -1,4 +1,4 @@
-﻿namespace Domain.Entities.Abstract
+﻿namespace Domain.Entities
 {
     public abstract class Entity
     {
