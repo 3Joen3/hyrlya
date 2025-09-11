@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250910204911_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20250911192501_LandlordLandLordProfile")]
+    partial class LandlordLandLordProfile
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,11 +33,41 @@ namespace Infrastructure.Persistence.Migrations
 
                     b.Property<string>("IdentityId")
                         .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdentityId")
+                        .IsUnique();
+
+                    b.ToTable("Landlords");
+                });
+
+            modelBuilder.Entity("Domain.Entities.LandlordProfile", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ContactEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactPhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("LandlordId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Landlords");
+                    b.HasIndex("LandlordId")
+                        .IsUnique();
+
+                    b.ToTable("LandlordProfiles");
                 });
 
             modelBuilder.Entity("Infrastructure.Auth.AppUser", b =>
@@ -238,6 +268,51 @@ namespace Infrastructure.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Entities.Landlord", b =>
+                {
+                    b.HasOne("Infrastructure.Auth.AppUser", null)
+                        .WithOne()
+                        .HasForeignKey("Domain.Entities.Landlord", "IdentityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.LandlordProfile", b =>
+                {
+                    b.HasOne("Domain.Entities.Landlord", "Landlord")
+                        .WithOne("Profile")
+                        .HasForeignKey("Domain.Entities.LandlordProfile", "LandlordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.OwnsOne("Domain.ValueObjects.Image", "Image", b1 =>
+                        {
+                            b1.Property<Guid>("LandlordProfileId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("AltText")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("ImageAlt");
+
+                            b1.Property<string>("Url")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("ImageUrl");
+
+                            b1.HasKey("LandlordProfileId");
+
+                            b1.ToTable("LandlordProfiles");
+
+                            b1.WithOwner()
+                                .HasForeignKey("LandlordProfileId");
+                        });
+
+                    b.Navigation("Image");
+
+                    b.Navigation("Landlord");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -286,6 +361,12 @@ namespace Infrastructure.Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.Landlord", b =>
+                {
+                    b.Navigation("Profile")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618
