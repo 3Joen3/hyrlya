@@ -1,4 +1,5 @@
 using Api;
+using Application;
 using Infrastructure;
 using Infrastructure.Auth;
 using Infrastructure.Persistence;
@@ -16,6 +17,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddFrontendCors();
 
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddAplication();
 
 builder.Services.AddIdentityCore<AppUser>()
     .AddEntityFrameworkStores<AppDbContext>()
