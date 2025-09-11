@@ -4,6 +4,6 @@ namespace Application.Interfaces
 {
     public interface ILandlordService
     {
-        Task<Landlord> GetByIdentityId(string identityId);
+        Task<Landlord?> GetByIdentityId(string identityId);
     }
 }

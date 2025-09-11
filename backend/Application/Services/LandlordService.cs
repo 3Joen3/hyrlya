@@ -1,13 +1,14 @@
 ﻿using Application.Interfaces;
 using Domain.Entities;
+using Domain.Interfaces;
 
 namespace Application.Services
 {
-    public class LandlordService : ILandlordService
+    public class LandlordService(ILandlordRepository repo) : ILandlordService
     {
-        public Task<Landlord> GetByIdentityId(string identityId)
-        {
-            throw new NotImplementedException();
-        }
+        private readonly ILandlordRepository _repo = repo;
+
+        public async Task<Landlord?> GetByIdentityId(string identityId)
+            => await _repo.GetByIdentityIdAsync(identityId);
     }
 }
