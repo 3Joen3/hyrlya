@@ -14,6 +14,6 @@
             Value = url;
         }
 
-        private WebAddress() { Value = default! }
+        private WebAddress() { Value = default!; }
     }
 }
