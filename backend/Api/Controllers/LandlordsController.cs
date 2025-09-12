@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Api.Responses;
+using Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -23,9 +24,14 @@ namespace Api.Controllers
 
             var landlord = await _landlordService.GetByIdentityId(IdentityId);
 
+            if (landlord is null)
+                return NotFound();
+
+            var response = new LandlordResponse(landlord);
+
             return landlord is null 
                 ? NotFound() 
-                : Ok(landlord);
+                : Ok(response);
         }
     }
 }
