@@ -1,6 +1,8 @@
 import LandlordHeader from "../components/Headers/LandlordHeader";
 
-export default function HostLayout({
+import { EdgeStoreProvider } from "@/lib/edgestore";
+
+export default function LandlordLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -8,7 +10,7 @@ export default function HostLayout({
   return (
     <>
       <LandlordHeader />
-      {children}
+      <EdgeStoreProvider>{children}</EdgeStoreProvider>
     </>
   );
 }
