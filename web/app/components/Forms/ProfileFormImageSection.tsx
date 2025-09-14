@@ -4,7 +4,7 @@ import Button from "../Button";
 import { useEdgeStore } from "@/lib/edgestore";
 import { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import SectionHeading from "../SectionHeading";
+import SectionHeading from "../Headings/SectionHeading";
 
 export default function ProfileFormImageSection() {
   const { edgestore } = useEdgeStore();

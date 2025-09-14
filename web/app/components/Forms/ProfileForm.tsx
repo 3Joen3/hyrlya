@@ -1,9 +1,9 @@
 "use client";
 
 import Form from "./Form";
-import PageHeading from "../PageHeading";
+import PageHeading from "../Headings/PageHeading";
 import Block from "../Block";
-import SectionHeading from "../SectionHeading";
+import SectionHeading from "../Headings/SectionHeading";
 import TextField from "./TextField";
 import ProfileFormImageSection from "./ProfileFormImageSection";
 import Button from "../Button";
