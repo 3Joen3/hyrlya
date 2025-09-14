@@ -42,7 +42,7 @@ namespace Api.Controllers
                 return Unauthorized();
 
             var landlord = await _landlordService.CreateAsync(IdentityId, request.Name, request.ProfileImageUrl,
-                request.Contact.PhoneNumber, request.Contact.EmailAddress);
+                request.PhoneNumber, request.EmailAddress);
 
             var response = new LandlordResponse(landlord);
 
