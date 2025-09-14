@@ -8,7 +8,7 @@ namespace Api.Requests
         public string Name { get; init; } = default!;
 
         [Required]
-        public LandlordContactRequest ContactMethod { get; init; } = default!;
+        public LandlordContactRequest Contact { get; init; } = default!;
 
         public string? ProfileImageUrl { get; init; }
     }
