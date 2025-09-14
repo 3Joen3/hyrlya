@@ -1,7 +1,8 @@
-import { getAccessToken } from "@/lib/auth/cookies";
-import { redirect } from "next/navigation";
 import Page from "../../components/Page";
 import AuthForm from "../../components/Forms/AuthForm";
+
+import { getAccessToken } from "@/lib/auth/cookies";
+import { redirect } from "next/navigation";
 
 export default async function page() {
   if (await getAccessToken()) {

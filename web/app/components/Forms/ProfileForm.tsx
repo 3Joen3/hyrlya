@@ -11,7 +11,7 @@ import Button from "../Button";
 import { useForm } from "react-hook-form";
 import { ProfileData, profileSchema } from "@/lib/schemas/profileSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createLandlord } from "@/app/landlord/profile/create/actions";
+import { createLandlord } from "@/lib/actions/profile";
 
 interface Props {
   className: string;
