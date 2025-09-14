@@ -36,7 +36,7 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateLandlord([FromBody] LandlordRequest request)
+        public async Task<IActionResult> CreateMyLandlord([FromBody] LandlordRequest request)
         {
             if (string.IsNullOrEmpty(IdentityId))
                 return Unauthorized();
