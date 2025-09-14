@@ -2,19 +2,11 @@
 
 namespace Api.Requests
 {
-    public class LandlordRequest
+    public class LandlordRequest : IValidatableObject
     {
         [Required, MinLength(1)]
         public string Name { get; init; } = default!;
-
-        [Required]
-        public LandlordContactRequest Contact { get; init; } = default!;
-
         public string? ProfileImageUrl { get; init; }
-    }
-
-    public class LandlordContactRequest : IValidatableObject
-    {
         public string? PhoneNumber { get; init; }
         public string? EmailAddress { get; init; }
 
