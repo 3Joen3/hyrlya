@@ -9,14 +9,35 @@ namespace Application.Services
     {
         private readonly ILandlordRepository _repo = repo;
 
-        public async Task<Landlord> CreateAsync(string identityId, string name, Image? image = null,
-            PhoneNumber? contactPhone = null, EmailAddress? contactEmail = null)
+        public async Task<Landlord> CreateAsync(string identityId, string name, 
+            string? profileImageUrl = null, string? contactPhone = null, string? contactEmail = null)
         {
-            var landlord = new Landlord(identityId, name, image, contactPhone, contactEmail);
+            Image? profileImage = null;
+            PhoneNumber? phoneNumber = null;
+            EmailAddress? emailAddress = null;
+
+            if (!string.IsNullOrWhiteSpace(profileImageUrl))
+                profileImage = BuildProfileImage(profileImageUrl, name);
+
+            if (!string.IsNullOrWhiteSpace(contactPhone))
+                phoneNumber = new PhoneNumber(contactPhone);
+
+            if (!string.IsNullOrWhiteSpace(contactEmail))
+                emailAddress = new EmailAddress(contactEmail);
+
+            var landlord = new Landlord(identityId, name, profileImage, phoneNumber, emailAddress);
             return await _repo.SaveAsync(landlord);
         }
 
         public async Task<Landlord?> GetByIdentityIdAsync(string identityId)
             => await _repo.GetByIdentityIdAsync(identityId);
+
+        private static Image BuildProfileImage(string profileImageUrl, string profileName)
+        {
+            var url = new WebAddress(profileImageUrl);
+            var altText = $"{profileName} - Profilbild";
+
+            return new Image(url, altText);
+        }
     }
 }
