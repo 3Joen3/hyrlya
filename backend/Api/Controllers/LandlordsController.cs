@@ -1,4 +1,5 @@
-﻿using Api.Responses;
+﻿using Api.Requests;
+using Api.Responses;
 using Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,7 @@ namespace Api.Controllers
             if (string.IsNullOrEmpty(IdentityId))
                 return Unauthorized();
 
-            var landlord = await _landlordService.GetByIdentityId(IdentityId);
+            var landlord = await _landlordService.GetByIdentityIdAsync(IdentityId);
 
             if (landlord is null)
                 return NotFound();
@@ -32,6 +33,20 @@ namespace Api.Controllers
             return landlord is null 
                 ? NotFound() 
                 : Ok(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateLandlord([FromBody] LandlordRequest request)
+        {
+            if (string.IsNullOrEmpty(IdentityId))
+                return Unauthorized();
+
+            var landlord = await _landlordService.CreateAsync(IdentityId, request.Name, request.ProfileImageUrl,
+                request.Contact.PhoneNumber, request.Contact.EmailAddress);
+
+            var response = new LandlordResponse(landlord);
+
+            return Ok(response);
         }
     }
 }
