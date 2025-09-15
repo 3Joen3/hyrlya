@@ -1,7 +1,7 @@
 import "server-only";
 
 import { backendUrl } from "./utils";
-import { getAccessToken } from "../auth/cookies";
+import { cookies } from "next/headers";
 
 export async function getAuthenticated(endpoint: string): Promise<Response> {
   const url = `${backendUrl}/${endpoint}`;
@@ -18,7 +18,10 @@ export async function getAuthenticated(endpoint: string): Promise<Response> {
   return response;
 }
 
-export async function postAuthenticated(endpoint: string, data: any): Promise<Response> {
+export async function postAuthenticated(
+  endpoint: string,
+  data: any
+): Promise<Response> {
   const url = `${backendUrl}/${endpoint}`;
 
   const accessToken = await getAccessToken();
@@ -33,4 +36,8 @@ export async function postAuthenticated(endpoint: string, data: any): Promise<Re
   });
 
   return response;
+}
+
+export async function getAccessToken() {
+  return (await cookies()).get("__Host-accessToken");
 }
