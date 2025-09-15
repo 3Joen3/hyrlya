@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain.Entities;
+using Domain.Enums;
 using Domain.Interfaces;
 using Domain.ValueObjects;
 
@@ -10,22 +11,21 @@ namespace Application.Services
         private readonly IRentalUnitRepository _repo = repo;
         private readonly ILandlordService _landlordService = landlordService;
 
-        public async Task<RentalUnit> CreateAsync(string identityId, IEnumerable<string> imageUrls, 
-            string street, string houseNumber, string city)
+        public async Task<RentalUnit> CreateAsync(string identityId, string street, string houseNumber, string city, 
+            RentalUnitType type, int rooms, int sizeSquareMeters, IEnumerable<string> imageUrls)
         {
             var landlordId = await _landlordService.GetIdByIdentityIdAsync(identityId);
 
             if (landlordId == Guid.Empty)
                 return null;
 
-            var images = BuildRentalUnitImages(imageUrls);
             var address = new Address(street, houseNumber, city);
+            var images = BuildRentalUnitImages(imageUrls);
 
-            var rentalUnit = new RentalUnit(images, address, landlordId);
-
+            var rentalUnit = new RentalUnit(landlordId, address, type, rooms, sizeSquareMeters, images);
             return await _repo.AddAsync(rentalUnit);
         }
-
+  
         private static IEnumerable<Image> BuildRentalUnitImages(IEnumerable<string> imageUrls)
         {
             var index = 1;
