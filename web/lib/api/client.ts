@@ -1,7 +1,5 @@
-import { backendUrl } from "./utils";
-
 export async function postNoResponse(endpoint: string, data: any) {
-  const url = `${backendUrl}/${endpoint}`;
+  const url = `${process.env.BACKEND_URL}/${endpoint}`;
 
   const response = await fetch(url, {
     method: "POST",
@@ -18,7 +16,7 @@ export async function postNoResponse(endpoint: string, data: any) {
 }
 
 export async function post<T>(endpoint: string, data: any) {
-  const url = `${backendUrl}/${endpoint}`;
+  const url = `${process.env.BACKEND_URL}/${endpoint}`;
 
   const response = await fetch(url, {
     method: "POST",

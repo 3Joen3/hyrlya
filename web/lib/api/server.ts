@@ -1,10 +1,9 @@
 import "server-only";
 
-import { backendUrl } from "./utils";
 import { cookies } from "next/headers";
 
 export async function getAuthenticated(endpoint: string): Promise<Response> {
-  const url = `${backendUrl}/${endpoint}`;
+  const url = `${process.env.BACKEND_URL}/${endpoint}`;
 
   const accessToken = await getAccessToken();
 
@@ -22,7 +21,7 @@ export async function postAuthenticated(
   endpoint: string,
   data: any
 ): Promise<Response> {
-  const url = `${backendUrl}/${endpoint}`;
+  const url = `${process.env.BACKEND_URL}/${endpoint}`;
 
   const accessToken = await getAccessToken();
 
