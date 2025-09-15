@@ -11,6 +11,7 @@ namespace Infrastructure.Persistence
     {
         public DbSet<Landlord> Landlords => Set<Landlord>();
         public DbSet<LandlordProfile> LandlordProfiles => Set<LandlordProfile>();
+        public DbSet<RentalUnit> RentalUnits => Set<RentalUnit>();
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -19,6 +20,7 @@ namespace Infrastructure.Persistence
 
             builder.ApplyConfiguration(new LandlordConfiguration());
             builder.ApplyConfiguration(new LandlordProfileConfiguration());
+            builder.ApplyConfiguration(new RentalUnitConfiguration());
         }
     
     }
