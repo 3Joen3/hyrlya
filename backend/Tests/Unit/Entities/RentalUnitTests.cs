@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Enums;
 using Domain.ValueObjects;
 
 namespace Tests.Unit.Entities
@@ -12,7 +13,7 @@ namespace Tests.Unit.Entities
             var address = new Address("SomeStreet", "14", "Borås"); ;
             var landlordId = Guid.NewGuid();
 
-            var rentalUnit = new RentalUnit(images, address, landlordId);
+            var rentalUnit = new RentalUnit(images, address, RentalUnitType.Apartment, landlordId);
 
             Assert.NotEqual(rentalUnit.Id, Guid.Empty);
 
@@ -23,6 +24,8 @@ namespace Tests.Unit.Entities
 
             Assert.NotNull(rentalUnit.Address);
             Assert.Equal(address, rentalUnit.Address);
+
+            Assert.Equal(RentalUnitType.Apartment, rentalUnit.Type);
 
             Assert.NotEqual(rentalUnit.LandlordId, Guid.Empty);
             Assert.Equal(landlordId, rentalUnit.LandlordId);
@@ -38,7 +41,7 @@ namespace Tests.Unit.Entities
             var address = new Address("SomeStreet", "14", "Borås"); ;
 
             Assert.Throws<ArgumentNullException>(()
-               => new RentalUnit(images!, address, landlordId));
+               => new RentalUnit(images!, address, RentalUnitType.Apartment, landlordId));
         }
 
         [Fact]
@@ -49,7 +52,7 @@ namespace Tests.Unit.Entities
             var address = new Address("SomeStreet", "14", "Borås"); ;
 
             Assert.Throws<ArgumentException>(()
-             => new RentalUnit(images, address, landlordId));
+             => new RentalUnit(images, address, RentalUnitType.Apartment, landlordId));
         }
 
         [Fact]
@@ -60,7 +63,7 @@ namespace Tests.Unit.Entities
             var address = new Address("SomeStreet", "14", "Borås"); ;
 
             Assert.Throws<ArgumentNullException>(()
-             => new RentalUnit(images, address, landlordId));
+             => new RentalUnit(images, address, RentalUnitType.Apartment, landlordId));
         }
 
         [Fact]
@@ -71,7 +74,7 @@ namespace Tests.Unit.Entities
             Address? address = null;
 
             Assert.Throws<ArgumentNullException>(()
-             => new RentalUnit(images, address!, landlordId));
+             => new RentalUnit(images, address!, RentalUnitType.Apartment, landlordId));
         }
 
         [Fact]
@@ -82,7 +85,7 @@ namespace Tests.Unit.Entities
             var address = new Address("SomeStreet", "14", "Borås");
 
             Assert.Throws<ArgumentException>(()
-             => new RentalUnit(images, address, landlordId));
+             => new RentalUnit(images, address, RentalUnitType.Apartment, landlordId));
         }
 
         private static List<Image> CreateImages()
