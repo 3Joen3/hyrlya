@@ -32,6 +32,9 @@ namespace Application.Services
         public async Task<Landlord?> GetByIdentityIdAsync(string identityId)
             => await _repo.GetByIdentityIdAsync(identityId);
 
+        public async Task<Guid> GetIdByIdentityIdAsync(string identityId)
+            => await _repo.GetIdByIdentityIdAsync(identityId);
+
         private static Image BuildProfileImage(string profileImageUrl, string profileName)
         {
             var url = new WebAddress(profileImageUrl);

@@ -7,5 +7,6 @@ namespace Application.Interfaces
             string? contactPhone = null, string? contactEmail = null);
 
         Task<Landlord?> GetByIdentityIdAsync(string identityId);
+        Task<Guid> GetIdByIdentityIdAsync(string identityId);
     }
 }
