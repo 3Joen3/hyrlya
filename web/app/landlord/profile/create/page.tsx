@@ -1,5 +1,5 @@
-import Page from "@/app/components/Page";
-import ProfileForm from "@/app/components/Forms/ProfileForm";
+import Page from "@/components/Page";
+import ProfileForm from "@/app/landlord/components/profile/ProfileForm";
 
 export default function page() {
   return (

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import UserIcon from "../Icons/UserIcon";
+import UserIcon from "../icons/UserIcon";
 
 interface Props {
   className: string;

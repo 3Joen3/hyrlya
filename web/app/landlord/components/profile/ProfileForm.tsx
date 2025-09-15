@@ -1,12 +1,12 @@
 "use client";
 
-import Form from "./Form";
-import PageHeading from "../Headings/PageHeading";
-import Block from "../Block";
-import SectionHeading from "../Headings/SectionHeading";
-import TextField from "./TextField";
+import Form from "../../../../components/forms/Form";
+import PageHeading from "../../../../components/headings/PageHeading";
+import Block from "../../../../components/Block";
+import SectionHeading from "../../../../components/headings/SectionHeading";
+import TextField from "../../../../components/forms/TextField";
 import ProfileFormImageSection from "./ProfileFormImageSection";
-import Button from "../Button";
+import Button from "../../../../components/Button";
 
 import { useForm } from "react-hook-form";
 import { ProfileData, profileSchema } from "@/lib/schemas/profileSchema";

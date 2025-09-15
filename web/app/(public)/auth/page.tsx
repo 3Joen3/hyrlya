@@ -1,5 +1,5 @@
-import Page from "../../components/Page";
-import AuthForm from "../../components/Forms/AuthForm";
+import Page from "../../../components/Page";
+import AuthForm from "../components/AuthForm";
 
 import { getAccessToken } from "@/lib/api/server";
 import { redirect } from "next/navigation";

@@ -1,5 +1,5 @@
-import Header from "../components/Header";
-import NavLink from "../components/NavLink";
+import Header from "../../components/Header";
+import NavLink from "../../components/NavLink";
 
 export default function PublicLayout({
   children,

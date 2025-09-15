@@ -1,5 +1,5 @@
-import Page from "@/app/components/Page";
-import NavLink from "@/app/components/NavLink";
+import Page from "@/components/Page";
+import NavLink from "@/components/NavLink";
 
 export default function page() {
   return (
