@@ -15,6 +15,7 @@ namespace Infrastructure
                 => options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<ILandlordRepository, LandlordRepository>();
+            services.AddScoped<IRentalUnitRepository, RentalUnitRepository>();
 
             return services;
         }
