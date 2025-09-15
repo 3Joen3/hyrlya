@@ -8,7 +8,7 @@ namespace Infrastructure.Persistence.Repositories
     {
         private readonly AppDbContext _context = context;
 
-        public async Task<Landlord> SaveAsync(Landlord landlord)
+        public async Task<Landlord> AddAsync(Landlord landlord)
         {
             _context.Landlords.Add(landlord);
             await _context.SaveChangesAsync();

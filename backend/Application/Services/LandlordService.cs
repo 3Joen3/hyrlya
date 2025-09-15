@@ -26,7 +26,7 @@ namespace Application.Services
                 emailAddress = new EmailAddress(contactEmail);
 
             var landlord = new Landlord(identityId, name, profileImage, phoneNumber, emailAddress);
-            return await _repo.SaveAsync(landlord);
+            return await _repo.AddAsync(landlord);
         }
 
         public async Task<Landlord?> GetByIdentityIdAsync(string identityId)
