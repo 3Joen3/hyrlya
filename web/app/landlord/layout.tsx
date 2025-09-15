@@ -20,7 +20,7 @@ function LayoutHeader() {
   return (
     <Header className="gap-12" logoHref="/landlord">
       <div className="space-x-6">
-        <NavLink href="/landlord/listings">Annonser</NavLink>
+        <NavLink href="/landlord">Annonser</NavLink>
       </div>
     </Header>
   );
