@@ -1,9 +1,9 @@
 "use client";
 
-import Button from "../../../components/Button";
-import Block from "../../../components/Block";
-import Form from "../../../components/forms/Form";
-import TextField from "../../../components/forms/TextField";
+import Button from "../Button";
+import Block from "../Block";
+import Form from "../forms/Form";
+import TextField from "../forms/TextField";
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
