@@ -9,6 +9,7 @@ namespace Application
         public static IServiceCollection AddAplication(this IServiceCollection services)
         {
             services.AddScoped<ILandlordService, LandlordService>();
+            services.AddScoped<IRentalUnitService, RentalUnitService>();
 
             return services;
         }
