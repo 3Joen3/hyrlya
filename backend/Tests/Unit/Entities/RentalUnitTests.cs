@@ -9,83 +9,130 @@ namespace Tests.Unit.Entities
         [Fact]
         public void Constructor_WithFullValidParameters_ShouldSucceed()
         {
-            var images = CreateImages();
-            var address = new Address("SomeStreet", "14", "Borås"); ;
             var landlordId = Guid.NewGuid();
+            var address = new Address("SomeStreet", "123", "SomeCity");
+            var type = RentalUnitType.Apartment;
+            var rooms = 4;
+            var size = 100;
+            var images = CreateImages();
 
-            var rentalUnit = new RentalUnit(images, address, RentalUnitType.Apartment, landlordId);
+            var rentalUnit = new RentalUnit(landlordId, address, type, rooms, size, images);
 
             Assert.NotEqual(rentalUnit.Id, Guid.Empty);
-
-            Assert.NotNull(rentalUnit.Images);
-            Assert.Single(rentalUnit.Images);
-            Assert.NotNull(rentalUnit.Images[0]);
-            Assert.Equal(images[0], rentalUnit.Images[0]);
-
-            Assert.NotNull(rentalUnit.Address);
-            Assert.Equal(address, rentalUnit.Address);
-
-            Assert.Equal(RentalUnitType.Apartment, rentalUnit.Type);
 
             Assert.NotEqual(rentalUnit.LandlordId, Guid.Empty);
             Assert.Equal(landlordId, rentalUnit.LandlordId);
 
-            Assert.Null(rentalUnit.Landlord);
-        }
+            Assert.NotNull(rentalUnit.Address);
+            Assert.Equal(address, rentalUnit.Address);
 
-        [Fact]
-        public void Constructor_WithNullImages_ShouldThrow()
-        {
-            var landlordId = Guid.NewGuid();
-            List<Image>? images = null;
-            var address = new Address("SomeStreet", "14", "Borås"); ;
+            Assert.Equal(type, rentalUnit.Type);
 
-            Assert.Throws<ArgumentNullException>(()
-               => new RentalUnit(images!, address, RentalUnitType.Apartment, landlordId));
-        }
+            Assert.Equal(rooms, rentalUnit.Rooms);
 
-        [Fact]
-        public void Constructor_WithEmptyImages_ShouldThrow()
-        {
-            var landlordId = Guid.NewGuid();
-            var images = new List<Image>();
-            var address = new Address("SomeStreet", "14", "Borås"); ;
+            Assert.Equal(size, rentalUnit.SizeSquareMeters);
 
-            Assert.Throws<ArgumentException>(()
-             => new RentalUnit(images, address, RentalUnitType.Apartment, landlordId));
-        }
-
-        [Fact]
-        public void Constructor_WithNullImage_ShouldThrow()
-        {
-            var landlordId = Guid.NewGuid();
-            var images = new List<Image>() { null! };
-            var address = new Address("SomeStreet", "14", "Borås"); ;
-
-            Assert.Throws<ArgumentNullException>(()
-             => new RentalUnit(images, address, RentalUnitType.Apartment, landlordId));
-        }
-
-        [Fact]
-        public void Constructor_WithNullAddress_ShouldThrow()
-        {
-            var landlordId = Guid.NewGuid();
-            var images = CreateImages();
-            Address? address = null;
-
-            Assert.Throws<ArgumentNullException>(()
-             => new RentalUnit(images, address!, RentalUnitType.Apartment, landlordId));
+            Assert.NotNull(rentalUnit.Images);
+            Assert.NotEmpty(rentalUnit.Images);
+            Assert.Equal(images, rentalUnit.Images);
         }
 
         [Fact]
         public void Constructor_WithEmptyLandlordId_ShouldThrow()
         {
             var landlordId = Guid.Empty;
+            var address = new Address("SomeStreet", "123", "SomeCity");
+            var type = RentalUnitType.Apartment;
+            var rooms = 4;
+            var size = 100;
             var images = CreateImages();
-            var address = new Address("SomeStreet", "14", "Borås");
 
             Assert.Throws<ArgumentException>(()
-             => new RentalUnit(images, address, RentalUnitType.Apartment, landlordId));
+               => new RentalUnit(landlordId, address, type, rooms, size, images));
+        }
+
+        [Fact]
+        public void Constructor_WithNullAddress_ShouldThrow()
+        {
+            var landlordId = Guid.NewGuid();
+            Address? address = null;
+            var type = RentalUnitType.Apartment;
+            var rooms = 4;
+            var size = 100;
+            var images = CreateImages();
+
+            Assert.Throws<ArgumentNullException>(()
+               => new RentalUnit(landlordId, address!, type, rooms, size, images));
+        }
+
+        [Fact]
+        public void Constructor_WithZeroRooms_ShouldThrow()
+        {
+            var landlordId = Guid.NewGuid();
+            var address = new Address("SomeStreet", "123", "SomeCity");
+            var type = RentalUnitType.Apartment;
+            var rooms = 0;
+            var size = 100;
+            var images = CreateImages();
+
+            Assert.Throws<ArgumentException>(()
+               => new RentalUnit(landlordId, address, type, rooms, size, images));
+        }
+
+        [Fact]
+        public void Constructor_WithZeroSize_ShouldThrow()
+        {
+            var landlordId = Guid.NewGuid();
+            var address = new Address("SomeStreet", "123", "SomeCity");
+            var type = RentalUnitType.Apartment;
+            var rooms = 4;
+            var size = 0;
+            var images = CreateImages();
+
+            Assert.Throws<ArgumentException>(()
+               => new RentalUnit(landlordId, address, type, rooms, size, images));
+        }
+
+        [Fact]
+        public void Constructor_WithNullImages_ShouldThrow()
+        {
+            var landlordId = Guid.NewGuid();
+            var address = new Address("SomeStreet", "123", "SomeCity");
+            var type = RentalUnitType.Apartment;
+            var rooms = 4;
+            var size = 100;
+            List<Image>? images = null;
+
+            Assert.Throws<ArgumentNullException>(() 
+                => new RentalUnit(landlordId, address, type, rooms, size, images!));
+        }
+
+        [Fact]
+        public void Constructor_WithEmptyImages_ShouldThrow()
+        {
+            var landlordId = Guid.NewGuid();
+            var address = new Address("SomeStreet", "123", "SomeCity");
+            var type = RentalUnitType.Apartment;
+            var rooms = 4;
+            var size = 100;
+            var images = new List<Image>();
+
+            Assert.Throws<ArgumentException>(() 
+                => new RentalUnit(landlordId, address, type, rooms, size, images));
+        }
+
+        [Fact]
+        public void Constructor_WithNullImage_ShouldThrow()
+        {
+            var landlordId = Guid.NewGuid();
+            var address = new Address("SomeStreet", "123", "SomeCity");
+            var type = RentalUnitType.Apartment;
+            var rooms = 4;
+            var size = 100;
+            var images = new List<Image?>() { null };
+
+            Assert.Throws<ArgumentNullException>(()
+               => new RentalUnit(landlordId, address, type, rooms, size, images!));
         }
 
         private static List<Image> CreateImages()
