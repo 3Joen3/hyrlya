@@ -8,10 +8,16 @@ export default function PublicLayout({
 }) {
   return (
     <>
-      <Header className="justify-between" logoHref="/">
-        <NavLink href="/auth">Hyr ut din bostad</NavLink>
-      </Header>
+      <LayoutHeader />
       {children}
     </>
+  );
+}
+
+function LayoutHeader() {
+  return (
+    <Header className="justify-between" logoHref="/">
+      <NavLink href="/auth">Hyr ut din bostad</NavLink>
+    </Header>
   );
 }

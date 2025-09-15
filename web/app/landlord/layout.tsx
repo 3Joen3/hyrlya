@@ -10,12 +10,18 @@ export default function LandlordLayout({
 }) {
   return (
     <>
-      <Header className="gap-12" logoHref="/landlord">
-        <div className="space-x-6">
-          <NavLink href="/landlord/listings">Annonser</NavLink>
-        </div>
-      </Header>
+      <LayoutHeader />
       <EdgeStoreProvider>{children}</EdgeStoreProvider>
     </>
+  );
+}
+
+function LayoutHeader() {
+  return (
+    <Header className="gap-12" logoHref="/landlord">
+      <div className="space-x-6">
+        <NavLink href="/landlord/listings">Annonser</NavLink>
+      </div>
+    </Header>
   );
 }
