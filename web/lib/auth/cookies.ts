@@ -1,10 +1,9 @@
 import "server-only";
 
-import { getCookie } from "../utils/cookies";
 import { cookies } from "next/headers";
 
 export async function getAccessToken() {
-  return getCookie("__Host-accessToken");
+  return (await cookies()).get("__Host-accessToken");
 }
 
 export async function setAuthCookie(
