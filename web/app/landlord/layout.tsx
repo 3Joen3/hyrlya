@@ -21,6 +21,7 @@ function LayoutHeader() {
     <Header className="gap-12" logoHref="/landlord">
       <div className="space-x-6">
         <NavLink href="/landlord">Annonser</NavLink>
+        <NavLink href="/landlord/rental-units">Hyresobjekt</NavLink>
       </div>
     </Header>
   );
