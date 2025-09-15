@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { RegisterData, registerSchema } from "@/lib/schemas/registerSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { login, register } from "@/app/(public)/auth/actions";
+import { login, register } from "@/lib/actions/auth";
 import { LoginData, loginSchema } from "@/lib/schemas/loginSchema";
 
 interface Props {
@@ -52,7 +52,7 @@ export default function AuthForm({ className }: Props) {
 
 function RegisterForm() {
   const methods = useForm<RegisterData>({
-    resolver: zodResolver(registerSchema)
+    resolver: zodResolver(registerSchema),
   });
 
   async function handleSubmit(data: RegisterData) {
