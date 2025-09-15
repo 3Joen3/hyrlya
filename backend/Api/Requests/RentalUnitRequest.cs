@@ -1,12 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace Api.Requests
 {
     public class RentalUnitRequest : IValidatableObject
     {
-        [Required]
-        public IEnumerable<string> Images { get; init; } = default!;
-
         [Required, MinLength(1)]
         public string Street { get; init; } = default!;
 
@@ -15,6 +13,18 @@ namespace Api.Requests
 
         [Required, MinLength(1)]
         public string City { get; init; } = default!;
+
+        [Required]
+        public RentalUnitType Type { get; init; }
+
+        [Range(1, int.MaxValue)]
+        public int Rooms { get; init; }
+
+        [Range(1, int.MaxValue)]
+        public int SizeSquareMeters { get; init; }
+
+        [Required]
+        public IEnumerable<string> Images { get; init; } = default!;
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
