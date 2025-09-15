@@ -1,4 +1,5 @@
-import PublicHeader from "../components/Headers/PublicHeader";
+import Header from "../components/Header";
+import NavLink from "../components/NavLink";
 
 export default function PublicLayout({
   children,
@@ -7,7 +8,9 @@ export default function PublicLayout({
 }) {
   return (
     <>
-      <PublicHeader />
+      <Header className="justify-between" logoHref="/">
+        <NavLink href="/auth">Hyr ut din bostad</NavLink>
+      </Header>
       {children}
     </>
   );
