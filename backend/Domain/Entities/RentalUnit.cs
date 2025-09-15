@@ -6,7 +6,7 @@ namespace Domain.Entities
     {
         private readonly List<Image> _images = [];
 
-        public IReadOnlyList<Image> Images => _images.AsReadOnly();
+        public IReadOnlyCollection<Image> Images => _images.AsReadOnly();
         public Address Address { get; private set; }
 
         public Guid LandlordId { get; private set; }

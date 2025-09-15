@@ -8,7 +8,7 @@ namespace Domain.Entities
 
         public string IdentityId { get; private set; }
         public LandlordProfile Profile { get; private set; }
-        public IReadOnlyList<RentalUnit> RentalUnits => _rentalUnits.AsReadOnly();
+        public IReadOnlyCollection<RentalUnit> RentalUnits => _rentalUnits.AsReadOnly();
 
         public Landlord(string identityId, string name, Image? image = null,
             PhoneNumber? contactPhone = null, EmailAddress? contactEmail = null)
