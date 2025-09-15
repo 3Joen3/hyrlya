@@ -13,7 +13,8 @@ namespace Api.ValidationAttributes
                 var count = collection.Count();
 
                 if (count < _minCount)
-                    return new ValidationResult($"Collection must contain at least {_minCount} item(s).");
+                    return new ValidationResult(ErrorMessage 
+                        ?? $"Collection must contain at least {_minCount} item(s).");
             }
 
             return ValidationResult.Success;
