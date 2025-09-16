@@ -1,7 +1,8 @@
 interface Props {
+  className: string;
   heading: string;
 }
 
-export default function PageHeading({ heading }: Props) {
-  return <h1 className="text-xl font-bold underline">{heading}</h1>;
+export default function PageHeading({ className, heading }: Props) {
+  return <h1 className={`${className} text-2xl font-bold underline`}>{heading}</h1>;
 }

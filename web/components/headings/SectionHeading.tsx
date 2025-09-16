@@ -3,5 +3,5 @@ interface Props {
 }
 
 export default function SectionHeading({ heading }: Props) {
-  return <h2 className="text-lg font-semibold">{heading}</h2>;
+  return <h2 className="text-xl font-semibold">{heading}</h2>;
 }
