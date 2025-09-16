@@ -1,12 +1,11 @@
 "use client";
 
-import Form from "../../../../components/forms/Form";
-import PageHeading from "../../../../components/headings/PageHeading";
-import Block from "../../../../components/Block";
-import SectionHeading from "../../../../components/headings/SectionHeading";
-import TextField from "../../../../components/forms/TextField";
+import Form from "../forms/Form";
+import Block from "../Block";
+import SectionHeading from "../headings/SectionHeading";
+import TextField from "../forms/TextField";
 import ProfileFormImageSection from "./ProfileFormImageSection";
-import Button from "../../../../components/Button";
+import Button from "../Button";
 
 import { useForm } from "react-hook-form";
 import { ProfileData, profileSchema } from "@/lib/schemas/profileSchema";
@@ -28,12 +27,7 @@ export default function ProfileForm({ className, heading }: Props) {
   }
 
   return (
-    <Form
-      className={`${className} space-y-4`}
-      methods={methods}
-      onSubmit={handleSubmit}
-    >
-      <PageHeading heading={heading} />
+    <Form className={`${className} space-y-4`} methods={methods} onSubmit={handleSubmit}>
       <div className="grid grid-cols-3 gap-10">
         <Block className="col-span-2 space-y-4">
           <SectionHeading heading="Profil info" />
