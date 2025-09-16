@@ -1,10 +1,10 @@
-import ProfileImage from "../../../../components/profile/ProfileImage";
-import Button from "../../../../components/Button";
+import Button from "../Button";
+import ProfileImage from "./ProfileImage";
 
 import { useEdgeStore } from "@/lib/edgestore";
 import { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import SectionHeading from "../../../../components/headings/SectionHeading";
+import SectionHeading from "../headings/SectionHeading";
 
 export default function ProfileFormImageSection() {
   const { edgestore } = useEdgeStore();
