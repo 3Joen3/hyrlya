@@ -13,7 +13,7 @@ export default function TextField({ id, label }: Props) {
   return (
     <FormField id={id} label={label}>
       <input
-        className="rounded border border-neutral-300 px-2 py-1.5 placeholder:text-neutral-400 focus:outline-none focus:border-sky-600 focus:ring-1 focus:ring-sky-600"
+        className="rounded border border-neutral-300 px-2 py-1.5 focus:outline-none focus:border-sky-600 focus:ring-1 focus:ring-sky-600"
         type="text"
         id={id}
         {...register(id)}
