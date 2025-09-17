@@ -4,7 +4,6 @@ import ProfileImage from "./ProfileImage";
 import { useEdgeStore } from "@/lib/edgestore";
 import { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import SectionHeading from "../headings/SectionHeading";
 
 export default function ProfileFormImageSection() {
   const { edgestore } = useEdgeStore();
@@ -29,7 +28,6 @@ export default function ProfileFormImageSection() {
 
   return (
     <>
-      <SectionHeading heading="Profilbild" />
       <input
         className="hidden"
         type="file"
