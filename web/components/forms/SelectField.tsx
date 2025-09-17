@@ -5,7 +5,7 @@ import { useFormContext } from "react-hook-form";
 interface Props {
   id: string;
   label: string;
-  options: { value: string; label: string }[];
+  options: { value: string | number; label: string }[];
 }
 
 export default function SelectField({ id, label, options }: Props) {
