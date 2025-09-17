@@ -1,5 +1,6 @@
 ﻿using Api.Requests;
 using Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -7,6 +8,7 @@ namespace Api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class RentalUnitsController(IRentalUnitService rentalUnitService) : ControllerBase
     {
         private readonly IRentalUnitService _rentalUnitService = rentalUnitService;
