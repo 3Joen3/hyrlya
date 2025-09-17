@@ -38,5 +38,5 @@ export async function postAuthenticated(
 }
 
 export async function getAccessToken() {
-  return (await cookies()).get("__Host-accessToken");
+  return (await cookies()).get("__Host-accessToken")?.value;
 }
