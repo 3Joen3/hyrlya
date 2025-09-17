@@ -28,9 +28,9 @@ namespace Api.Requests
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (!Images.Any())
+            if (!ImageUrls.Any())
                 yield return new ValidationResult("At least one image is required.");
-            else if (Images.Any(img => string.IsNullOrWhiteSpace(img)))
+            else if (ImageUrls.Any(img => string.IsNullOrWhiteSpace(img)))
                 yield return new ValidationResult("An image can't be null or empty string.");
         }
     }
