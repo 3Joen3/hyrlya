@@ -14,7 +14,7 @@ export default function NumberField({ id, label }: Props) {
     <FormField id={id} label={label}>
       <input
         id={id}
-        {...register(id)}
+        {...register(id, { valueAsNumber: true })}
         type="number"
         className="rounded border border-neutral-300 px-2 py-1.5 focus:outline-none focus:border-sky-600 focus:ring-1 focus:ring-sky-600"
       />
