@@ -24,7 +24,7 @@ namespace Api.Requests
         public int SizeSquareMeters { get; init; }
 
         [Required]
-        public IEnumerable<string> Images { get; init; } = default!;
+        public IEnumerable<string> ImageUrls { get; init; } = default!;
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
