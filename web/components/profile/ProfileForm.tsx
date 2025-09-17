@@ -2,7 +2,6 @@
 
 import Form from "../forms/Form";
 import Block from "../Block";
-import SectionHeading from "../headings/SectionHeading";
 import TextField from "../forms/TextField";
 import ProfileFormImageSection from "./ProfileFormImageSection";
 import Button from "../Button";
@@ -30,7 +29,6 @@ export default function ProfileForm({ className, heading }: Props) {
     <Form className={`${className} space-y-4`} methods={methods} onSubmit={handleSubmit}>
       <div className="grid grid-cols-3 gap-10">
         <Block className="col-span-2 space-y-4">
-          <SectionHeading heading="Profil info" />
           <TextField id="name" label="Namn" />
           <TextField id="phoneNumber" label="Telefonnummer" />
           <TextField id="emailAddress" label="Email address" />
