@@ -5,7 +5,7 @@ interface Props<T extends FieldValues> {
   className?: string;
   methods: UseFormReturn<T>;
   onSubmit: (data: T) => void;
-  heading: string;
+  heading?: string;
   children: React.ReactNode;
 }
 
@@ -21,7 +21,7 @@ export default function Form<T extends FieldValues>({
   return (
     <FormProvider {...methods}>
       <form className={`${className} space-y-6`} onSubmit={handleSubmit(onSubmit)}>
-        <PageHeading heading={heading} />
+        {heading && <PageHeading heading={heading} />}
         {children}
       </form>
     </FormProvider>
