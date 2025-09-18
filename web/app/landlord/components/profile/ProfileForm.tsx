@@ -1,10 +1,10 @@
 "use client";
 
-import Form from "../forms/Form";
-import Block from "../Block";
-import TextField from "../forms/TextField";
+import Form from "@/components/forms/Form";
+import Block from "@/components/Block";
+import TextField from "@/components/forms/TextField";
 import ProfileFormImageSection from "./ProfileFormImageSection";
-import Button from "../Button";
+import Button from "@/components/Button";
 
 import { useForm } from "react-hook-form";
 import { ProfileData, profileSchema } from "@/lib/schemas/profileSchema";

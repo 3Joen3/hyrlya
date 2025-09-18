@@ -1,5 +1,5 @@
 import Page from "@/components/Page";
-import ProfileForm from "@/components/profile/ProfileForm";
+import ProfileForm from "../components/profile/ProfileForm";
 
 export default function page() {
   return (
