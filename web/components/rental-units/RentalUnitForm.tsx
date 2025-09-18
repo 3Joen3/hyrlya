@@ -8,6 +8,7 @@ import { createRentalUnit } from "@/lib/actions/rental-units";
 
 import Block from "../Block";
 import Form from "../forms/Form";
+import PageHeading from "../PageHeading";
 import FormSection from "../forms/FormSection";
 import NumberField from "../forms/NumberField";
 import SelectField from "../forms/SelectField";
@@ -25,12 +26,8 @@ export default function RentalUnitForm() {
   }
 
   return (
-    <Form
-      className="grid grid-cols-2 gap-4"
-      methods={methods}
-      onSubmit={handleSubmit}
-      heading="Skapa nytt hyresobjekt"
-    >
+    <Form className="grid grid-cols-2 gap-4" methods={methods} onSubmit={handleSubmit}>
+      <PageHeading heading={"Skapa nytt hyresobjekt"} />
       <Block className="space-y-6">
         <AboutSection />
         <AdressSection />
