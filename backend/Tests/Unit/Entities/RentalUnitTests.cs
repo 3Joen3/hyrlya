@@ -136,7 +136,7 @@ namespace Tests.Unit.Entities
         }
 
         [Fact]
-        public void ChangeAddress_WithValidAddress_ReplacesAddress()
+        public void ChangeAddress_WithValidAddress_ShouldReplaceAddress()
         {
             var rentalUnit = CreateRentalUnitWithFullValidParameters();
             var newAddress = new Address("NewSomeStreet", "321", "NewSomeCity");
