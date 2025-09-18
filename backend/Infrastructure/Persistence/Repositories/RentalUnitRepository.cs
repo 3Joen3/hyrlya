@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Infrastructure.Persistence.Repositories
 {
@@ -22,5 +23,8 @@ namespace Infrastructure.Persistence.Repositories
                 .Where(r => r.LandlordId == landlordId)
                 .ToListAsync();
         }
+
+        public async Task<RentalUnit?> GetByIdAsync(Guid id)
+            => await _context.RentalUnits.FirstOrDefaultAsync(r => r.Id == id);
     }
 }
