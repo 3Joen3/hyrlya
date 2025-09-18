@@ -5,14 +5,8 @@ namespace Api.Requests
 {
     public class RentalUnitRequest : IValidatableObject
     {
-        [Required, MinLength(1)]
-        public string Street { get; init; } = default!;
-
-        [Required, MinLength(1)]
-        public string HouseNumber { get; init; } = default!;
-
-        [Required, MinLength(1)]
-        public string City { get; init; } = default!;
+        [Required]
+        public AddressRequest Address { get; init; } = default!;
 
         [Required]
         public RentalUnitType Type { get; init; }
