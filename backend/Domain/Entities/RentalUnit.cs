@@ -22,7 +22,7 @@ namespace Domain.Entities
             if (landlordId == Guid.Empty)
                 throw new ArgumentException("LandlordId is required to create a rental unit.");
 
-            ArgumentNullException.ThrowIfNull(address);
+            ValidateAddress(address);
 
             if (rooms < 1)
                 throw new ArgumentException("Rooms can't be zero when creating a rental unit.");
@@ -45,7 +45,7 @@ namespace Domain.Entities
 
         public void UpdateAddress(Address newAddress)
         {
-            ArgumentNullException.ThrowIfNull(newAddress);
+            ValidateAddress(newAddress);
             Address = newAddress;
         }
 
@@ -57,6 +57,9 @@ namespace Domain.Entities
                 _images.Add(image);
             }
         }
+
+        private static void ValidateAddress(Address address) 
+            => ArgumentNullException.ThrowIfNull(address);
 
         private RentalUnit()
         {
