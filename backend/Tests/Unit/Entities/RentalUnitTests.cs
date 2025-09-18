@@ -209,6 +209,23 @@ namespace Tests.Unit.Entities
                 => rentalUnit.ChangeSizeSquareMeters(newSizeSquareMeters));
         }
 
+        [Fact]
+        public void ReplaceImages_ShouldRemoveOldAndAddNew()
+        {
+            var rentalUnit = CreateRentalUnitWithFullValidParameters();
+            var oldImage = rentalUnit.Images.Single();
+
+            var newImage = new Image(new WebAddress("https://new.com"), "NewAlt");
+            var newImages = new List<Image> { newImage };
+
+            rentalUnit.ReplaceImages(newImages);
+
+            Assert.DoesNotContain(oldImage, rentalUnit.Images);
+            Assert.Contains(newImage, rentalUnit.Images);
+            Assert.Equal(newImages, rentalUnit.Images);
+        }
+
+
         private static RentalUnit CreateRentalUnitWithFullValidParameters()
         {
             return new RentalUnit(

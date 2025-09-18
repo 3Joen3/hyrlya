@@ -54,10 +54,17 @@ namespace Domain.Entities
             SizeSquareMeters = newSize;
         }
 
+        public void ReplaceImages(IEnumerable<Image> newImages)
+        {
+            Guard.AgainstNull(newImages, nameof(newImages));
+            Guard.AgainstEmptyCollection(newImages, nameof(newImages));
+
+            _images.Clear();
+            AddImages(newImages);
+        }
+
         private void AddImages(IEnumerable<Image> images)
         {
-            Guard.AgainstNull(images, nameof(images));
-
             foreach (var image in images)
             {
                 Guard.AgainstNull(image, nameof(image));
