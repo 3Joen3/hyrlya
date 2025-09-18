@@ -12,11 +12,11 @@ namespace Tests.Unit.Entities
             var landlordId = Guid.NewGuid();
             var address = new Address("SomeStreet", "123", "SomeCity");
             var type = RentalUnitType.Apartment;
-            var rooms = 4;
+            var numberOfRooms = 4;
             var size = 100;
             var images = CreateImages();
 
-            var rentalUnit = new RentalUnit(landlordId, address, type, rooms, size, images);
+            var rentalUnit = new RentalUnit(landlordId, address, type, numberOfRooms, size, images);
 
             Assert.NotEqual(rentalUnit.Id, Guid.Empty);
 
@@ -28,7 +28,7 @@ namespace Tests.Unit.Entities
 
             Assert.Equal(type, rentalUnit.Type);
 
-            Assert.Equal(rooms, rentalUnit.Rooms);
+            Assert.Equal(numberOfRooms, rentalUnit.NumberOfRooms);
 
             Assert.Equal(size, rentalUnit.SizeSquareMeters);
 
@@ -43,12 +43,12 @@ namespace Tests.Unit.Entities
             var landlordId = Guid.Empty;
             var address = new Address("SomeStreet", "123", "SomeCity");
             var type = RentalUnitType.Apartment;
-            var rooms = 4;
+            var numberOfRooms = 4;
             var size = 100;
             var images = CreateImages();
 
             Assert.Throws<ArgumentException>(()
-               => new RentalUnit(landlordId, address, type, rooms, size, images));
+               => new RentalUnit(landlordId, address, type, numberOfRooms, size, images));
         }
 
         [Fact]
@@ -57,12 +57,12 @@ namespace Tests.Unit.Entities
             var landlordId = Guid.NewGuid();
             Address? address = null;
             var type = RentalUnitType.Apartment;
-            var rooms = 4;
+            var numberOfRooms = 4;
             var size = 100;
             var images = CreateImages();
 
             Assert.Throws<ArgumentNullException>(()
-               => new RentalUnit(landlordId, address!, type, rooms, size, images));
+               => new RentalUnit(landlordId, address!, type, numberOfRooms, size, images));
         }
 
         [Fact]
@@ -71,12 +71,12 @@ namespace Tests.Unit.Entities
             var landlordId = Guid.NewGuid();
             var address = new Address("SomeStreet", "123", "SomeCity");
             var type = RentalUnitType.Apartment;
-            var rooms = 0;
+            var numberOfRooms = 0;
             var size = 100;
             var images = CreateImages();
 
-            Assert.Throws<ArgumentException>(()
-               => new RentalUnit(landlordId, address, type, rooms, size, images));
+            Assert.Throws<ArgumentOutOfRangeException>(()
+               => new RentalUnit(landlordId, address, type, numberOfRooms, size, images));
         }
 
         [Fact]
@@ -85,12 +85,12 @@ namespace Tests.Unit.Entities
             var landlordId = Guid.NewGuid();
             var address = new Address("SomeStreet", "123", "SomeCity");
             var type = RentalUnitType.Apartment;
-            var rooms = 4;
+            var numberOfRooms = 4;
             var size = 0;
             var images = CreateImages();
 
-            Assert.Throws<ArgumentException>(()
-               => new RentalUnit(landlordId, address, type, rooms, size, images));
+            Assert.Throws<ArgumentOutOfRangeException>(()
+               => new RentalUnit(landlordId, address, type, numberOfRooms, size, images));
         }
 
         [Fact]
@@ -99,12 +99,12 @@ namespace Tests.Unit.Entities
             var landlordId = Guid.NewGuid();
             var address = new Address("SomeStreet", "123", "SomeCity");
             var type = RentalUnitType.Apartment;
-            var rooms = 4;
+            var numberOfRooms = 4;
             var size = 100;
             List<Image>? images = null;
 
             Assert.Throws<ArgumentNullException>(() 
-                => new RentalUnit(landlordId, address, type, rooms, size, images!));
+                => new RentalUnit(landlordId, address, type, numberOfRooms, size, images!));
         }
 
         [Fact]
@@ -113,12 +113,12 @@ namespace Tests.Unit.Entities
             var landlordId = Guid.NewGuid();
             var address = new Address("SomeStreet", "123", "SomeCity");
             var type = RentalUnitType.Apartment;
-            var rooms = 4;
+            var numberOfRooms = 4;
             var size = 100;
             var images = new List<Image>();
 
             Assert.Throws<ArgumentException>(() 
-                => new RentalUnit(landlordId, address, type, rooms, size, images));
+                => new RentalUnit(landlordId, address, type, numberOfRooms, size, images));
         }
 
         [Fact]
@@ -127,12 +127,12 @@ namespace Tests.Unit.Entities
             var landlordId = Guid.NewGuid();
             var address = new Address("SomeStreet", "123", "SomeCity");
             var type = RentalUnitType.Apartment;
-            var rooms = 4;
+            var numberOfRooms = 4;
             var size = 100;
             var images = new List<Image?>() { null };
 
             Assert.Throws<ArgumentNullException>(()
-               => new RentalUnit(landlordId, address, type, rooms, size, images!));
+               => new RentalUnit(landlordId, address, type, numberOfRooms, size, images!));
         }
 
         private static List<Image> CreateImages()
