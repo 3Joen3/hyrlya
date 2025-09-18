@@ -135,6 +135,39 @@ namespace Tests.Unit.Entities
                => new RentalUnit(landlordId, address, type, numberOfRooms, size, images!));
         }
 
+        [Fact]
+        public void ChangeAddress_WithValidAddress_ReplacesAddress()
+        {
+            var rentalUnit = CreateRentalUnitWithFullValidParameters();
+            var newAddress = new Address("NewSomeStreet", "321", "NewSomeCity");
+
+            rentalUnit.ChangeAddress(newAddress);
+
+            Assert.Equal(newAddress, rentalUnit.Address);
+        }
+
+        [Fact]
+        public void ChangeAddress_WithNullAddress_ShouldThrow()
+        {
+            var rentalUnit = CreateRentalUnitWithFullValidParameters();
+            Address? address = null;
+
+            Assert.Throws<ArgumentNullException>(()
+                => rentalUnit.ChangeAddress(address!));
+        }
+
+        private static RentalUnit CreateRentalUnitWithFullValidParameters()
+        {
+            return new RentalUnit(
+                Guid.NewGuid(),
+                new Address("SomeStreet", "123", "SomeCity"),
+                RentalUnitType.Apartment,
+                4,
+                100,
+                CreateImages()
+            );
+        }
+
         private static List<Image> CreateImages()
         {
             var url = new WebAddress("https://example.com");

@@ -34,6 +34,12 @@ namespace Domain.Entities
             AddImages(images);
         }
 
+        public void ChangeAddress(Address newAddress)
+        {
+            Guard.AgainstNull(newAddress, nameof(newAddress));
+            Address = newAddress;
+        }
+
         private void AddImages(IEnumerable<Image> images)
         {
             Guard.AgainstNull(images, nameof(images));
