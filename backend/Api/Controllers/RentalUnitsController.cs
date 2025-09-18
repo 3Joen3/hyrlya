@@ -43,7 +43,7 @@ namespace Api.Controllers
             return Ok(responseModels);
         }
 
-        [HttpGet("id:guid")]
+        [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetMyRentalUnitById(Guid id)
         {
             if (string.IsNullOrEmpty(IdentityId))
