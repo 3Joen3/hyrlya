@@ -150,10 +150,10 @@ namespace Tests.Unit.Entities
         public void ChangeAddress_WithNullAddress_ShouldThrow()
         {
             var rentalUnit = CreateRentalUnitWithFullValidParameters();
-            Address? address = null;
+            Address? newAddress = null;
 
             Assert.Throws<ArgumentNullException>(()
-                => rentalUnit.ChangeAddress(address!));
+                => rentalUnit.ChangeAddress(newAddress!));
         }
 
         [Fact]
