@@ -26,6 +26,9 @@ namespace Application.Services
             return await _repo.AddAsync(rentalUnit);
         }
   
+        public async Task<IEnumerable<RentalUnit>> GetAllByLandlordIdAsync(Guid landlordId)
+            => await _repo.GetAllByLandlordIdAsync(landlordId);
+
         private static IEnumerable<Image> BuildRentalUnitImages(IEnumerable<string> imageUrls)
         {
             var index = 1;
