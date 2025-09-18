@@ -1,4 +1,5 @@
 ﻿using Api.Requests;
+using Api.Responses;
 using Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -36,7 +37,10 @@ namespace Api.Controllers
 
             var rentalUnits = await _rentalUnitService.GetAllByIdentityIdAsync(IdentityId);
 
-            return Ok(rentalUnits);
+            var responseModels = rentalUnits
+                .Select(rentalUnit => new RentalUnitSummary(rentalUnit));
+
+            return Ok(responseModels);
         }
     }
 }
