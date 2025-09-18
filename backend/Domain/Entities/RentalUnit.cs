@@ -19,34 +19,57 @@ namespace Domain.Entities
         public RentalUnit(Guid landlordId, Address address, RentalUnitType type, 
             int rooms, int sizeSquareMeters, IEnumerable<Image> images)
         {
-            if (landlordId == Guid.Empty)
-                throw new ArgumentException("LandlordId is required to create a rental unit.");
+            Address = default!;
 
-            ValidateAddress(address);
-
-            if (rooms < 1)
-                throw new ArgumentException("Rooms can't be zero when creating a rental unit.");
-
-            if (sizeSquareMeters < 1)
-                throw new ArgumentException("Size can't be zero when creating a rental unit.");
-
-            ArgumentNullException.ThrowIfNull(images);
-
-            if (!images.Any()) 
-                throw new ArgumentException("At least one image is required to create a rental unit.");
-
-            LandlordId = landlordId;
-            Address = address;
+            SetLandlordId(landlordId);
+            SetAddress(address);
             Type = type;
-            Rooms = rooms;
-            SizeSquareMeters = sizeSquareMeters;
-            AddImages(images);
+            SetRooms(rooms);
+            SetSizeSquareMeters(sizeSquareMeters);
+            SetImages(images);
         }
 
-        public void UpdateAddress(Address newAddress)
+        private RentalUnit() { Address = default!; }
+
+        private void SetLandlordId(Guid landlordId)
         {
-            ValidateAddress(newAddress);
-            Address = newAddress;
+            if (landlordId == Guid.Empty) 
+                throw new ArgumentException("LandlordId is required to create a rental unit.");
+            
+            LandlordId = landlordId;
+        }
+
+        private void SetAddress(Address address)
+        {
+            ArgumentNullException.ThrowIfNull(address);
+            Address = address;
+        }
+
+        private void SetRooms(int rooms)
+        {
+            if (rooms < 1) 
+                throw new ArgumentException("Rooms can't be zero when creating a rental unit.");
+
+            Rooms = rooms;
+        }
+
+        private void SetSizeSquareMeters(int sizeSquareMeters)
+        {
+            if (sizeSquareMeters < 1) 
+                throw new ArgumentException("Size can't be zero when creating a rental unit.");
+            
+            SizeSquareMeters = sizeSquareMeters;
+        }
+
+        private void SetImages(IEnumerable<Image> images)
+        {
+            ArgumentNullException.ThrowIfNull(images);
+
+            if (!images.Any())
+                throw new ArgumentException("At least one image is required to create a rental unit.");
+
+            _images.Clear();
+            AddImages(images);
         }
 
         private void AddImages(IEnumerable<Image> images)
@@ -56,14 +79,6 @@ namespace Domain.Entities
                 ArgumentNullException.ThrowIfNull(image);
                 _images.Add(image);
             }
-        }
-
-        private static void ValidateAddress(Address address) 
-            => ArgumentNullException.ThrowIfNull(address);
-
-        private RentalUnit()
-        {
-            Address = default!;
         }
     }
 }
