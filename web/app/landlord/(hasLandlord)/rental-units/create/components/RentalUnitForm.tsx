@@ -6,14 +6,14 @@ import { RentalUnitData, rentalUnitSchema } from "@/lib/schemas/rentalUnitSchema
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createRentalUnit } from "@/lib/actions/rental-units";
 
-import Block from "../Block";
-import Form from "../forms/Form";
-import FormSection from "../forms/FormSection";
-import NumberField from "../forms/NumberField";
-import SelectField from "../forms/SelectField";
-import TextField from "../forms/TextField";
-import ImageUploader from "../image-uploader/ImageUploader";
-import Button from "../Button";
+import Block from "../../../../../../components/Block";
+import Form from "../../../../../../components/forms/Form";
+import FormSection from "../../../../../../components/forms/FormSection";
+import NumberField from "../../../../../../components/forms/NumberField";
+import SelectField from "../../../../../../components/forms/SelectField";
+import TextField from "../../../../../../components/forms/TextField";
+import ImageUploader from "../../../../../../components/image-uploader/ImageUploader";
+import Button from "../../../../../../components/Button";
 
 export default function RentalUnitForm() {
   const methods = useForm<RentalUnitData>({

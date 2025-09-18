@@ -1,5 +1,5 @@
 import Page from "@/components/Page";
-import RentalUnitForm from "@/components/rental-units/RentalUnitForm";
+import RentalUnitForm from "./components/RentalUnitForm";
 
 export default function page() {
   return (
