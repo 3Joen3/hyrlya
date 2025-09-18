@@ -27,5 +27,16 @@ namespace Api.Controllers
 
             return Ok(rentalUnit);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetMyRentalUnits()
+        {
+            if (string.IsNullOrEmpty(IdentityId))
+                return Unauthorized();
+
+            var rentalUnits = await _rentalUnitService.GetAllByIdentityIdAsync(IdentityId);
+
+            return Ok(rentalUnits);
+        }
     }
 }
