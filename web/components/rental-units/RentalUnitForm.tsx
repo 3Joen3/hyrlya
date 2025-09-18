@@ -26,8 +26,12 @@ export default function RentalUnitForm() {
   }
 
   return (
-    <Form className="grid grid-cols-2 gap-4" methods={methods} onSubmit={handleSubmit}>
-      <PageHeading heading={"Skapa nytt hyresobjekt"} />
+    <Form
+      className="grid grid-cols-2 gap-4"
+      methods={methods}
+      onSubmit={handleSubmit}
+      heading={"Skapa nytt hyresobjekt"}
+    >
       <Block className="space-y-6">
         <AboutSection />
         <AdressSection />
