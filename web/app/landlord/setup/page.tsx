@@ -4,7 +4,7 @@ import ProfileForm from "../components/profile/ProfileForm";
 export default function page() {
   return (
     <Page>
-      <ProfileForm className="w-2/3" heading="Kom igång som hyresvärd" />
+      <ProfileForm heading="Kom igång som hyresvärd" className="w-2/3 justify-self-center" />
     </Page>
   );
 }

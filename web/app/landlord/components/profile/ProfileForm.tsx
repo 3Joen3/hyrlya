@@ -1,6 +1,7 @@
 "use client";
 
 import Form from "@/components/forms/Form";
+import PageHeading from "@/components/PageHeading";
 import Block from "@/components/Block";
 import TextField from "@/components/forms/TextField";
 import ProfileFormImageSection from "./ProfileFormImageSection";
@@ -27,6 +28,7 @@ export default function ProfileForm({ className, heading }: Props) {
 
   return (
     <Form className={`${className} space-y-4`} methods={methods} onSubmit={handleSubmit}>
+      <PageHeading heading={heading} />
       <div className="grid grid-cols-3 gap-10">
         <Block className="col-span-2 space-y-4">
           <TextField id="name" label="Namn" />
