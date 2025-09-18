@@ -206,7 +206,7 @@ namespace Tests.Unit.Entities
             var newSizeSquareMeters = 0;
 
             Assert.Throws<ArgumentOutOfRangeException>(()
-                => rentalUnit.ChangeNumberOfRooms(newSizeSquareMeters));
+                => rentalUnit.ChangeSizeSquareMeters(newSizeSquareMeters));
         }
 
         private static RentalUnit CreateRentalUnitWithFullValidParameters()
