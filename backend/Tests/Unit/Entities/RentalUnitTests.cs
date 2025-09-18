@@ -156,6 +156,17 @@ namespace Tests.Unit.Entities
                 => rentalUnit.ChangeAddress(address!));
         }
 
+        [Fact]
+        public void ChangeType_WithValidType_ShouldReplaceType()
+        {
+            var rentalUnit = CreateRentalUnitWithFullValidParameters();
+            var newType = RentalUnitType.House;
+
+            rentalUnit.ChangeType(newType);
+
+            Assert.Equal(newType, rentalUnit.Type);
+        }
+
         private static RentalUnit CreateRentalUnitWithFullValidParameters()
         {
             return new RentalUnit(

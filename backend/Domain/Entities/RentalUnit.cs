@@ -40,6 +40,8 @@ namespace Domain.Entities
             Address = newAddress;
         }
 
+        public void ChangeType(RentalUnitType newType) => Type = newType;
+
         private void AddImages(IEnumerable<Image> images)
         {
             Guard.AgainstNull(images, nameof(images));
