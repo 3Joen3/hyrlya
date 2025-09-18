@@ -21,7 +21,7 @@ function RentalUnitContainer({ rentalUnit }: { rentalUnit: RentalUnitSummary }) 
   const address = rentalUnit.address;
 
   return (
-    <Link href={`/rental-units/${rentalUnit.id}`}>
+    <Link href={`/landlord/rental-units/${rentalUnit.id}`}>
       {address.city} {address.street} {address.houseNumber}
     </Link>
   );
