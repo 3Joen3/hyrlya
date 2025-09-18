@@ -23,8 +23,8 @@ namespace Api.Controllers
             if (string.IsNullOrEmpty(IdentityId))
                 return Unauthorized();
 
-            var rentalUnit = await _rentalUnitService.CreateAsync(IdentityId, request.Address.Street, request.Address.HouseNumber,
-                request.Address.City, request.Type, request.Rooms, request.SizeSquareMeters, request.ImageUrls );
+            var rentalUnit = await _rentalUnitService.CreateAsync(IdentityId, request.Street, request.HouseNumber,
+                request.City, request.Type, request.Rooms, request.SizeSquareMeters, request.ImageUrls );
 
             return Ok(rentalUnit);
         }
