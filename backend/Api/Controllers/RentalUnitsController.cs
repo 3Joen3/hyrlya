@@ -42,5 +42,21 @@ namespace Api.Controllers
 
             return Ok(responseModels);
         }
+
+        [HttpGet("id:guid")]
+        public async Task<IActionResult> GetMyRentalUnitById(Guid id)
+        {
+            if (string.IsNullOrEmpty(IdentityId))
+                return Unauthorized();
+
+            var rentalUnit = await _rentalUnitService.GetByIdAsync(id);
+
+            if (rentalUnit == null)
+                return NotFound();
+
+            var response = new RentalUnitDetails(rentalUnit);
+
+            return Ok(response);
+        }
     }
 }
