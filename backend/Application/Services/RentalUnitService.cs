@@ -25,9 +25,16 @@ namespace Application.Services
             var rentalUnit = new RentalUnit(landlordId, address, type, rooms, sizeSquareMeters, images);
             return await _repo.AddAsync(rentalUnit);
         }
-  
-        public async Task<IEnumerable<RentalUnit>> GetAllByLandlordIdAsync(Guid landlordId)
-            => await _repo.GetAllByLandlordIdAsync(landlordId);
+
+        public async Task<IEnumerable<RentalUnit>> GetAllByIdentityIdAsync(string identityId)
+        {
+            var landlordId = await _landlordService.GetIdByIdentityIdAsync(identityId);
+
+            if (landlordId == Guid.Empty)
+                return null;
+
+            return await _repo.GetAllByLandlordIdAsync(landlordId);
+        }
 
         private static IEnumerable<Image> BuildRentalUnitImages(IEnumerable<string> imageUrls)
         {
