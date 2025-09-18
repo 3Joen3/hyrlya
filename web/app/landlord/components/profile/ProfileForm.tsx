@@ -1,8 +1,8 @@
 "use client";
 
 import Form from "@/components/forms/Form";
-import PageHeading from "@/components/PageHeading";
 import Block from "@/components/Block";
+import FormSection from "@/components/forms/FormSection";
 import TextField from "@/components/forms/TextField";
 import ProfileFormImageSection from "./ProfileFormImageSection";
 import Button from "@/components/Button";
@@ -27,20 +27,26 @@ export default function ProfileForm({ className, heading }: Props) {
   }
 
   return (
-    <Form className={`${className} space-y-4`} methods={methods} onSubmit={handleSubmit}>
-      <PageHeading heading={heading} />
-      <div className="grid grid-cols-3 gap-10">
-        <Block className="col-span-2 space-y-4">
-          <TextField id="name" label="Namn" />
-          <TextField id="phoneNumber" label="Telefonnummer" />
-          <TextField id="emailAddress" label="Email address" />
+    <Form
+      className={`${className} space-y-6`}
+      methods={methods}
+      onSubmit={handleSubmit}
+      heading={heading}
+    >
+      <div className="flex flex-col gap-6 lg:grid lg:grid-cols-3">
+        <Block className="lg:col-span-2">
+          <FormSection>
+            <TextField id="name" label="Namn" />
+            <TextField id="phoneNumber" label="Telefonnummer" />
+            <TextField id="emailAddress" label="Email address" />
+          </FormSection>
         </Block>
-
-        <Block className="col-span-1 flex flex-col justify-center items-center space-y-4">
+        <Block className="lg:col-span-1 flex flex-col items-center gap-6">
           <ProfileFormImageSection />
         </Block>
       </div>
-      <Button className="w-1/3" type="submit" color="secondary">
+
+      <Button className="w-full" color="secondary" type="submit">
         Spara
       </Button>
     </Form>

@@ -36,7 +36,7 @@ export default function ProfileFormImageSection() {
         onChange={handleSelectedImage}
       />
 
-      <ProfileImage className="w-1/2" imageUrl={profileImageUrl} />
+      <ProfileImage className="w-2/3" imageUrl={profileImageUrl} />
 
       <Button className="w-1/2" onClick={() => fileInputRef.current?.click()}>
         Välj profilbild
