@@ -167,6 +167,27 @@ namespace Tests.Unit.Entities
             Assert.Equal(newType, rentalUnit.Type);
         }
 
+        [Fact]
+        public void ChangeNumberOfRooms_WithValidValue_ShouldReplaceRooms()
+        {
+            var rentalUnit = CreateRentalUnitWithFullValidParameters();
+            var newNumberOfRooms = 5;
+
+            rentalUnit.ChangeNumberOfRooms(newNumberOfRooms);
+
+            Assert.Equal(newNumberOfRooms, rentalUnit.NumberOfRooms);
+        }
+
+        [Fact]
+        public void ChangeNumberOfRooms_WithZero_ShouldThrow()
+        {
+            var rentalUnit = CreateRentalUnitWithFullValidParameters();
+            var newNumberOfRooms = 0;
+
+            Assert.Throws<ArgumentOutOfRangeException>(()
+                => rentalUnit.ChangeNumberOfRooms(newNumberOfRooms));
+        }
+
         private static RentalUnit CreateRentalUnitWithFullValidParameters()
         {
             return new RentalUnit(

@@ -42,6 +42,12 @@ namespace Domain.Entities
 
         public void ChangeType(RentalUnitType newType) => Type = newType;
 
+        public void ChangeNumberOfRooms(int newNumberOfRooms)
+        {
+            Guard.AgainstOutOfRange(newNumberOfRooms, 1, nameof(newNumberOfRooms));
+            NumberOfRooms = newNumberOfRooms;
+        }
+
         private void AddImages(IEnumerable<Image> images)
         {
             Guard.AgainstNull(images, nameof(images));
