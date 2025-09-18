@@ -7,7 +7,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createRentalUnit } from "@/lib/actions/rental-units";
 
 import Block from "../Block";
-import PageHeading from "../PageHeading";
 import Form from "../forms/Form";
 import FormSection from "../forms/FormSection";
 import NumberField from "../forms/NumberField";
@@ -26,8 +25,12 @@ export default function RentalUnitForm() {
   }
 
   return (
-    <Form className="grid grid-cols-2 gap-4" methods={methods} onSubmit={handleSubmit}>
-      <PageHeading heading="Skapa nytt hyresobjekt" />
+    <Form
+      className="grid grid-cols-2 gap-4"
+      methods={methods}
+      onSubmit={handleSubmit}
+      heading="Skapa nytt hyresobjekt"
+    >
       <Block className="space-y-6">
         <AboutSection />
         <AdressSection />
