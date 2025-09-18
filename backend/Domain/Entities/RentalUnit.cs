@@ -43,6 +43,12 @@ namespace Domain.Entities
             AddImages(images);
         }
 
+        public void UpdateAddress(Address newAddress)
+        {
+            ArgumentNullException.ThrowIfNull(newAddress);
+            Address = newAddress;
+        }
+
         private void AddImages(IEnumerable<Image> images)
         {
             foreach (var image in images)
