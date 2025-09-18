@@ -12,7 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { login, register } from "../actions";
 
 interface Props {
-  className?: string;
+  className: string;
 }
 
 export default function AuthForm({ className }: Props) {
@@ -48,7 +48,7 @@ export default function AuthForm({ className }: Props) {
           <TextField id="email" label="Ange e-postadress" />
           <TextField id="password" label="Ange lösenord" />
           <Button className="w-full" type="submit">
-            {isSubmitting ? "Laddar..." : isRegisterForm ?  "Skapa konto" : "Logga in"}
+            {isSubmitting ? "Laddar..." : isRegisterForm ? "Skapa konto" : "Logga in"}
           </Button>
         </Form>
       </Block>
