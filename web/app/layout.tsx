@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${montserrat.className} flex flex-col min-h-screen space-y-6 bg-neutral-100 text-neutral-700`}
+        className={`${montserrat.className} min-h-screen flex flex-col space-y-6 bg-neutral-100 text-neutral-700`}
       >
         {children}
       </body>
