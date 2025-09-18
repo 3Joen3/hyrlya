@@ -1,24 +1,21 @@
 "use server";
 
-import { RegisterData } from "@/lib/schemas/registerSchema";
-import { LoginData } from "@/lib/schemas/loginSchema";
-import { post, postNoResponse } from "@/lib/api/client";
+import { AuthData } from "@/lib/schemas/authSchema";
+import { postNoResponse, post } from "@/lib/api/client";
 import { LoginResponse } from "@/types/LoginResponse";
 import { cookies } from "next/headers";
 
-export async function register(request: RegisterData) {
+export async function register(request: AuthData) {
   await postNoResponse("register", request);
 }
 
-export async function login(data: LoginData) {
+export async function login(data: AuthData) {
   const response = await post<LoginResponse>("login", data);
 
   const bufferedExpiry = response.expiresIn - 60;
 
   await setAuthCookie("accessToken", response.accessToken, bufferedExpiry);
-
-  //SET A REAL EXPIRY DATE, SHOULD NOT BE SAME AS AT
-  await setAuthCookie("refresh", response.refreshToken, bufferedExpiry);
+  await setAuthCookie("refresh", response.refreshToken, 604800);
 }
 
 async function setAuthCookie(name: string, value: string, maxAge: number) {

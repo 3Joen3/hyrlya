@@ -1,5 +1,5 @@
-import Page from "../../../components/Page";
-import AuthForm from "@/components/auth/AuthForm";
+import Page from "@/components/Page";
+import AuthForm from "./components/AuthForm";
 
 import { getAccessToken } from "@/lib/api/server";
 import { redirect } from "next/navigation";
@@ -11,7 +11,7 @@ export default async function page() {
 
   return (
     <Page>
-      <AuthForm className="w-full lg:w-1/3 justify-self-center mt-10" />
+      <AuthForm className="w-full md:justify-self-center md:w-3/4 lg:w-2/5" />
     </Page>
   );
 }
