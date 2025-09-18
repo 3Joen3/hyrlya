@@ -48,6 +48,12 @@ namespace Domain.Entities
             NumberOfRooms = newNumberOfRooms;
         }
 
+        public void ChangeSizeSquareMeters(int newSize)
+        {
+            Guard.AgainstOutOfRange(newSize, 1, nameof(newSize));
+            SizeSquareMeters = newSize;
+        }
+
         private void AddImages(IEnumerable<Image> images)
         {
             Guard.AgainstNull(images, nameof(images));

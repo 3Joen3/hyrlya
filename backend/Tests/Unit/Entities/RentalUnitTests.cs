@@ -188,6 +188,27 @@ namespace Tests.Unit.Entities
                 => rentalUnit.ChangeNumberOfRooms(newNumberOfRooms));
         }
 
+        [Fact]
+        public void ChangeSizeSquareMeters_WithValidValue_ShouldReplaceSize()
+        {
+            var rentalUnit = CreateRentalUnitWithFullValidParameters();
+            var newSizeSquareMeters = 123;
+
+            rentalUnit.ChangeSizeSquareMeters(newSizeSquareMeters);
+
+            Assert.Equal(newSizeSquareMeters, rentalUnit.SizeSquareMeters);
+        }
+
+        [Fact]
+        public void ChangeSizeSquareMeters_WithZero_ShouldThrow()
+        {
+            var rentalUnit = CreateRentalUnitWithFullValidParameters();
+            var newSizeSquareMeters = 0;
+
+            Assert.Throws<ArgumentOutOfRangeException>(()
+                => rentalUnit.ChangeNumberOfRooms(newSizeSquareMeters));
+        }
+
         private static RentalUnit CreateRentalUnitWithFullValidParameters()
         {
             return new RentalUnit(
