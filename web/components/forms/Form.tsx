@@ -1,4 +1,4 @@
-import PageHeading from "../PageHeading";
+import Heading from "../Heading";
 import { FieldValues, FormProvider, UseFormReturn } from "react-hook-form";
 
 interface Props<T extends FieldValues> {
@@ -21,7 +21,7 @@ export default function Form<T extends FieldValues>({
   return (
     <FormProvider {...methods}>
       <form className={`${className} space-y-6`} onSubmit={handleSubmit(onSubmit)}>
-        {heading && <PageHeading heading={heading} />}
+        {heading && <Heading heading={heading} />}
         {children}
       </form>
     </FormProvider>
