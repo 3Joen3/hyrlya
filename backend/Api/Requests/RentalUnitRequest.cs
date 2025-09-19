@@ -1,4 +1,5 @@
-﻿using Domain.Enums;
+﻿using Application.Dtos;
+using Domain.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace Api.Requests
@@ -32,6 +33,20 @@ namespace Api.Requests
                 yield return new ValidationResult("At least one image is required.");
             else if (ImageUrls.Any(img => string.IsNullOrWhiteSpace(img)))
                 yield return new ValidationResult("An image can't be null or empty string.");
+        }
+
+        public RentalUnitDto ToDto()
+        {
+            return new RentalUnitDto
+            {
+                Street = Street,
+                HouseNumber = HouseNumber,
+                City = City,
+                Type = Type,
+                NumberOfRooms = Rooms,
+                SizeSquareMeters = SizeSquareMeters,
+                ImageUrls = ImageUrls
+            };
         }
     }
 }

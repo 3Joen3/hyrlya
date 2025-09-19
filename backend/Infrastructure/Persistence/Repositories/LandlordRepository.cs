@@ -22,10 +22,5 @@ namespace Infrastructure.Persistence.Repositories
             => await _context.Landlords.Where(l => l.IdentityId == identityId)
             .Select(l => l.Id)
             .SingleOrDefaultAsync();
-
-        Task<Landlord> ILandlordRepository.AddAsync(Landlord landlord)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
