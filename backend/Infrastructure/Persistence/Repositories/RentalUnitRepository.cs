@@ -1,7 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Infrastructure.Persistence.Repositories
 {
@@ -9,12 +8,10 @@ namespace Infrastructure.Persistence.Repositories
     {
         private readonly AppDbContext _context = context;
 
-        public async Task<RentalUnit> AddAsync(RentalUnit rentalUnit)
+        public Task AddAsync(RentalUnit rentalUnit)
         {
             _context.RentalUnits.Add(rentalUnit);
-            await _context.SaveChangesAsync();
-
-            return rentalUnit;
+            return Task.CompletedTask;
         }
 
         public async Task<IEnumerable<RentalUnit>> GetAllByLandlordIdAsync(Guid landlordId)
