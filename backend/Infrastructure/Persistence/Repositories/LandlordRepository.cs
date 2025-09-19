@@ -8,12 +8,10 @@ namespace Infrastructure.Persistence.Repositories
     {
         private readonly AppDbContext _context = context;
 
-        public async Task<Landlord> AddAsync(Landlord landlord)
+        public Task AddAsync(Landlord landlord)
         {
             _context.Landlords.Add(landlord);
-            await _context.SaveChangesAsync();
-
-            return landlord;
+            return Task.CompletedTask;
         }
 
         public async Task<Landlord?> GetByIdentityIdAsync(string identityId)
@@ -24,5 +22,10 @@ namespace Infrastructure.Persistence.Repositories
             => await _context.Landlords.Where(l => l.IdentityId == identityId)
             .Select(l => l.Id)
             .SingleOrDefaultAsync();
+
+        Task<Landlord> ILandlordRepository.AddAsync(Landlord landlord)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
