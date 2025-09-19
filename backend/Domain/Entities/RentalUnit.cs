@@ -63,6 +63,9 @@ namespace Domain.Entities
             AddImages(newImages);
         }
 
+        public bool IsOwnedBy(Guid landlordId) 
+            => LandlordId == landlordId;
+
         private void AddImages(IEnumerable<Image> images)
         {
             foreach (var image in images)
