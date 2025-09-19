@@ -63,6 +63,7 @@ namespace Domain.Entities
             AddImages(newImages);
         }
 
+        //NOT TEST
         public bool IsOwnedBy(Guid landlordId) 
             => LandlordId == landlordId;
 
