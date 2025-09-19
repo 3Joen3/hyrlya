@@ -14,6 +14,7 @@ namespace Infrastructure
             services.AddDbContext<AppDbContext>(options
                 => options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ILandlordRepository, LandlordRepository>();
             services.AddScoped<IRentalUnitRepository, RentalUnitRepository>();
 
