@@ -14,6 +14,12 @@ namespace Infrastructure.Persistence.Repositories
             return Task.CompletedTask;
         }
 
+        public Task UpdateAsync(RentalUnit rentalUnit)
+        {
+            _context.RentalUnits.Update(rentalUnit);
+            return Task.CompletedTask;
+        }
+
         public async Task<IEnumerable<RentalUnit>> GetAllByLandlordIdAsync(Guid landlordId)
         {
             return await _context.RentalUnits
