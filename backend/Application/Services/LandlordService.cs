@@ -5,9 +5,10 @@ using Domain.ValueObjects;
 
 namespace Application.Services
 {
-    public class LandlordService(ILandlordRepository repo) : ILandlordService
+    public class LandlordService(ILandlordRepository repo, IUnitOfWork unitOfWork) : ILandlordService
     {
         private readonly ILandlordRepository _repo = repo;
+        private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
         public async Task<Landlord> CreateAsync(string identityId, string name, 
             string? profileImageUrl = null, string? contactPhone = null, string? contactEmail = null)
@@ -26,7 +27,11 @@ namespace Application.Services
                 emailAddress = new EmailAddress(contactEmail);
 
             var landlord = new Landlord(identityId, name, profileImage, phoneNumber, emailAddress);
-            return await _repo.AddAsync(landlord);
+
+            await _repo.AddAsync(landlord);
+            await _unitOfWork.WriteChangesAsync();
+
+            return landlord;
         }
 
         public async Task<Landlord?> GetByIdentityIdAsync(string identityId)
