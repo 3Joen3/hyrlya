@@ -9,13 +9,13 @@ namespace Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<LandlordProfile> builder)
         {
-            builder.Property(p => p.ContactPhone)
+            builder.Property(p => p.PhoneNumber)
                 .HasConversion(
                     phone => phone != null ? phone.Value : null,
                     value => value != null ? new PhoneNumber(value) : null
                 );
 
-            builder.Property(p => p.ContactEmail)
+            builder.Property(p => p.EmailAddress)
                 .HasConversion(
                     email => email != null ? email.Value : null,
                     value => value != null ? new EmailAddress(value) : null

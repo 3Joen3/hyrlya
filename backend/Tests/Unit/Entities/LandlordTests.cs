@@ -9,71 +9,70 @@ namespace Tests.Unit.Entities
         public void Constructor_WithFullValidParameters_ShouldSucceed()
         {
             var identityId = "SomeIdentityId";
-            var name = "John Doe";
-            var image = CreateImage();
-            var contactPhone = new PhoneNumber("0701234567");
-            var contactEmail = new EmailAddress("random@example.com");
+            var profileName = "John Doe";
+            var profileImageUrl = new WebAddress("https://example.com/image/123");
+            var profilePhone = new PhoneNumber("0712345678");
+            var profileEmail = new EmailAddress("example@example.com");
 
-            var landlord = new Landlord(identityId, name, image, contactPhone, contactEmail);
+            var landlord = new Landlord(identityId, profileName, 
+                profileImageUrl, profilePhone, profileEmail);
 
-            Assert.NotEqual(landlord.Id, Guid.Empty);
+            Assert.NotEqual(Guid.Empty, landlord.Id);
+
             Assert.Equal(identityId, landlord.IdentityId);
 
             Assert.NotNull(landlord.Profile);
-            Assert.Same(landlord, landlord.Profile.Landlord);
-            Assert.Equal(landlord.Id, landlord.Profile.LandlordId);
-            Assert.Equal(name, landlord.Profile.Name);
-            Assert.Equal(image, landlord.Profile.Image);
-            Assert.Equal(contactPhone, landlord.Profile.ContactPhone);
-            Assert.Equal(contactEmail, landlord.Profile.ContactEmail);
+            Assert.Equal(profileName, landlord.Profile.Name);
+            Assert.NotNull(landlord.Profile.Image);
+            Assert.Equal(profileImageUrl, landlord.Profile.Image.Url);
+            Assert.Equal(profilePhone, landlord.Profile.PhoneNumber);
+            Assert.Equal(profileEmail, landlord.Profile.EmailAddress);
 
             Assert.NotNull(landlord.RentalUnits);
             Assert.Empty(landlord.RentalUnits);
         }
 
         [Fact]
-        public void Constructor_WithPhoneNumberMinimalValidParameters_ShouldSucceed()
+        public void Constructor_WithProfilePhoneMinimalValidParameters_ShouldSucceed()
         {
             var identityId = "SomeIdentityId";
-            var name = "John Doe";
-            var contactPhone = new PhoneNumber("0701234567");
+            var profileName = "John Doe";
+            var profilePhone = new PhoneNumber("0712345678");
 
-            var landlord = new Landlord(identityId, name, contactPhone: contactPhone);
+            var landlord = new Landlord(identityId, profileName, profilePhone: profilePhone);
 
-            Assert.NotEqual(landlord.Id, Guid.Empty);
+            Assert.NotEqual(Guid.Empty, landlord.Id);
+
             Assert.Equal(identityId, landlord.IdentityId);
 
             Assert.NotNull(landlord.Profile);
-            Assert.Same(landlord, landlord.Profile.Landlord);
-            Assert.Equal(landlord.Id, landlord.Profile.LandlordId);
-            Assert.Equal(name, landlord.Profile.Name);
+            Assert.Equal(profileName, landlord.Profile.Name);
             Assert.Null(landlord.Profile.Image);
-            Assert.Equal(contactPhone, landlord.Profile.ContactPhone);
-            Assert.Null(landlord.Profile.ContactEmail);
+            Assert.Equal(profilePhone, landlord.Profile.PhoneNumber);
+            Assert.Null(landlord.Profile.EmailAddress);
 
             Assert.NotNull(landlord.RentalUnits);
             Assert.Empty(landlord.RentalUnits);
         }
 
         [Fact]
-        public void Constructor_WithEmailAddressMinimalValidParameters_ShouldSucceed()
+        public void Constructor_WithProfileEmailMinimalValidParameters_ShouldSucceed()
         {
             var identityId = "SomeIdentityId";
-            var name = "John Doe";
-            var contactEmail = new EmailAddress("random@example.com");
+            var profileName = "John Doe";
+            var profileEmail = new EmailAddress("example@example.com");
 
-            var landlord = new Landlord(identityId, name, contactEmail: contactEmail);
+            var landlord = new Landlord(identityId, profileName, profileEmail: profileEmail);
 
-            Assert.NotEqual(landlord.Id, Guid.Empty);
+            Assert.NotEqual(Guid.Empty, landlord.Id);
+
             Assert.Equal(identityId, landlord.IdentityId);
 
             Assert.NotNull(landlord.Profile);
-            Assert.Same(landlord, landlord.Profile.Landlord);
-            Assert.Equal(landlord.Id, landlord.Profile.LandlordId);
-            Assert.Equal(name, landlord.Profile.Name);
+            Assert.Equal(profileName, landlord.Profile.Name);
             Assert.Null(landlord.Profile.Image);
-            Assert.Null(landlord.Profile.ContactPhone);
-            Assert.Equal(contactEmail, landlord.Profile.ContactEmail);
+            Assert.Null(landlord.Profile.PhoneNumber);
+            Assert.Equal(profileEmail, landlord.Profile.EmailAddress);
 
             Assert.NotNull(landlord.RentalUnits);
             Assert.Empty(landlord.RentalUnits);
@@ -83,70 +82,64 @@ namespace Tests.Unit.Entities
         public void Constructor_WithNullIdentityId_ShouldThrow()
         {
             string? identityId = null;
-            var name = "John Doe";
-            var image = CreateImage();
-            var contactPhone = new PhoneNumber("0701234567");
-            var contactEmail = new EmailAddress("random@example.com");
+            var profileName = "John Doe";
+            var profileImageUrl = new WebAddress("https://example.com/image/123");
+            var profilePhone = new PhoneNumber("0712345678");
+            var profileEmail = new EmailAddress("example@example.com");
 
             Assert.Throws<ArgumentNullException>(()
-                =>  new Landlord(identityId!, name, image, contactPhone, contactEmail));
+                => new Landlord(identityId!, profileName, profileImageUrl, profilePhone, profileEmail));
         }
 
         [Theory]
         [InlineData("")]
-        [InlineData("  ")]
-        public void Constructor_WithInvalidIdentityId_ShouldThrow(string identityId)
+        [InlineData(" ")]
+        public void Constructor_WithEmptyIdentityId_ShouldThrow(string identityId)
         {
-            var name = "John Doe";
-            var image = CreateImage();
-            var contactPhone = new PhoneNumber("0701234567");
-            var contactEmail = new EmailAddress("random@example.com");
+            var profileName = "John Doe";
+            var profileImageUrl = new WebAddress("https://example.com/image/123");
+            var profilePhone = new PhoneNumber("0712345678");
+            var profileEmail = new EmailAddress("example@example.com");
 
             Assert.Throws<ArgumentException>(()
-             => new Landlord(identityId, name, image, contactPhone, contactEmail));
+                => new Landlord(identityId, profileName, profileImageUrl, profilePhone, profileEmail));
         }
 
         [Fact]
-        public void Constructor_WithNullName_ShouldThrow()
+        public void Constructor_WithNullProfileName_ShouldThrow()
         {
             var identityId = "SomeIdentityId";
-            string? name = null;
-            var image = CreateImage();
-            var contactPhone = new PhoneNumber("0701234567");
-            var contactEmail = new EmailAddress("random@example.com");
+            string? profileName = null;
+            var profileImageUrl = new WebAddress("https://example.com/image/123");
+            var profilePhone = new PhoneNumber("0712345678");
+            var profileEmail = new EmailAddress("example@example.com");
 
-            Assert.Throws<ArgumentNullException>(()
-                => new Landlord(identityId, name!, image, contactPhone, contactEmail));
+            Assert.Throws<ArgumentNullException>(() 
+                => new Landlord(identityId, profileName!, profileImageUrl, profilePhone, profileEmail));
         }
 
         [Theory]
         [InlineData("")]
-        [InlineData("  ")]
-        public void Constructor_WithInvalidName_ShouldThrow(string name)
+        [InlineData(" ")]
+        public void Constructor_WithEmptyProfileName_ShouldThrow(string profileName)
         {
             var identityId = "SomeIdentityId";
-            var image = CreateImage();
-            var contactPhone = new PhoneNumber("0701234567");
-            var contactEmail = new EmailAddress("random@example.com");
+            var profileImageUrl = new WebAddress("https://example.com/image/123");
+            var profilePhone = new PhoneNumber("0712345678");
+            var profileEmail = new EmailAddress("example@example.com");
 
-            Assert.Throws<ArgumentException>(()
-             => new Landlord(identityId, name, image, contactPhone, contactEmail));
+            Assert.Throws<ArgumentException>(() 
+                => new Landlord(identityId, profileName, profileImageUrl, profilePhone, profileEmail));
         }
 
         [Fact]
-        public void Constructor_WithNoContactMethod_ShouldThrow()
+        public void Constructor_WithoutContactMethod_ShouldThrow()
         {
             var identityId = "SomeIdentityId";
-            var name = "John Doe";
+            var profileName = "John Doe";
 
             Assert.Throws<ArgumentException>(()
-                => new Landlord(identityId, name));
-        }
-
-        private static Image CreateImage()
-        {
-            var url = new WebAddress("https://example.com");
-            return new Image(url, "SomeAltText");
+                => new Landlord(identityId, profileName));
         }
     }
 }

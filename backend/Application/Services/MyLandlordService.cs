@@ -2,7 +2,6 @@
 using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
-using Domain.ValueObjects;
 
 namespace Application.Services
 {
@@ -14,12 +13,9 @@ namespace Application.Services
         public async Task<Landlord> CreateAsync(string identityId, LandlordDto dto)
         {
             //INTE HAR EN REDAN?
-            Image? profileImage = null;
 
-            if (dto.ProfileImageUrl is not null)
-                profileImage = BuildProfileImage(dto.ProfileImageUrl, dto.Name);
-
-            var landlord = new Landlord(identityId, dto.Name, profileImage, dto.ContactPhone, dto.ContactEmail);
+            var landlord = new Landlord(identityId, dto.Name, dto.ProfileImageUrl,
+                dto.ContactPhone, dto.ContactEmail);
 
             await _repo.AddAsync(landlord);
             await _unitOfWork.WriteChangesAsync();
@@ -32,13 +28,5 @@ namespace Application.Services
 
         public async Task<Guid> GetIdByIdentityIdAsync(string identityId)
             => await _repo.GetIdByIdentityIdAsync(identityId);
-
-        //MOVE THIS TO DOMAIN
-        private static Image BuildProfileImage(WebAddress imageUrl, string profileName)
-        {
-            var altText = $"{profileName} - Profilbild";
-
-            return new Image(imageUrl, altText);
-        }
     }
 }
