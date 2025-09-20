@@ -1,4 +1,5 @@
 ﻿using Api.Requests;
+using Api.Responses.Landlords;
 using Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +34,9 @@ namespace Api.Controllers
             if (landlord is null)
                 return NotFound();
 
-            return Ok(landlord);
+            var response = new LandlordDetails(landlord);
+
+            return Ok(response);
         }
     }
 }
