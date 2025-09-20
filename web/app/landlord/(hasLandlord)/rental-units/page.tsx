@@ -5,7 +5,7 @@ import { getAuthenticated } from "@/lib/api/server";
 import { RentalUnitSummary } from "@/types/RentalUnit";
 
 export default async function page() {
-  const response = await getAuthenticated("rentalunits");
+  const response = await getAuthenticated("my/rental-units");
   const rentalUnits = (await response.json()) as RentalUnitSummary[];
 
   return (

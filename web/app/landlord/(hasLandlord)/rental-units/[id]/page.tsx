@@ -12,7 +12,7 @@ interface Props {
 export default async function page({ params }: Props) {
   const { id } = await params;
 
-  const response = await getAuthenticated(`rentalunits/${id}`);
+  const response = await getAuthenticated(`my/rental-units/${id}`);
   const rentalUnit = (await response.json()) as RentalUnitDetails;
   return (
     <Page>
