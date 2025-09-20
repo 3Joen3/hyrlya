@@ -3,12 +3,11 @@ using Domain.ValueObjects;
 
 namespace Application.Dtos
 {
-    public class RentalUnitDto
-    {
-        public required Address Address { get; init; } = default!;
-        public required RentalUnitType Type { get; init; }
-        public required int NumberOfRooms { get; init; }
-        public required int SizeSquareMeters { get; init; }
-        public required IEnumerable<WebAddress> ImageUrls { get; init; }
-    }
+    public record RentalUnitDto(
+        Address Address, 
+        RentalUnitType Type, 
+        int NumberOfRooms, 
+        int SizeSquareMeters, 
+        IEnumerable<WebAddress> ImageUrls
+    );
 }
