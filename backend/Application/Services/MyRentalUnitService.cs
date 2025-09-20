@@ -6,16 +6,16 @@ using Domain.ValueObjects;
 
 namespace Application.Services
 {
-    public class MyRentalUnitService(IRentalUnitRepository repo, IUnitOfWork unitOfWork, ILandlordService landlordService) : IMyRentalUnitService
+    public class MyRentalUnitService(IRentalUnitRepository repo, IUnitOfWork unitOfWork, IMyLandlordService myLandlordService) : IMyRentalUnitService
     {
         private readonly IRentalUnitRepository _repo = repo;
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
-        private readonly ILandlordService _landlordService = landlordService;
+        private readonly IMyLandlordService _myLandlordService = myLandlordService;
 
         public async Task<RentalUnit> CreateAsync(string identityId, RentalUnitDto dto)
         {
-            var landlordId = await _landlordService
+            var landlordId = await _myLandlordService
                 .GetIdByIdentityIdAsync(identityId);
 
             var images = BuildRentalUnitImages(dto.ImageUrls);
@@ -59,7 +59,7 @@ namespace Application.Services
             if (rentalUnit is null)
                 return null;
 
-            var landlordId = await _landlordService
+            var landlordId = await _myLandlordService
                 .GetIdByIdentityIdAsync(identityId);
 
             if (!rentalUnit.IsOwnedBy(landlordId))
@@ -72,7 +72,7 @@ namespace Application.Services
 
         public async Task<IEnumerable<RentalUnit>> GetAllAsync(string identityId)
         {
-            var landlordId = await _landlordService
+            var landlordId = await _myLandlordService
                 .GetIdByIdentityIdAsync(identityId);
 
             return await _repo.GetAllByLandlordIdAsync(landlordId);
