@@ -1,5 +1,5 @@
 ﻿using Api.Requests;
-using Api.Responses;
+using Api.Responses.RentalUnits;
 using Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
