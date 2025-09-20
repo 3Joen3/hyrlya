@@ -6,8 +6,14 @@ namespace Api.Requests
     {
         [Required, MinLength(1)]
         public string Name { get; init; } = default!;
+
+        [MinLength(1)]
         public string? ProfileImageUrl { get; init; }
+
+        [MinLength(1)]
         public string? PhoneNumber { get; init; }
+
+        [MinLength(1)]
         public string? EmailAddress { get; init; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

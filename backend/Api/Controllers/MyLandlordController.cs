@@ -1,0 +1,39 @@
+﻿using Api.Requests;
+using Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+
+namespace Api.Controllers
+{
+    [ApiController]
+    [Route("my/landlord")]
+    [Authorize]
+    public class MyLandlordController(IMyLandlordService myLandlordService) : ControllerBase
+    {
+        private readonly IMyLandlordService _myLandlordService = myLandlordService;
+
+        public string IdentityId => User
+            .FindFirstValue(ClaimTypes.NameIdentifier)!;
+
+        [HttpPost]
+        public async Task<IActionResult> CreateMyLandlord([FromBody] LandlordRequest request)
+        {
+            var dto = request.ToDto();
+            var landlord = await _myLandlordService.CreateAsync(IdentityId, dto);
+
+            return Ok(landlord);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetMyLandlord()
+        {
+            var landlord = await _myLandlordService.GetByIdentityIdAsync(IdentityId);
+
+            if (landlord is null)
+                return NotFound();
+
+            return Ok(landlord);
+        }
+    }
+}
