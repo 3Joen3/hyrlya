@@ -18,10 +18,9 @@ namespace Application.Services
             var landlordId = await _landlordService
                 .GetIdByIdentityIdAsync(identityId);
 
-            var address = new Address(dto.Street, dto.HouseNumber, dto.City);
             var images = BuildRentalUnitImages(dto.ImageUrls);
 
-            var rentalUnit = new RentalUnit(landlordId, address, 
+            var rentalUnit = new RentalUnit(landlordId, dto.Address, 
                 dto.Type, dto.NumberOfRooms, dto.SizeSquareMeters, images);
 
             await _repo.AddAsync(rentalUnit);
@@ -39,9 +38,7 @@ namespace Application.Services
                 //Do something
             }
 
-            var address = new Address(dto.Street, dto.HouseNumber, dto.City);
-            rentalUnit.ChangeAddress(address);
-
+            rentalUnit.ChangeAddress(dto.Address);
             rentalUnit.ChangeType(dto.Type);
             rentalUnit.ChangeNumberOfRooms(dto.NumberOfRooms);
             rentalUnit.ChangeSizeSquareMeters(dto.SizeSquareMeters);
@@ -81,15 +78,14 @@ namespace Application.Services
             return await _repo.GetAllByLandlordIdAsync(landlordId);
         }
         //Should this method be in RentalUnit?
-        private static IEnumerable<Image> BuildRentalUnitImages(IEnumerable<string> imageUrls)
+        private static IEnumerable<Image> BuildRentalUnitImages(IEnumerable<WebAddress> imageUrls)
         {
             var index = 1;
             foreach (var imageUrl in imageUrls)
             {
-                var url = new WebAddress(imageUrl);
                 var alt = $"Bostadsannons – bild {index}";
 
-                yield return new Image(url, alt);
+                yield return new Image(imageUrl, alt);
                 index++;
             }
         }
