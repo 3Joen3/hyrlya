@@ -1,6 +1,6 @@
 ﻿using Domain.ValueObjects;
 
-namespace Api.Responses
+namespace Api.Responses.Common
 {
     public class ImageResponse(Image image)
     {

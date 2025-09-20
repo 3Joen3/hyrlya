@@ -1,6 +1,7 @@
-﻿using Domain.Entities;
+﻿using Api.Responses.Common;
+using Domain.Entities;
 
-namespace Api.Responses
+namespace Api.Responses.RentalUnits
 {
     public class RentalUnitDetails(RentalUnit rentalUnit)
     {

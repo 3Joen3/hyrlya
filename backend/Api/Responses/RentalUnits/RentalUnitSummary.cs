@@ -1,7 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.ValueObjects;
 
-namespace Api.Responses
+namespace Api.Responses.RentalUnits
 {
     public class RentalUnitSummary(RentalUnit rentalUnit)
     {
