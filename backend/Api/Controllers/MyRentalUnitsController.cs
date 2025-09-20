@@ -26,17 +26,15 @@ namespace Api.Controllers
             return Ok(rentalUnit);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetMyRentalUnits()
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> UpdateMyRentalUnit(Guid id, [FromBody] RentalUnitRequest request)
         {
-            var rentalUnits = await _myRentalUnitService
-                .GetAllAsync(IdentityId);
+            var dto = request.ToDto();
+            var rentalUnit = await _myRentalUnitService.UpdateAsync(IdentityId, id, dto);
 
-            var response = rentalUnits
-                .Select(rentalUnit => new RentalUnitSummary(rentalUnit));
-
-            return Ok(response);
+            return Ok(rentalUnit);
         }
+
 
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetMyRentalUnitById(Guid id)
@@ -48,6 +46,18 @@ namespace Api.Controllers
                 return NotFound();
 
             var response = new RentalUnitDetails(rentalUnit);
+
+            return Ok(response);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetMyRentalUnits()
+        {
+            var rentalUnits = await _myRentalUnitService
+                .GetAllAsync(IdentityId);
+
+            var response = rentalUnits
+                .Select(rentalUnit => new RentalUnitSummary(rentalUnit));
 
             return Ok(response);
         }
