@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 export async function createLandlord(data: ProfileData) {
   const parsed = profileSchema.parse(data);
 
-  const response = await postAuthenticated("landlords", parsed);
+  const response = await postAuthenticated("my/landlord", parsed);
 
   if (!response.ok) {
     //Do Something
