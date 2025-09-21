@@ -1,5 +1,5 @@
-﻿using Domain.ValueObjects;
-using Domain.Enums;
+﻿using Domain.Enums;
+using Domain.ValueObjects;
 
 namespace Domain.Entities
 {
@@ -17,7 +17,7 @@ namespace Domain.Entities
         public Landlord? Landlord { get; private set; }
 
         public RentalUnit(Guid landlordId, Address address, RentalUnitType type, 
-            int numberOfRooms, int sizeSquareMeters, IEnumerable<Image> images)
+            int numberOfRooms, int sizeSquareMeters, IEnumerable<WebAddress> imageUrls)
         {
             if (landlordId == Guid.Empty)
                 throw new ArgumentException("LandlordId can't be empty.", nameof(landlordId));
@@ -30,17 +30,12 @@ namespace Domain.Entities
             if (sizeSquareMeters < 1)
                 throw new ArgumentOutOfRangeException(nameof(sizeSquareMeters), "SizeSquareMeters can't be under 1.");
 
-            ArgumentNullException.ThrowIfNull(images);
-
-            if (!images.Any())
-                throw new ArgumentException("At least one image is required.", nameof(images));
-
             LandlordId = landlordId;
             Address = address;
             Type = type;
             NumberOfRooms = numberOfRooms;
             SizeSquareMeters = sizeSquareMeters;
-            AddImages(images);
+            AddImages(imageUrls);
         }
 
         public void ChangeAddress(Address newAddress)
@@ -67,25 +62,26 @@ namespace Domain.Entities
             SizeSquareMeters = newSize;
         }
 
-        public void ReplaceImages(IEnumerable<Image> newImages)
-        {
-            ArgumentNullException.ThrowIfNull(newImages);
-
-            if (!newImages.Any())
-                throw new ArgumentException("At least one image is required.", nameof(newImages));
-
-            _images.Clear();
-            AddImages(newImages);
-        }
-
-        //NOT TEST
         public bool IsOwnedBy(Guid landlordId) => LandlordId == landlordId;
 
-        private void AddImages(IEnumerable<Image> images)
+        public void ReplaceImages(IEnumerable<WebAddress> imageUrls)
         {
-            foreach (var image in images)
+            _images.Clear();
+            AddImages(imageUrls);
+        }
+
+        private void AddImages(IEnumerable<WebAddress> imageUrls)
+        {
+            ArgumentNullException.ThrowIfNull(imageUrls);
+
+            if (!imageUrls.Any())
+                throw new ArgumentException("At least one image is required.", nameof(imageUrls));
+
+            foreach(var url in imageUrls)
             {
-                ArgumentNullException.ThrowIfNull(image);
+                ArgumentNullException.ThrowIfNull(url);
+                var alt = $"Bild från bostadsannons";
+                var image = new Image(url, alt);
                 _images.Add(image);
             }
         }

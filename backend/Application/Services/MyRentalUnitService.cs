@@ -2,7 +2,6 @@
 using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
-using Domain.ValueObjects;
 
 namespace Application.Services
 {
@@ -18,10 +17,8 @@ namespace Application.Services
             var landlordId = await _myLandlordService
                 .GetIdByIdentityIdAsync(identityId);
 
-            var images = BuildRentalUnitImages(dto.ImageUrls);
-
             var rentalUnit = new RentalUnit(landlordId, dto.Address, 
-                dto.Type, dto.NumberOfRooms, dto.SizeSquareMeters, images);
+                dto.Type, dto.NumberOfRooms, dto.SizeSquareMeters, dto.ImageUrls);
 
             await _repo.AddAsync(rentalUnit);
             await _unitOfWork.WriteChangesAsync();
@@ -42,9 +39,7 @@ namespace Application.Services
             rentalUnit.ChangeType(dto.Type);
             rentalUnit.ChangeNumberOfRooms(dto.NumberOfRooms);
             rentalUnit.ChangeSizeSquareMeters(dto.SizeSquareMeters);
-
-            var images = BuildRentalUnitImages(dto.ImageUrls);
-            rentalUnit.ReplaceImages(images);
+            rentalUnit.ReplaceImages(dto.ImageUrls);
 
             await _repo.UpdateAsync(rentalUnit);
             await _unitOfWork.WriteChangesAsync();
@@ -76,18 +71,6 @@ namespace Application.Services
                 .GetIdByIdentityIdAsync(identityId);
 
             return await _repo.GetAllByLandlordIdAsync(landlordId);
-        }
-        //Should this method be in RentalUnit?
-        private static IEnumerable<Image> BuildRentalUnitImages(IEnumerable<WebAddress> imageUrls)
-        {
-            var index = 1;
-            foreach (var imageUrl in imageUrls)
-            {
-                var alt = $"Bostadsannons – bild {index}";
-
-                yield return new Image(imageUrl, alt);
-                index++;
-            }
         }
     }
 }
