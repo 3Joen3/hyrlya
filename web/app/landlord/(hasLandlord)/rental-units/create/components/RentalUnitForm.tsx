@@ -47,16 +47,16 @@ export default function RentalUnitForm() {
 
 function AboutSection() {
   const rentalUnitTypeOptions = [
-    { value: "1", label: "Rum" },
-    { value: "2", label: "Lägenhet" },
-    { value: "3", label: "Hus" },
+    { value: "room", label: "Rum" },
+    { value: "apartment", label: "Lägenhet" },
+    { value: "house", label: "Hus" },
   ];
 
   return (
     <FormSection heading="Om bostaden">
       <SelectField id="type" label="Boendetyp" options={rentalUnitTypeOptions} />
       <div className="grid grid-cols-2 gap-4">
-        <NumberField id="rooms" label="Antal rum" />
+        <NumberField id="numberOfRooms" label="Antal rum" />
         <NumberField id="sizeSquareMeters" label="Storlek" />
       </div>
     </FormSection>
@@ -67,10 +67,10 @@ function AdressSection() {
   return (
     <FormSection heading="Adress">
       <div className="grid grid-cols-2 gap-4">
-        <TextField id="street" label="Gatuadress" />
-        <TextField id="houseNumber" label="Husnummer" />
+        <TextField id="address.street" label="Gatuadress" />
+        <TextField id="address.houseNumber" label="Husnummer" />
       </div>
-      <TextField id="city" label="Stad" />
+      <TextField id="address.city" label="Stad" />
     </FormSection>
   );
 }
