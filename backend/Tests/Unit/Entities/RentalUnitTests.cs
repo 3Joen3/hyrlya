@@ -10,45 +10,36 @@ namespace Tests.Unit.Entities
         public void Constructor_WithFullValidParameters_ShouldSucceed()
         {
             var landlordId = Guid.NewGuid();
-            var address = new Address("SomeStreet", "123", "SomeCity");
+            var address = new Address("SomeStreet", "4", "Borås");
             var type = RentalUnitType.Apartment;
-            var numberOfRooms = 4;
-            var size = 100;
-            var images = CreateImages();
+            var numberOfRooms = 3;
+            var sizeSquareMeters = 83;
+            var imageUrls = new List<WebAddress>() { new("https://example.com/image/123") };
 
-            var rentalUnit = new RentalUnit(landlordId, address, type, numberOfRooms, size, images);
+            var rentalUnit = new RentalUnit(landlordId, address, type, 
+                numberOfRooms, sizeSquareMeters, imageUrls);
 
-            Assert.NotEqual(rentalUnit.Id, Guid.Empty);
-
-            Assert.NotEqual(rentalUnit.LandlordId, Guid.Empty);
+            Assert.NotEqual(Guid.Empty, rentalUnit.Id);
             Assert.Equal(landlordId, rentalUnit.LandlordId);
-
-            Assert.NotNull(rentalUnit.Address);
             Assert.Equal(address, rentalUnit.Address);
-
             Assert.Equal(type, rentalUnit.Type);
-
             Assert.Equal(numberOfRooms, rentalUnit.NumberOfRooms);
-
-            Assert.Equal(size, rentalUnit.SizeSquareMeters);
-
-            Assert.NotNull(rentalUnit.Images);
-            Assert.NotEmpty(rentalUnit.Images);
-            Assert.Equal(images, rentalUnit.Images);
+            Assert.Equal(sizeSquareMeters, rentalUnit.SizeSquareMeters);
+            Assert.Equal(imageUrls[0], rentalUnit.Images[0].Url);
         }
 
         [Fact]
         public void Constructor_WithEmptyLandlordId_ShouldThrow()
         {
             var landlordId = Guid.Empty;
-            var address = new Address("SomeStreet", "123", "SomeCity");
+            var address = new Address("SomeStreet", "4", "Borås");
             var type = RentalUnitType.Apartment;
-            var numberOfRooms = 4;
-            var size = 100;
-            var images = CreateImages();
+            var numberOfRooms = 3;
+            var sizeSquareMeters = 83;
+            var imageUrls = new List<WebAddress>() { new("https://example.com/image/123") };
 
-            Assert.Throws<ArgumentException>(()
-               => new RentalUnit(landlordId, address, type, numberOfRooms, size, images));
+            Assert.Throws<ArgumentException>(() 
+                => new RentalUnit(landlordId, address, type, numberOfRooms, sizeSquareMeters, imageUrls));
         }
 
         [Fact]
@@ -57,89 +48,89 @@ namespace Tests.Unit.Entities
             var landlordId = Guid.NewGuid();
             Address? address = null;
             var type = RentalUnitType.Apartment;
-            var numberOfRooms = 4;
-            var size = 100;
-            var images = CreateImages();
+            var numberOfRooms = 3;
+            var sizeSquareMeters = 83;
+            var imageUrls = new List<WebAddress>() { new("https://example.com/image/123") };
 
             Assert.Throws<ArgumentNullException>(()
-               => new RentalUnit(landlordId, address!, type, numberOfRooms, size, images));
+                => new RentalUnit(landlordId, address!, type, numberOfRooms, sizeSquareMeters, imageUrls));
         }
 
         [Fact]
-        public void Constructor_WithZeroRooms_ShouldThrow()
+        public void Constructor_WithZeroNumberOfRooms_ShouldThrow()
         {
             var landlordId = Guid.NewGuid();
-            var address = new Address("SomeStreet", "123", "SomeCity");
+            var address = new Address("SomeStreet", "4", "Borås");
             var type = RentalUnitType.Apartment;
             var numberOfRooms = 0;
-            var size = 100;
-            var images = CreateImages();
+            var sizeSquareMeters = 83;
+            var imageUrls = new List<WebAddress>() { new("https://example.com/image/123") };
 
             Assert.Throws<ArgumentOutOfRangeException>(()
-               => new RentalUnit(landlordId, address, type, numberOfRooms, size, images));
+                => new RentalUnit(landlordId, address, type, numberOfRooms, sizeSquareMeters, imageUrls));
         }
 
         [Fact]
-        public void Constructor_WithZeroSize_ShouldThrow()
+        public void Constructor_WithZeroSizeSquareMeters_ShouldThrow()
         {
             var landlordId = Guid.NewGuid();
-            var address = new Address("SomeStreet", "123", "SomeCity");
+            var address = new Address("SomeStreet", "4", "Borås");
             var type = RentalUnitType.Apartment;
-            var numberOfRooms = 4;
-            var size = 0;
-            var images = CreateImages();
+            var numberOfRooms = 3;
+            var sizeSquareMeters = 0;
+            var imageUrls = new List<WebAddress>() { new("https://example.com/image/123") };
 
             Assert.Throws<ArgumentOutOfRangeException>(()
-               => new RentalUnit(landlordId, address, type, numberOfRooms, size, images));
+                => new RentalUnit(landlordId, address, type, numberOfRooms, sizeSquareMeters, imageUrls));
         }
 
         [Fact]
-        public void Constructor_WithNullImages_ShouldThrow()
+        public void Constructor_WithNullImageUrls_ShouldThrow()
         {
             var landlordId = Guid.NewGuid();
-            var address = new Address("SomeStreet", "123", "SomeCity");
+            var address = new Address("SomeStreet", "4", "Borås");
             var type = RentalUnitType.Apartment;
-            var numberOfRooms = 4;
-            var size = 100;
-            List<Image>? images = null;
-
-            Assert.Throws<ArgumentNullException>(() 
-                => new RentalUnit(landlordId, address, type, numberOfRooms, size, images!));
-        }
-
-        [Fact]
-        public void Constructor_WithEmptyImages_ShouldThrow()
-        {
-            var landlordId = Guid.NewGuid();
-            var address = new Address("SomeStreet", "123", "SomeCity");
-            var type = RentalUnitType.Apartment;
-            var numberOfRooms = 4;
-            var size = 100;
-            var images = new List<Image>();
-
-            Assert.Throws<ArgumentException>(() 
-                => new RentalUnit(landlordId, address, type, numberOfRooms, size, images));
-        }
-
-        [Fact]
-        public void Constructor_WithNullImage_ShouldThrow()
-        {
-            var landlordId = Guid.NewGuid();
-            var address = new Address("SomeStreet", "123", "SomeCity");
-            var type = RentalUnitType.Apartment;
-            var numberOfRooms = 4;
-            var size = 100;
-            var images = new List<Image?>() { null };
+            var numberOfRooms = 3;
+            var sizeSquareMeters = 83;
+            List<WebAddress>? imageUrls = null;
 
             Assert.Throws<ArgumentNullException>(()
-               => new RentalUnit(landlordId, address, type, numberOfRooms, size, images!));
+                => new RentalUnit(landlordId, address, type, numberOfRooms, sizeSquareMeters, imageUrls!));
         }
 
         [Fact]
-        public void ChangeAddress_WithValidAddress_ShouldReplaceAddress()
+        public void Constructor_WithEmptyImageUrls_ShouldThrow()
         {
-            var rentalUnit = CreateRentalUnitWithFullValidParameters();
-            var newAddress = new Address("NewSomeStreet", "321", "NewSomeCity");
+            var landlordId = Guid.NewGuid();
+            var address = new Address("SomeStreet", "4", "Borås");
+            var type = RentalUnitType.Apartment;
+            var numberOfRooms = 3;
+            var sizeSquareMeters = 83;
+            var imageUrls = new List<WebAddress>() { };
+
+            Assert.Throws<ArgumentException>(()
+                => new RentalUnit(landlordId, address, type, numberOfRooms, sizeSquareMeters, imageUrls));
+        }
+
+        [Fact]
+        public void Constructor_WithNullImageUrl_ShouldThrow()
+        {
+            var landlordId = Guid.NewGuid();
+            var address = new Address("SomeStreet", "4", "Borås");
+            var type = RentalUnitType.Apartment;
+            var numberOfRooms = 3;
+            var sizeSquareMeters = 83;
+            var imageUrls = new List<WebAddress?>() { null };
+
+            Assert.Throws<ArgumentNullException>(()
+                => new RentalUnit(landlordId, address, type, numberOfRooms, sizeSquareMeters, imageUrls!));
+        }
+
+        [Fact]
+        public void ChangeAddress_WithValidAddress_ShouldSucceed()
+        {
+            var rentalUnit = GetFullRentalUnit();
+            var newAddress = new Address("ChangedStreet", "999", "Göteborg");
 
             rentalUnit.ChangeAddress(newAddress);
 
@@ -149,7 +140,7 @@ namespace Tests.Unit.Entities
         [Fact]
         public void ChangeAddress_WithNullAddress_ShouldThrow()
         {
-            var rentalUnit = CreateRentalUnitWithFullValidParameters();
+            var rentalUnit = GetFullRentalUnit();
             Address? newAddress = null;
 
             Assert.Throws<ArgumentNullException>(()
@@ -157,10 +148,10 @@ namespace Tests.Unit.Entities
         }
 
         [Fact]
-        public void ChangeType_WithValidType_ShouldReplaceType()
+        public void ChangeType_WithValidType_ShouldSucceed()
         {
-            var rentalUnit = CreateRentalUnitWithFullValidParameters();
-            var newType = RentalUnitType.House;
+            var rentalUnit = GetFullRentalUnit();
+            var newType = RentalUnitType.Room;
 
             rentalUnit.ChangeType(newType);
 
@@ -168,10 +159,10 @@ namespace Tests.Unit.Entities
         }
 
         [Fact]
-        public void ChangeNumberOfRooms_WithValidValue_ShouldReplaceRooms()
+        public void ChangeNumberOfRooms_WithValidValue_ShouldSucceed()
         {
-            var rentalUnit = CreateRentalUnitWithFullValidParameters();
-            var newNumberOfRooms = 5;
+            var rentalUnit = GetFullRentalUnit();
+            var newNumberOfRooms = 11;
 
             rentalUnit.ChangeNumberOfRooms(newNumberOfRooms);
 
@@ -179,9 +170,9 @@ namespace Tests.Unit.Entities
         }
 
         [Fact]
-        public void ChangeNumberOfRooms_WithZero_ShouldThrow()
+        public void ChangeNumberOfRooms_WithInvalidValue_ShouldThrow()
         {
-            var rentalUnit = CreateRentalUnitWithFullValidParameters();
+            var rentalUnit = GetFullRentalUnit();
             var newNumberOfRooms = 0;
 
             Assert.Throws<ArgumentOutOfRangeException>(()
@@ -189,10 +180,10 @@ namespace Tests.Unit.Entities
         }
 
         [Fact]
-        public void ChangeSizeSquareMeters_WithValidValue_ShouldReplaceSize()
+        public void ChangeSizeSquareMeters_WithValidValue_ShouldSucceed()
         {
-            var rentalUnit = CreateRentalUnitWithFullValidParameters();
-            var newSizeSquareMeters = 123;
+            var rentalUnit = GetFullRentalUnit();
+            var newSizeSquareMeters = 71;
 
             rentalUnit.ChangeSizeSquareMeters(newSizeSquareMeters);
 
@@ -200,9 +191,9 @@ namespace Tests.Unit.Entities
         }
 
         [Fact]
-        public void ChangeSizeSquareMeters_WithZero_ShouldThrow()
+        public void ChangeSizeSquareMeters_WithInvalidValue_ShouldThrow()
         {
-            var rentalUnit = CreateRentalUnitWithFullValidParameters();
+            var rentalUnit = GetFullRentalUnit();
             var newSizeSquareMeters = 0;
 
             Assert.Throws<ArgumentOutOfRangeException>(()
@@ -210,39 +201,77 @@ namespace Tests.Unit.Entities
         }
 
         [Fact]
-        public void ReplaceImages_ShouldRemoveOldAndAddNew()
+        public void ReplaceImages_WithValidImageUrls_ShouldSucceed()
         {
-            var rentalUnit = CreateRentalUnitWithFullValidParameters();
-            var oldImage = rentalUnit.Images.Single();
+            var newImageUrls = new List<WebAddress>() { new("https://newexample.com/newimage/321") };
+            var rentalUnit = GetFullRentalUnit();
 
-            var newImage = new Image(new WebAddress("https://new.com"), "NewAlt");
-            var newImages = new List<Image> { newImage };
+            rentalUnit.ReplaceImages(newImageUrls);
 
-            rentalUnit.ReplaceImages(newImages);
-
-            Assert.DoesNotContain(oldImage, rentalUnit.Images);
-            Assert.Contains(newImage, rentalUnit.Images);
-            Assert.Equal(newImages, rentalUnit.Images);
+            Assert.Single(rentalUnit.Images);
+            Assert.Equal(newImageUrls[0], rentalUnit.Images[0].Url);
         }
 
+        [Fact]
+        public void ReplaceImages_WithNullImageUrls_ShouldThrow()
+        {
+            List<WebAddress>? newImageUrls = null;
+            var rentalUnit = GetFullRentalUnit();
 
-        private static RentalUnit CreateRentalUnitWithFullValidParameters()
+            Assert.Throws<ArgumentNullException>(()
+                => rentalUnit.ReplaceImages(newImageUrls!));
+        }
+
+        [Fact]
+        public void ReplaceImages_WithEmptyImageUrls_ShouldThrow()
+        {
+            var newImageUrls = new List<WebAddress>() { };
+            var rentalUnit = GetFullRentalUnit();
+
+            Assert.Throws<ArgumentException>(()
+                => rentalUnit.ReplaceImages(newImageUrls));
+        }
+
+        [Fact]
+        public void ReplaceImages_WithNullImageUrl_ShouldThrow()
+        {
+            var newImageUrls = new List<WebAddress?>() { null };
+            var rentalUnit = GetFullRentalUnit();
+
+            Assert.Throws<ArgumentNullException>(()
+                => rentalUnit.ReplaceImages(newImageUrls!));
+        }
+
+        [Fact]
+        public void IsOwnedBy_WithCorrectOwner_ShouldReturnTrue()
+        {
+            var landlordId = Guid.NewGuid();
+            var rentalUnit = GetFullRentalUnit(landlordId);
+
+            var result = rentalUnit.IsOwnedBy(landlordId);
+
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void IsOwnedBy_WithIncorrectOwner_ShouldReturnTrue()
+        {
+            var rentalUnit = GetFullRentalUnit();
+            var landlordId = Guid.NewGuid();
+
+            var result = rentalUnit.IsOwnedBy(landlordId);
+
+            Assert.False(result);
+        }
+
+        private static RentalUnit GetFullRentalUnit(Guid? landlordId = null)
         {
             return new RentalUnit(
-                Guid.NewGuid(),
-                new Address("SomeStreet", "123", "SomeCity"),
-                RentalUnitType.Apartment,
-                4,
-                100,
-                CreateImages()
+                landlordId ?? Guid.NewGuid(),
+                new Address("SomeStreet", "4", "Borås"), 
+                RentalUnitType.Apartment, 3, 83,
+                [new("https://example.com/image/123")]
             );
-        }
-
-        private static List<Image> CreateImages()
-        {
-            var url = new WebAddress("https://example.com");
-            var image = new Image(url, "SomeAltText");
-            return [image];
         }
     }
 }

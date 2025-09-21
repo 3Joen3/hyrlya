@@ -11,7 +11,7 @@ namespace Domain.Entities
         public Address Address { get; private set; }
         public RentalUnitType Type { get; private set; }
         public int NumberOfRooms { get; private set; }
-        public int SizeSquareMeters { get; private set; }
+        public int SizeSquareMeters { get; private set; } 
 
         public Guid LandlordId { get; private set; }
         public Landlord? Landlord { get; private set; }
@@ -19,49 +19,18 @@ namespace Domain.Entities
         public RentalUnit(Guid landlordId, Address address, RentalUnitType type, 
             int numberOfRooms, int sizeSquareMeters, IEnumerable<WebAddress> imageUrls)
         {
-            if (landlordId == Guid.Empty)
-                throw new ArgumentException("LandlordId can't be empty.", nameof(landlordId));
-
-            ArgumentNullException.ThrowIfNull(address);
-
-            if (numberOfRooms < 1)
-                throw new ArgumentOutOfRangeException(nameof(numberOfRooms), "NumberOfRooms can't be under 1.");
-
-            if (sizeSquareMeters < 1)
-                throw new ArgumentOutOfRangeException(nameof(sizeSquareMeters), "SizeSquareMeters can't be under 1.");
-
-            LandlordId = landlordId;
-            Address = address;
+            LandlordId = SetLandlordId(landlordId);
+            Address = SetAddress(address);
             Type = type;
-            NumberOfRooms = numberOfRooms;
-            SizeSquareMeters = sizeSquareMeters;
+            NumberOfRooms = SetNumberOfRooms(numberOfRooms);;
+            SizeSquareMeters = SetSizeSquareMeters(sizeSquareMeters);
             AddImages(imageUrls);
         }
 
-        public void ChangeAddress(Address newAddress)
-        {
-            ArgumentNullException.ThrowIfNull(newAddress);
-            Address = newAddress;
-        }
-
+        public void ChangeAddress(Address newAddress) => Address = SetAddress(newAddress);
         public void ChangeType(RentalUnitType newType) => Type = newType;
-
-        public void ChangeNumberOfRooms(int newNumberOfRooms)
-        {
-            if (newNumberOfRooms < 1)
-                throw new ArgumentOutOfRangeException(nameof(newNumberOfRooms), "NumberOfRooms can't be under 1.");
-
-            NumberOfRooms = newNumberOfRooms;
-        }
-
-        public void ChangeSizeSquareMeters(int newSize)
-        {
-            if (newSize < 1)
-                throw new ArgumentOutOfRangeException(nameof(newSize), "SizeSquareMeters can't be under 1.");
-
-            SizeSquareMeters = newSize;
-        }
-
+        public void ChangeNumberOfRooms(int newNumberOfRooms) => NumberOfRooms = SetNumberOfRooms(newNumberOfRooms);
+        public void ChangeSizeSquareMeters(int newSize) => SizeSquareMeters = SetSizeSquareMeters(newSize);
         public bool IsOwnedBy(Guid landlordId) => LandlordId == landlordId;
 
         public void ReplaceImages(IEnumerable<WebAddress> imageUrls)
@@ -77,13 +46,43 @@ namespace Domain.Entities
             if (!imageUrls.Any())
                 throw new ArgumentException("At least one image is required.", nameof(imageUrls));
 
-            foreach(var url in imageUrls)
+            foreach (var url in imageUrls)
             {
                 ArgumentNullException.ThrowIfNull(url);
                 var alt = $"Bild från bostadsannons";
                 var image = new Image(url, alt);
                 _images.Add(image);
             }
+        }
+
+        private static Guid SetLandlordId(Guid landlordId)
+        {
+            if (landlordId == Guid.Empty)
+                throw new ArgumentException("LandlordId can't be empty.", nameof(landlordId));
+
+            return landlordId;
+        }
+
+        private static Address SetAddress(Address address)
+        {
+            ArgumentNullException.ThrowIfNull(address);
+            return address;
+        }
+
+        private static int SetNumberOfRooms(int numberOfRooms)
+        {
+            if (numberOfRooms < 1)
+                throw new ArgumentOutOfRangeException(nameof(numberOfRooms), "NumberOfRooms can't be under 1.");
+
+            return numberOfRooms;
+        }
+
+        private static int SetSizeSquareMeters(int sizeSquareMeters)
+        {
+            if (sizeSquareMeters < 1)
+                throw new ArgumentOutOfRangeException(nameof(sizeSquareMeters), "SizeSquareMeters can't be under 1.");
+
+            return sizeSquareMeters;
         }
 
         private RentalUnit() { Address = default!; }
