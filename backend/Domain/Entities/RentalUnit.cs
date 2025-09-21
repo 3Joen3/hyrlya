@@ -35,8 +35,15 @@ namespace Domain.Entities
 
         public void ReplaceImages(IEnumerable<WebAddress> imageUrls)
         {
+            ArgumentNullException.ThrowIfNull(imageUrls);
+
+            if (!imageUrls.Any())
+                throw new ArgumentException("At least one image is required.", nameof(imageUrls));
+
+            var images = BuildImages(imageUrls);
+
             _images.Clear();
-            AddImages(imageUrls);
+            _images.AddRange(images);
         }
 
         private void AddImages(IEnumerable<WebAddress> imageUrls)
@@ -46,13 +53,13 @@ namespace Domain.Entities
             if (!imageUrls.Any())
                 throw new ArgumentException("At least one image is required.", nameof(imageUrls));
 
-            foreach (var url in imageUrls)
-            {
-                ArgumentNullException.ThrowIfNull(url);
-                var alt = $"Bild från bostadsannons";
-                var image = new Image(url, alt);
-                _images.Add(image);
-            }
+            var images = BuildImages(imageUrls);
+            _images.AddRange(images);
+        }
+
+        private static IEnumerable<Image> BuildImages(IEnumerable<WebAddress> imageUrls)
+        {
+            return [.. imageUrls.Select(url => new Image(url, "Bild från bostadsannons"))];
         }
 
         private static Guid SetLandlordId(Guid landlordId)

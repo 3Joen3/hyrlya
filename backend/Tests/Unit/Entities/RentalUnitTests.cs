@@ -217,9 +217,13 @@ namespace Tests.Unit.Entities
         {
             List<WebAddress>? newImageUrls = null;
             var rentalUnit = GetFullRentalUnit();
+            var oldImage = rentalUnit.Images[0];
 
             Assert.Throws<ArgumentNullException>(()
                 => rentalUnit.ReplaceImages(newImageUrls!));
+
+            Assert.Single(rentalUnit.Images);
+            Assert.Equal(oldImage, rentalUnit.Images[0]);
         }
 
         [Fact]
@@ -227,9 +231,13 @@ namespace Tests.Unit.Entities
         {
             var newImageUrls = new List<WebAddress>() { };
             var rentalUnit = GetFullRentalUnit();
+            var oldImage = rentalUnit.Images[0];
 
             Assert.Throws<ArgumentException>(()
                 => rentalUnit.ReplaceImages(newImageUrls));
+
+            Assert.Single(rentalUnit.Images);
+            Assert.Equal(oldImage, rentalUnit.Images[0]);
         }
 
         [Fact]
@@ -237,9 +245,13 @@ namespace Tests.Unit.Entities
         {
             var newImageUrls = new List<WebAddress?>() { null };
             var rentalUnit = GetFullRentalUnit();
+            var oldImage = rentalUnit.Images[0];
 
             Assert.Throws<ArgumentNullException>(()
                 => rentalUnit.ReplaceImages(newImageUrls!));
+
+            Assert.Single(rentalUnit.Images);
+            Assert.Equal(oldImage, rentalUnit.Images[0]);
         }
 
         [Fact]
