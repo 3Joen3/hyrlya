@@ -21,14 +21,12 @@ namespace Tests.Unit.Entities
 
             Assert.Equal(identityId, landlord.IdentityId);
 
-            Assert.NotNull(landlord.Profile);
             Assert.Equal(profileName, landlord.Profile.Name);
             Assert.NotNull(landlord.Profile.Image);
             Assert.Equal(profileImageUrl, landlord.Profile.Image.Url);
             Assert.Equal(profilePhone, landlord.Profile.PhoneNumber);
             Assert.Equal(profileEmail, landlord.Profile.EmailAddress);
 
-            Assert.NotNull(landlord.RentalUnits);
             Assert.Empty(landlord.RentalUnits);
         }
 
@@ -45,13 +43,11 @@ namespace Tests.Unit.Entities
 
             Assert.Equal(identityId, landlord.IdentityId);
 
-            Assert.NotNull(landlord.Profile);
             Assert.Equal(profileName, landlord.Profile.Name);
             Assert.Null(landlord.Profile.Image);
             Assert.Equal(profilePhone, landlord.Profile.PhoneNumber);
             Assert.Null(landlord.Profile.EmailAddress);
 
-            Assert.NotNull(landlord.RentalUnits);
             Assert.Empty(landlord.RentalUnits);
         }
 
@@ -68,13 +64,11 @@ namespace Tests.Unit.Entities
 
             Assert.Equal(identityId, landlord.IdentityId);
 
-            Assert.NotNull(landlord.Profile);
             Assert.Equal(profileName, landlord.Profile.Name);
             Assert.Null(landlord.Profile.Image);
             Assert.Null(landlord.Profile.PhoneNumber);
             Assert.Equal(profileEmail, landlord.Profile.EmailAddress);
 
-            Assert.NotNull(landlord.RentalUnits);
             Assert.Empty(landlord.RentalUnits);
         }
 
