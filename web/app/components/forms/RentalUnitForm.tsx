@@ -15,9 +15,16 @@ import TextField from "@/components/forms/TextField";
 import ImageUploader from "@/components/image-uploader/ImageUploader";
 import Button from "@/components/Button";
 
-export default function RentalUnitForm() {
+interface Props {
+  heading: string;
+  submitLabel: string;
+  existingData?: RentalUnitData;
+}
+
+export default function RentalUnitForm({ heading, submitLabel, existingData }: Props) {
   const methods = useForm<RentalUnitData>({
     resolver: zodResolver(rentalUnitSchema),
+    defaultValues: existingData,
   });
 
   async function handleSubmit(data: RentalUnitData) {
@@ -25,7 +32,7 @@ export default function RentalUnitForm() {
   }
 
   return (
-    <Form methods={methods} onSubmit={handleSubmit} heading={"Skapa nytt hyresobjekt"}>
+    <Form methods={methods} onSubmit={handleSubmit} heading={heading}>
       <div className="grid grid-cols-2 gap-6">
         <Block className="space-y-6">
           <AboutSection />
@@ -33,12 +40,12 @@ export default function RentalUnitForm() {
         </Block>
         <Block>
           <FormSection heading="Bilder på bostaden">
-            <ImageUploader id="imageUrls" />
+            <ImageUploader id="imageUrls" currentImageUrls={existingData?.imageUrls} />
           </FormSection>
         </Block>
 
         <Button color="secondary" type="submit">
-          Skapa hyresobjekt
+          {submitLabel}
         </Button>
       </div>
     </Form>

@@ -5,7 +5,11 @@ export interface RentalUnitSummary {
 }
 
 export interface RentalUnitDetails {
-  images: Image;
+  address: Address;
+  type: "room" | "apartment" | "house";
+  numberOfRooms: number;
+  sizeSquareMeters: number;
+  images: Image[];
 }
 
 export interface Address {

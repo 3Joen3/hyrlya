@@ -9,11 +9,12 @@ import { useEffect, useState } from "react";
 
 interface Props {
   id: string;
+  currentImageUrls?: string[];
 }
 
-export default function ImageUploader({ id }: Props) {
+export default function ImageUploader({ id, currentImageUrls }: Props) {
   const { edgestore } = useEdgeStore();
-  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
+  const [uploadedImages, setUploadedImages] = useState<string[]>(currentImageUrls ?? []);
   const { setValue } = useFormContext();
 
   async function handleDroppedFiles(acceptedFiles: File[]) {
