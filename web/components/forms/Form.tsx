@@ -20,7 +20,7 @@ export default function Form<T extends FieldValues>({
 
   return (
     <FormProvider {...methods}>
-      <form className={`${className} space-y-6`} onSubmit={handleSubmit(onSubmit)}>
+      <form className={`${className} space-y-4`} onSubmit={handleSubmit(onSubmit)}>
         {heading && <Heading heading={heading} />}
         {children}
       </form>
