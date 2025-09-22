@@ -1,8 +1,14 @@
 interface Props {
-  className?: string;
+  heading: string;
+  className: string;
   children: React.ReactNode;
 }
 
-export default function Page({ className, children }: Props) {
-  return <main className={`w-11/12 mx-auto flex-1 space-y-6 ${className}`}>{children}</main>;
+export default function Page({ heading, className, children }: Props) {
+  return (
+    <main className={`w-11/12 mx-auto flex-1 ${heading ? "space-y-6" : ""}`}>
+      {heading && <h1 className="text-2xl font-bold underline">{heading}</h1>}
+      <div className={className}>{children}</div>
+    </main>
+  );
 }
