@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthData, authSchema } from "@/lib/schemas/authSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { login, register } from "@/app/actions/actions";
+import { login, register } from "@/lib/actions/auth";
 
 interface Props {
   className: string;
