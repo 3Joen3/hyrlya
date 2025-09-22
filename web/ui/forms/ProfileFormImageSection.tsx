@@ -1,5 +1,5 @@
 import Button from "@/components/Button";
-import ProfileImage from "@/app/ui/ProfileImage";
+import ProfileImage from "../ProfileImage";
 
 import { useEdgeStore } from "@/lib/edgestore";
 import { useRef, useState } from "react";
