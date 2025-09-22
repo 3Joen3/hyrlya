@@ -1,12 +1,14 @@
 import { Image } from "./Common";
+
 export interface RentalUnitSummary {
   id: string;
+  type: "room" | "apartment" | "house";
   address: Address;
 }
 
 export interface RentalUnitDetails {
-  address: Address;
   type: "room" | "apartment" | "house";
+  address: Address;
   numberOfRooms: number;
   sizeSquareMeters: number;
   images: Image[];
