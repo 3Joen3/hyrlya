@@ -1,10 +1,10 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-
+import { RentalUnitDetails } from "@/types/RentalUnit";
 import { RentalUnitData, rentalUnitSchema } from "@/lib/schemas/rentalUnitSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createRentalUnit } from "@/lib/actions/rental-units";
+import { createRentalUnit, updateRentalUnit } from "@/lib/actions/rental-units";
 
 import Block from "@/components/Block";
 import Form from "@/components/forms/Form";
@@ -16,21 +16,28 @@ import ImageUploader from "@/components/image-uploader/ImageUploader";
 import Button from "@/components/Button";
 
 interface Props {
-  existingData?: RentalUnitData;
+  existingData?: RentalUnitDetails;
 }
 
 export default function RentalUnitForm({ existingData }: Props) {
   const methods = useForm<RentalUnitData>({
     resolver: zodResolver(rentalUnitSchema),
-    defaultValues: existingData,
+    defaultValues: {
+      address: existingData?.address,
+      imageUrls: existingData?.images.map((img) => img.url),
+      numberOfRooms: existingData?.numberOfRooms,
+      sizeSquareMeters: existingData?.sizeSquareMeters,
+      type: existingData?.type.toLowerCase() as RentalUnitData["type"],
+    },
   });
 
   async function handleSubmit(data: RentalUnitData) {
-    await createRentalUnit(data);
+    if (existingData) await updateRentalUnit(data, existingData.id);
+    else await createRentalUnit(data);
   }
 
   return (
-    <Form methods={methods} onSubmit={handleSubmit} heading="Skapa hyresobjekt">
+    <Form methods={methods} onSubmit={handleSubmit}>
       <div className="grid grid-cols-2 gap-6">
         <Block className="space-y-6">
           <AboutSection />
@@ -38,7 +45,10 @@ export default function RentalUnitForm({ existingData }: Props) {
         </Block>
         <Block>
           <FormSection heading="Bilder på bostaden">
-            <ImageUploader id="imageUrls" currentImageUrls={existingData?.imageUrls} />
+            <ImageUploader
+              id="imageUrls"
+              currentImageUrls={existingData?.images.map((img) => img.url)}
+            />
           </FormSection>
         </Block>
 
