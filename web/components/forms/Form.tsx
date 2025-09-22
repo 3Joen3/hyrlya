@@ -1,11 +1,9 @@
-import Heading from "../Heading";
 import { FieldValues, FormProvider, UseFormReturn } from "react-hook-form";
 
 interface Props<T extends FieldValues> {
   className?: string;
   methods: UseFormReturn<T>;
   onSubmit: (data: T) => void;
-  heading?: string;
   children: React.ReactNode;
 }
 
@@ -13,15 +11,13 @@ export default function Form<T extends FieldValues>({
   className,
   methods,
   onSubmit,
-  heading,
   children,
 }: Props<T>) {
   const { handleSubmit } = methods;
 
   return (
     <FormProvider {...methods}>
-      <form className={`${className} space-y-4`} onSubmit={handleSubmit(onSubmit)}>
-        {heading && <Heading heading={heading} />}
+      <form className={`${className}`} onSubmit={handleSubmit(onSubmit)}>
         {children}
       </form>
     </FormProvider>
