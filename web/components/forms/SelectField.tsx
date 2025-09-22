@@ -16,8 +16,8 @@ export default function SelectField({ id, label, options }: Props) {
       <select
         id={id}
         {...register(id)}
-        className="w-full rounded-md border border-neutral-300 bg-white px-3 py-2 
-                   text-sm shadow-sm focus:border-sky-600 focus:ring-1 focus:ring-sky-600"
+        className="rounded border border-neutral-300 px-2 py-1.5 
+             focus:outline-none focus:border-sky-600 focus:ring-1 focus:ring-sky-600"
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>
