@@ -3,7 +3,7 @@ import RentalUnitForm from "@/ui/forms/RentalUnitForm";
 
 export default function page() {
   return (
-    <Page>
+    <Page heading="Skapa hyresobjekt" className="">
       <RentalUnitForm />
     </Page>
   );

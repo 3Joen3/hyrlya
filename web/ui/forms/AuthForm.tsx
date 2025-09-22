@@ -11,11 +11,7 @@ import { AuthData, authSchema } from "@/lib/schemas/authSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { login, register } from "@/lib/actions/auth";
 
-interface Props {
-  className: string;
-}
-
-export default function AuthForm({ className }: Props) {
+export default function AuthForm() {
   const [isRegisterForm, setIsRegisterForm] = useState(true);
 
   const methods = useForm<AuthData>({
@@ -30,7 +26,7 @@ export default function AuthForm({ className }: Props) {
   }
 
   return (
-    <div className={className}>
+    <>
       <div className="grid grid-cols-2">
         <FormSelectorButton
           label="Logga in"
@@ -52,7 +48,7 @@ export default function AuthForm({ className }: Props) {
           </Button>
         </Form>
       </Block>
-    </div>
+    </>
   );
 }
 

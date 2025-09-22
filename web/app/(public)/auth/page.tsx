@@ -10,8 +10,8 @@ export default async function page() {
   }
 
   return (
-    <Page>
-      <AuthForm className="w-full md:justify-self-center md:w-3/4 lg:w-2/5" />
+    <Page className="w-full md:justify-self-center md:w-3/4 lg:w-2/5">
+      <AuthForm />
     </Page>
   );
 }

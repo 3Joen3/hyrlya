@@ -25,7 +25,7 @@ export default async function page({ params }: Props) {
   };
 
   return (
-    <Page>
+    <Page heading="Redigera hyresobjekt" className="">
       <RentalUnitForm existingData={existingData} />
     </Page>
   );
