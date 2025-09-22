@@ -1,7 +1,7 @@
 import Page from "@/components/Page";
 import { getAuthenticated } from "@/lib/api/server";
 import { RentalUnitDetails } from "@/types/RentalUnit";
-import RentalUnitForm from "../../../../ui/forms/RentalUnitForm";
+import RentalUnitForm from "@/ui/forms/RentalUnitForm";
 import { RentalUnitData } from "@/lib/schemas/rentalUnitSchema";
 
 interface Props {
