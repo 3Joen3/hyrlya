@@ -9,9 +9,9 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "HyrLya – Hitta och hyr bostäder enkelt",
+  title: "Hyrlya – Hitta och hyr bostäder enkelt",
   description:
-    "Utforska lediga lägenheter och hyr direkt via HyrLya. Enkelt för både hyresvärdar och hyresgäster.",
+    "Utforska lediga lägenheter och hyr direkt via Hyrlya. Enkelt för både hyresvärdar och hyresgäster.",
 };
 
 export default function RootLayout({

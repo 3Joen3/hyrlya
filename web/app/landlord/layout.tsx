@@ -1,5 +1,5 @@
-import Header from "../../components/Header";
-import NavLink from "../../components/NavLink";
+import Header from "@/components/Header";
+import NavLink from "@/components/NavLink";
 
 import { EdgeStoreProvider } from "@/lib/edgestore";
 
@@ -10,13 +10,13 @@ export default function LandlordLayout({
 }) {
   return (
     <>
-      <LayoutHeader />
+      <LandlordHeader />
       <EdgeStoreProvider>{children}</EdgeStoreProvider>
     </>
   );
 }
 
-function LayoutHeader() {
+function LandlordHeader() {
   return (
     <Header className="gap-12" logoHref="/landlord">
       <div className="space-x-6">
