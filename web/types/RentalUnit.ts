@@ -7,6 +7,7 @@ export interface RentalUnitSummary {
 }
 
 export interface RentalUnitDetails {
+  id: string;
   type: "room" | "apartment" | "house";
   address: Address;
   numberOfRooms: number;
