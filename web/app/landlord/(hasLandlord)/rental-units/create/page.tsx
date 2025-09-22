@@ -1,10 +1,17 @@
 import Page from "@/components/Page";
 import RentalUnitForm from "@/ui/forms/RentalUnitForm";
 
-export default function page() {
+import { RentalUnitData } from "@/lib/schemas/rentalUnitSchema";
+import { createRentalUnit } from "@/lib/actions/rental-units";
+
+export default async function page() {
+  async function handleSubmit(data: RentalUnitData) {
+    await createRentalUnit(data);
+  }
+
   return (
     <Page heading="Skapa hyresobjekt" className="">
-      <RentalUnitForm />
+      <RentalUnitForm onSubmit={handleSubmit} />
     </Page>
   );
 }
