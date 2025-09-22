@@ -16,12 +16,10 @@ import ImageUploader from "@/components/image-uploader/ImageUploader";
 import Button from "@/components/Button";
 
 interface Props {
-  heading: string;
-  submitLabel: string;
   existingData?: RentalUnitData;
 }
 
-export default function RentalUnitForm({ heading, submitLabel, existingData }: Props) {
+export default function RentalUnitForm({ existingData }: Props) {
   const methods = useForm<RentalUnitData>({
     resolver: zodResolver(rentalUnitSchema),
     defaultValues: existingData,
@@ -32,7 +30,7 @@ export default function RentalUnitForm({ heading, submitLabel, existingData }: P
   }
 
   return (
-    <Form methods={methods} onSubmit={handleSubmit} heading={heading}>
+    <Form methods={methods} onSubmit={handleSubmit} heading="Skapa hyresobjekt">
       <div className="grid grid-cols-2 gap-6">
         <Block className="space-y-6">
           <AboutSection />
@@ -45,7 +43,7 @@ export default function RentalUnitForm({ heading, submitLabel, existingData }: P
         </Block>
 
         <Button color="secondary" type="submit">
-          {submitLabel}
+          Spara
         </Button>
       </div>
     </Form>

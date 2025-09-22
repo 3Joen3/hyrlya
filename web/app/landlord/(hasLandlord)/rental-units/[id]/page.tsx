@@ -26,7 +26,7 @@ export default async function page({ params }: Props) {
 
   return (
     <Page>
-      <RentalUnitForm heading="Redigera hyresobjekt" submitLabel="Spara" existingData={existingData} />
+      <RentalUnitForm existingData={existingData} />
     </Page>
   );
 }
