@@ -27,12 +27,7 @@ export default function ProfileForm({ className, heading }: Props) {
   }
 
   return (
-    <Form
-      className={`${className} space-y-6`}
-      methods={methods}
-      onSubmit={handleSubmit}
-      heading={heading}
-    >
+    <Form className={`${className} space-y-6`} methods={methods} onSubmit={handleSubmit}>
       <div className="flex flex-col gap-6 lg:grid lg:grid-cols-3">
         <Block className="lg:col-span-2">
           <FormSection>

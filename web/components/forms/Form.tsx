@@ -17,7 +17,7 @@ export default function Form<T extends FieldValues>({
 
   return (
     <FormProvider {...methods}>
-      <form className={`${className}`} onSubmit={handleSubmit(onSubmit)}>
+      <form className={className} onSubmit={handleSubmit(onSubmit)}>
         {children}
       </form>
     </FormProvider>
