@@ -1,11 +1,5 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { RentalUnitDetails } from "@/types/RentalUnit";
-import { RentalUnitData, rentalUnitSchema } from "@/lib/schemas/rentalUnitSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { createRentalUnit, updateRentalUnit } from "@/lib/actions/rental-units";
-
 import Block from "@/components/Block";
 import Form from "@/components/forms/Form";
 import NumberField from "@/components/forms/NumberField";
@@ -13,6 +7,13 @@ import SelectField from "@/components/forms/SelectField";
 import TextField from "@/components/forms/TextField";
 import ImageUploader from "@/components/image-uploader/ImageUploader";
 import Button from "@/components/Button";
+import SectionHeading from "@/components/SectionHeading";
+
+import { useForm } from "react-hook-form";
+import { RentalUnitDetails } from "@/types/RentalUnit";
+import { RentalUnitData, rentalUnitSchema } from "@/lib/schemas/rentalUnitSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createRentalUnit, updateRentalUnit } from "@/lib/actions/rental-units";
 
 interface Props {
   existingData?: RentalUnitDetails;
@@ -89,8 +90,4 @@ function ImageSection() {
       <ImageUploader id="imageUrls" />
     </div>
   );
-}
-
-function SectionHeading({ heading }: { heading: string }) {
-  return <h2 className="text-xl font-semibold">{heading}</h2>;
 }
