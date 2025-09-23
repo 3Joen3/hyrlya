@@ -2,22 +2,23 @@
 
 import Form from "@/components/forms/Form";
 import Block from "@/components/Block";
-import FormSection from "@/components/forms/FormSection";
 import TextField from "@/components/forms/TextField";
-import ProfileFormImageSection from "./ProfileFormImageSection";
 import Button from "@/components/Button";
+import ProfileImage from "../ProfileImage";
+import SectionHeading from "@/components/SectionHeading";
 
-import { useForm } from "react-hook-form";
+import { useForm, useFormContext } from "react-hook-form";
 import { ProfileData, profileSchema } from "@/lib/schemas/profileSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createLandlord } from "@/lib/actions/profile";
+import { useEdgeStore } from "@/lib/edgestore";
+import { useRef, useState } from "react";
 
 interface Props {
   className: string;
-  heading: string;
 }
 
-export default function ProfileForm({ className, heading }: Props) {
+export default function ProfileForm({ className }: Props) {
   const methods = useForm<ProfileData>({
     resolver: zodResolver(profileSchema),
   });
@@ -28,22 +29,60 @@ export default function ProfileForm({ className, heading }: Props) {
 
   return (
     <Form className={`${className} space-y-6`} methods={methods} onSubmit={handleSubmit}>
-      <div className="flex flex-col gap-6 lg:grid lg:grid-cols-3">
-        <Block className="lg:col-span-2">
-          <FormSection>
-            <TextField id="name" label="Namn" />
-            <TextField id="phoneNumber" label="Telefonnummer" />
-            <TextField id="emailAddress" label="Email address" />
-          </FormSection>
-        </Block>
-        <Block className="lg:col-span-1 flex flex-col items-center gap-6">
-          <ProfileFormImageSection />
-        </Block>
-      </div>
+      <Block className="space-y-6">
+        <div className="space-y-4">
+          <SectionHeading heading="Dina kontaktuppgifter" />
+          <TextField id="name" label="Namn" />
+          <TextField id="phoneNumber" label="Telefonnummer" />
+          <TextField id="emailAddress" label="Email address" />
+        </div>
+
+        <ProfileImageSection />
+      </Block>
 
       <Button className="w-full" color="secondary" type="submit">
         Spara
       </Button>
     </Form>
+  );
+}
+
+function ProfileImageSection() {
+  const { edgestore } = useEdgeStore();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const [profileImageUrl, setProfileImageUrl] = useState<string>();
+  const { setValue } = useFormContext();
+
+  async function handleSelectedImage(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const response = await edgestore.publicImages.upload({
+      file,
+      input: { type: "profile" },
+    });
+
+    setProfileImageUrl(response.url);
+    setValue("profileImageUrl", response.url);
+  }
+
+  return (
+    <div className="space-y-4">
+      <SectionHeading heading="Profilbild" />
+      <div className="flex items-center gap-4">
+        <input
+          className="hidden"
+          type="file"
+          accept="image/*"
+          ref={fileInputRef}
+          onChange={handleSelectedImage}
+        />
+        <ProfileImage className="h-40 w-40" imageUrl={profileImageUrl} />
+        <Button className="px-1" onClick={() => fileInputRef.current?.click()}>
+          Välj profilbild
+        </Button>
+      </div>
+    </div>
   );
 }
