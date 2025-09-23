@@ -8,7 +8,6 @@ import { createRentalUnit, updateRentalUnit } from "@/lib/actions/rental-units";
 
 import Block from "@/components/Block";
 import Form from "@/components/forms/Form";
-import FormSection from "@/components/forms/FormSection";
 import NumberField from "@/components/forms/NumberField";
 import SelectField from "@/components/forms/SelectField";
 import TextField from "@/components/forms/TextField";
@@ -37,25 +36,16 @@ export default function RentalUnitForm({ existingData }: Props) {
   }
 
   return (
-    <Form methods={methods} onSubmit={handleSubmit}>
-      <div className="grid grid-cols-2 gap-6">
-        <Block className="space-y-6">
-          <AboutSection />
-          <AdressSection />
-        </Block>
-        <Block>
-          <FormSection heading="Bilder på bostaden">
-            <ImageUploader
-              id="imageUrls"
-              currentImageUrls={existingData?.images.map((img) => img.url)}
-            />
-          </FormSection>
-        </Block>
+    <Form className="w-1/2 space-y-6" methods={methods} onSubmit={handleSubmit}>
+      <Block className="space-y-6">
+        <AboutSection />
+        <AdressSection />
+        <ImageSection />
+      </Block>
 
-        <Button color="secondary" type="submit">
-          Spara
-        </Button>
-      </div>
+      <Button className="w-full" type="submit" color="secondary">
+        Spara
+      </Button>
     </Form>
   );
 }
@@ -68,24 +58,39 @@ function AboutSection() {
   ];
 
   return (
-    <FormSection heading="Om bostaden">
+    <div className="space-y-4">
+      <SectionHeading heading="Om bostaden" />
       <SelectField id="type" label="Boendetyp" options={rentalUnitTypeOptions} />
       <div className="grid grid-cols-2 gap-4">
         <NumberField id="numberOfRooms" label="Antal rum" />
         <NumberField id="sizeSquareMeters" label="Storlek" />
       </div>
-    </FormSection>
+    </div>
   );
 }
 
 function AdressSection() {
   return (
-    <FormSection heading="Adress">
+    <div className="space-y-4">
+      <SectionHeading heading="Adress" />
       <div className="grid grid-cols-2 gap-4">
         <TextField id="address.street" label="Gatuadress" />
         <TextField id="address.houseNumber" label="Husnummer" />
       </div>
       <TextField id="address.city" label="Stad" />
-    </FormSection>
+    </div>
   );
+}
+
+function ImageSection() {
+  return (
+    <div className="space-y-4">
+      <SectionHeading heading="Bilder på bostaden" />
+      <ImageUploader id="imageUrls" />
+    </div>
+  );
+}
+
+function SectionHeading({ heading }: { heading: string }) {
+  return <h2 className="text-xl font-semibold">{heading}</h2>;
 }
