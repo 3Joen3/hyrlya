@@ -17,6 +17,7 @@ namespace Infrastructure
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ILandlordRepository, LandlordRepository>();
             services.AddScoped<IRentalUnitRepository, RentalUnitRepository>();
+            services.AddScoped<IListingRepository, ListingRepository>();
 
             return services;
         }
