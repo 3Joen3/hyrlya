@@ -10,6 +10,7 @@ namespace Application
         {
             services.AddScoped<IMyLandlordService, MyLandlordService>();
             services.AddScoped<IMyRentalUnitService, MyRentalUnitService>();
+            services.AddScoped<IMyListingService, MyListingService>();
 
             return services;
         }
