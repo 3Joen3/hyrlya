@@ -7,19 +7,16 @@ namespace Domain.Entities
         public Guid LandlordId { get; private set; }
         public Landlord? Landlord { get; private set; }
 
-        public RentalUnit RentalUnit { get; private set; }
+        public Guid RentalUnitId { get; private set; }
+        public RentalUnit? RentalUnit { get; private set; }
+
         public RentalType RentalType { get; set; }
 
-        public Listing(Guid landlordId, RentalUnit rentalUnit, RentalType rentalType) 
+        public Listing(Guid landlordId, Guid rentalUnitId, RentalType rentalType) 
         {
             LandlordId = SetLandlordId(landlordId);
-            RentalUnit = SetRentalUnit(rentalUnit);
+            RentalUnitId = SetRentalUnitId(rentalUnitId);
             RentalType = rentalType;
-        }
-
-        private Listing() 
-        {
-            RentalUnit = default!;
         }
 
         private static Guid SetLandlordId(Guid landlordId)
@@ -30,10 +27,17 @@ namespace Domain.Entities
             return landlordId;
         }
 
-        private static RentalUnit SetRentalUnit(RentalUnit rentalUnit)
+        private static Guid SetRentalUnitId(Guid rentalUnitId)
         {
-            ArgumentNullException.ThrowIfNull(rentalUnit);
-            return rentalUnit;
+            if (rentalUnitId == Guid.Empty)
+                throw new ArgumentException("RentalUnitId can't be empty.", nameof(rentalUnitId));
+
+            return rentalUnitId;
+        }
+
+        private Listing()
+        {
+            RentalUnit = default!;
         }
     }
 }
