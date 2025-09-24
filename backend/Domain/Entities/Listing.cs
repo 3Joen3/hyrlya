@@ -4,7 +4,7 @@ namespace Domain.Entities
 {
     public class Listing : Entity
     {
-        public RentalPeriod RentalPeriod { get; private set; }+
+        public RentalPeriod RentalPeriod { get; private set; }
         
         public Guid LandlordId { get; private set; }
         public Landlord? Landlord { get; private set; }
