@@ -34,5 +34,10 @@ namespace Api.Requests
             return new RentalUnitDto(address, request.Type, 
                 request.NumberOfRooms, request.SizeSquareMeters, imageUrls);
         }
+
+        public static ListingDto ToDto(this ListingRequest request)
+        {
+            return new ListingDto(request.RentalUnitId, request.RentalType);
+        }
     }
 }
