@@ -48,20 +48,34 @@ namespace Application.Services
             return rentalUnit;
         }
 
-        public async Task<RentalUnit?> GetByIdAsync(string identityId, Guid id, Guid landlordId = default)
+        public async Task<RentalUnit?> GetByIdAsync(string identityId, Guid id)
         {
             var rentalUnit = await _repo.GetByIdAsync(id);
 
             if (rentalUnit is null)
                 return null;
 
-            landlordId = landlordId == Guid.Empty
-                ? await _myLandlordService.GetIdByIdentityIdAsync(identityId)
-                : landlordId;
+            var landlordId = await _myLandlordService
+                .GetIdByIdentityIdAsync(identityId);
                 
             if (!rentalUnit.IsOwnedBy(landlordId))
             {
                 //Do something
+            }
+
+            return rentalUnit;
+        }
+
+        public async Task<RentalUnit?> GetByIdAsync(Guid landlordId, Guid id)
+        {
+            var rentalUnit = await _repo.GetByIdAsync(id);
+
+            if (rentalUnit is null)
+                return null;
+
+            if (!rentalUnit.IsOwnedBy(landlordId))
+            {
+                //Do Something
             }
 
             return rentalUnit;

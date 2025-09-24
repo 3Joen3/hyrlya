@@ -7,7 +7,8 @@ namespace Application.Interfaces
     {
         Task<RentalUnit> CreateAsync(string identityId, RentalUnitDto dto);
         Task<RentalUnit> UpdateAsync(string identityId, Guid id, RentalUnitDto dto);
-        Task<RentalUnit?> GetByIdAsync(string identityId, Guid id, Guid landlordId);
+        Task<RentalUnit?> GetByIdAsync(string identityId, Guid id);
+        Task<RentalUnit?> GetByIdAsync(Guid landlordId, Guid id);
         Task<IEnumerable<RentalUnit>> GetAllAsync(string identityId);
     }
 }
