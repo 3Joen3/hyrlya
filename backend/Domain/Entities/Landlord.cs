@@ -7,6 +7,9 @@ namespace Domain.Entities
         private readonly List<RentalUnit> _rentalUnits = [];
         public IReadOnlyList<RentalUnit> RentalUnits => _rentalUnits.AsReadOnly();
 
+        private readonly List<Listing> _listings = [];
+        public IReadOnlyList<Listing> Listings => _listings.AsReadOnly();
+
         public string IdentityId { get; private set; }
         public LandlordProfile Profile { get; private set; }
 

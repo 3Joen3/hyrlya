@@ -4,6 +4,7 @@ using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250924025954_InitialListing")]
+    partial class InitialListing
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,7 +83,7 @@ namespace Infrastructure.Persistence.Migrations
 
                     b.HasIndex("LandlordId");
 
-                    b.ToTable("Listings");
+                    b.ToTable("Listing");
                 });
 
             modelBuilder.Entity("Domain.Entities.RentalUnit", b =>
@@ -374,7 +377,7 @@ namespace Infrastructure.Persistence.Migrations
 
                             b1.HasKey("ListingId");
 
-                            b1.ToTable("Listings");
+                            b1.ToTable("Listing");
 
                             b1.WithOwner()
                                 .HasForeignKey("ListingId");
