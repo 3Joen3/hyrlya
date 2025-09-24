@@ -22,7 +22,7 @@ namespace Infrastructure.Persistence
             builder.ApplyConfiguration(new LandlordConfiguration());
             builder.ApplyConfiguration(new LandlordProfileConfiguration());
             builder.ApplyConfiguration(new RentalUnitConfiguration());
-            //builder.ApplyConfiguration(new ListingConfiguration());
+            builder.ApplyConfiguration(new ListingConfiguration());
         }
     
     }
