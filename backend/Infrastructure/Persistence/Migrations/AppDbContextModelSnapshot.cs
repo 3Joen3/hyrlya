@@ -76,9 +76,17 @@ namespace Infrastructure.Persistence.Migrations
                     b.Property<Guid>("LandlordId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("RentalType")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("RentalUnitId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("LandlordId");
+
+                    b.HasIndex("RentalUnitId");
 
                     b.ToTable("Listings");
                 });
@@ -359,31 +367,15 @@ namespace Infrastructure.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("Domain.ValueObjects.RentalPeriod", "RentalPeriod", b1 =>
-                        {
-                            b1.Property<Guid>("ListingId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<DateOnly?>("EndDate")
-                                .HasColumnType("date")
-                                .HasColumnName("RentalEndDate");
-
-                            b1.Property<DateOnly>("StartDate")
-                                .HasColumnType("date")
-                                .HasColumnName("RentalStartDate");
-
-                            b1.HasKey("ListingId");
-
-                            b1.ToTable("Listings");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ListingId");
-                        });
+                    b.HasOne("Domain.Entities.RentalUnit", "RentalUnit")
+                        .WithMany()
+                        .HasForeignKey("RentalUnitId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Landlord");
 
-                    b.Navigation("RentalPeriod")
-                        .IsRequired();
+                    b.Navigation("RentalUnit");
                 });
 
             modelBuilder.Entity("Domain.Entities.RentalUnit", b =>

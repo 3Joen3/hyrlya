@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class LandlordLandLordProfile : Migration
+    public partial class TryToFixError : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -182,8 +182,8 @@ namespace Infrastructure.Persistence.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImageAlt = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ContactPhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ContactEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LandlordId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -193,6 +193,77 @@ namespace Infrastructure.Persistence.Migrations
                         name: "FK_LandlordProfiles_Landlords_LandlordId",
                         column: x => x.LandlordId,
                         principalTable: "Landlords",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RentalUnits",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HouseNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    NumberOfRooms = table.Column<int>(type: "int", nullable: false),
+                    SizeSquareMeters = table.Column<int>(type: "int", nullable: false),
+                    LandlordId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RentalUnits", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RentalUnits_Landlords_LandlordId",
+                        column: x => x.LandlordId,
+                        principalTable: "Landlords",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Listings",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LandlordId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RentalUnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RentalType = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Listings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Listings_Landlords_LandlordId",
+                        column: x => x.LandlordId,
+                        principalTable: "Landlords",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Listings_RentalUnits_RentalUnitId",
+                        column: x => x.RentalUnitId,
+                        principalTable: "RentalUnits",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RentalUnitImages",
+                columns: table => new
+                {
+                    RentalUnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AltText = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RentalUnitImages", x => new { x.RentalUnitId, x.Id });
+                    table.ForeignKey(
+                        name: "FK_RentalUnitImages_RentalUnits_RentalUnitId",
+                        column: x => x.RentalUnitId,
+                        principalTable: "RentalUnits",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -247,6 +318,21 @@ namespace Infrastructure.Persistence.Migrations
                 table: "Landlords",
                 column: "IdentityId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Listings_LandlordId",
+                table: "Listings",
+                column: "LandlordId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Listings_RentalUnitId",
+                table: "Listings",
+                column: "RentalUnitId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RentalUnits_LandlordId",
+                table: "RentalUnits",
+                column: "LandlordId");
         }
 
         /// <inheritdoc />
@@ -271,7 +357,16 @@ namespace Infrastructure.Persistence.Migrations
                 name: "LandlordProfiles");
 
             migrationBuilder.DropTable(
+                name: "Listings");
+
+            migrationBuilder.DropTable(
+                name: "RentalUnitImages");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "RentalUnits");
 
             migrationBuilder.DropTable(
                 name: "Landlords");
