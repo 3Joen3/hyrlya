@@ -5,7 +5,8 @@ using Domain.Interfaces;
 
 namespace Application.Services
 {
-    public class MyRentalUnitService(IRentalUnitRepository repo, IUnitOfWork unitOfWork, IMyLandlordService myLandlordService) : IMyRentalUnitService
+    public class MyRentalUnitService(IRentalUnitRepository repo, IUnitOfWork unitOfWork, 
+        IMyLandlordService myLandlordService) : IMyRentalUnitService
     {
         private readonly IRentalUnitRepository _repo = repo;
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
@@ -47,16 +48,17 @@ namespace Application.Services
             return rentalUnit;
         }
 
-        public async Task<RentalUnit?> GetByIdAsync(string identityId, Guid id)
+        public async Task<RentalUnit?> GetByIdAsync(string identityId, Guid id, Guid landlordId = default)
         {
             var rentalUnit = await _repo.GetByIdAsync(id);
 
             if (rentalUnit is null)
                 return null;
 
-            var landlordId = await _myLandlordService
-                .GetIdByIdentityIdAsync(identityId);
-
+            landlordId = landlordId == Guid.Empty
+                ? await _myLandlordService.GetIdByIdentityIdAsync(identityId)
+                : landlordId;
+                
             if (!rentalUnit.IsOwnedBy(landlordId))
             {
                 //Do something
