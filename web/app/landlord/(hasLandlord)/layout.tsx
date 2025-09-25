@@ -7,7 +7,7 @@ export default async function HasLandlordLayout({
   children: React.ReactNode;
 }) {
   const response = await getAuthenticated("my/landlord");
-  if (response.status === 404) redirect("/landlord/setup");
+  if (response.status === 404) redirect("/landlord");
 
   return <>{children}</>;
 }
