@@ -7,7 +7,7 @@ using System.Security.Claims;
 namespace Api.Controllers
 {
     [ApiController]
-    [Route("my/landlord")]
+    [Route("my/listings")]
     [Authorize]
     public class MyListingsController(IMyListingService myListingService) : ControllerBase
     {
