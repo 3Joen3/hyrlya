@@ -61,7 +61,7 @@ interface BottomNavLinkProps {
 }
 
 function BottomNavLink({ href, label, icon, currentPath }: BottomNavLinkProps) {
-  const isActive = currentPath === href;
+  const isActive = currentPath.startsWith(href);
   return (
     <Link
       className={`h-full flex items-center gap-2 ${
