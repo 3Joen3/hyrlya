@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { AuthData, authSchema } from "@/lib/schemas/authSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { login, register } from "@/lib/actions/auth";
+import FormSection from "@/components/forms/FormSection";
 
 export default function AuthForm() {
   const [isRegisterForm, setIsRegisterForm] = useState(true);
@@ -41,11 +42,13 @@ export default function AuthForm() {
       </div>
       <Block>
         <Form methods={methods} onSubmit={handleSubmit}>
-          <TextField id="email" label="Ange e-postadress" />
-          <TextField id="password" label="Ange lösenord" />
-          <Button className="w-full" type="submit">
-            {isSubmitting ? "Laddar..." : isRegisterForm ? "Skapa konto" : "Logga in"}
-          </Button>
+          <FormSection>
+            <TextField id="email" label="Ange e-postadress" />
+            <TextField id="password" label="Ange lösenord" />
+            <Button className="w-full" type="submit">
+              {isSubmitting ? "Laddar..." : isRegisterForm ? "Skapa konto" : "Logga in"}
+            </Button>
+          </FormSection>
         </Form>
       </Block>
     </>
