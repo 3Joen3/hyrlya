@@ -1,5 +1,4 @@
 import Link from "next/link";
-import NavLink from "../NavLink";
 
 export default function PublicHeader() {
   return (
@@ -8,7 +7,7 @@ export default function PublicHeader() {
         <Link className="text-3xl font-bold" href={"/"}>
           hyrlya
         </Link>
-        <NavLink href="/auth">Hyr ut din bostad</NavLink>
+        <Link className="btn-primary-slim btn-color-primary" href="/auth">Hyr ut din bostad</Link>
       </div>
     </header>
   );

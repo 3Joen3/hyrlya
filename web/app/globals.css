@@ -4,6 +4,10 @@
   @apply rounded p-2 font-semibold;
 }
 
+.btn-primary-slim{
+    @apply rounded py-1 px-2 font-semibold;
+}
+
 .btn-color-primary {
   @apply bg-sky-500 text-white hover:bg-sky-600;
 }
