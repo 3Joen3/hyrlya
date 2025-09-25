@@ -2,7 +2,6 @@ import Page from "@/components/Page";
 import Link from "next/link";
 import Block from "@/components/Block";
 import PageTopRow from "@/components/PageTopRow";
-import NavLink from "@/components/NavLink";
 
 import { getAuthenticated } from "@/lib/api/server";
 import { RentalUnitSummary } from "@/types/RentalUnit";
@@ -15,13 +14,9 @@ export default async function page() {
   return (
     <Page>
       <PageTopRow heading="Dina hyresobjekt">
-        <NavLink
-          variant="buttonPrimary"
-          color="buttonSecondary"
-          href="/landlord/rental-units/create"
-        >
+        <Link href="/landlord/rental-units/create" className="btn-primary btn-color-primary">
           Skapa hyresobjekt
-        </NavLink>
+        </Link>
       </PageTopRow>
       {rentalUnits.map((rentalUnit, index) => (
         <RentalUnitContainer key={index} rentalUnit={rentalUnit} />
