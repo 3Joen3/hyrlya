@@ -1,16 +1,28 @@
 import Page from "@/components/Page";
 import Link from "next/link";
 import Block from "@/components/Block";
+import PageTopRow from "@/components/PageTopRow";
+import NavLink from "@/components/NavLink";
 
 import { getAuthenticated } from "@/lib/api/server";
 import { RentalUnitSummary } from "@/types/RentalUnit";
+import { TranslateRentalUnitType } from "@/lib/utils";
 
 export default async function page() {
   const response = await getAuthenticated("my/rental-units");
   const rentalUnits = (await response.json()) as RentalUnitSummary[];
 
   return (
-    <Page heading="Dina hyresobjekt" className="grid grid-cols-4 gap-4 items-start">
+    <Page>
+      <PageTopRow heading="Dina hyresobjekt">
+        <NavLink
+          variant="buttonPrimary"
+          color="buttonSecondary"
+          href="/landlord/rental-units/create"
+        >
+          Skapa hyresobjekt
+        </NavLink>
+      </PageTopRow>
       {rentalUnits.map((rentalUnit, index) => (
         <RentalUnitContainer key={index} rentalUnit={rentalUnit} />
       ))}
@@ -19,7 +31,7 @@ export default async function page() {
 }
 
 function RentalUnitContainer({ rentalUnit }: { rentalUnit: RentalUnitSummary }) {
-  const swedishType = TranslateType(rentalUnit.type);
+  const swedishType = TranslateRentalUnitType(rentalUnit.type);
   const address = rentalUnit.address;
 
   return (
@@ -32,10 +44,4 @@ function RentalUnitContainer({ rentalUnit }: { rentalUnit: RentalUnitSummary }) 
       </Block>
     </Link>
   );
-}
-
-function TranslateType(englishType: string) {
-  if (englishType === "Room") return "Rum";
-  if (englishType === "Apartment") return "Lägenhet";
-  return "Hus";
 }
