@@ -1,28 +1,12 @@
-import Header from "@/components/Header";
-import NavLink from "@/components/NavLink";
+import LandlordHeader from "@/components/LandlordHeader";
 
 import { EdgeStoreProvider } from "@/lib/edgestore";
 
-export default function LandlordLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function LandlordLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <LandlordHeader />
       <EdgeStoreProvider>{children}</EdgeStoreProvider>
     </>
-  );
-}
-
-function LandlordHeader() {
-  return (
-    <Header className="gap-12" logoHref="/landlord">
-      <div className="space-x-6">
-        <NavLink href="/landlord">Annonser</NavLink>
-        <NavLink href="/landlord/rental-units">Hyresobjekt</NavLink>
-      </div>
-    </Header>
   );
 }
