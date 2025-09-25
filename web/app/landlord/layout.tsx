@@ -1,4 +1,4 @@
-import LandlordHeader from "@/components/LandlordHeader";
+import LandlordHeader from "@/components/headers/LandlordHeader";
 
 import { EdgeStoreProvider } from "@/lib/edgestore";
 

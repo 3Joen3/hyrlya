@@ -1,5 +1,4 @@
-import Header from "@/components/Header";
-import NavLink from "@/components/NavLink";
+import PublicHeader from "@/components/headers/PublicHeader";
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -7,13 +6,5 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
       <PublicHeader />
       {children}
     </>
-  );
-}
-
-function PublicHeader() {
-  return (
-    <Header className="justify-between" logoHref="/">
-      <NavLink href="/auth">Hyr ut din bostad</NavLink>
-    </Header>
   );
 }

@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import HomeIcon from "./icons/HomeIcon";
-import DocumentIcon from "./icons/DocumentIcon";
+import HomeIcon from "../icons/HomeIcon";
+import DocumentIcon from "../icons/DocumentIcon";
 
 import { usePathname } from "next/navigation";
 
@@ -17,8 +17,8 @@ export default function HasLandlordHeader() {
 
 function TopSection() {
   return (
-    <div className="bg-neutral-700 text-white">
-      <div className="w-10/12 mx-auto h-full flex items-center">
+    <div className="bg-neutral-700 text-white flex">
+      <div className="w-10/12 mx-auto flex items-center">
         <Link className="text-3xl font-bold" href="/">
           hyrlya
         </Link>
