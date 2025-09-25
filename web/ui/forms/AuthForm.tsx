@@ -27,7 +27,7 @@ export default function AuthForm() {
   }
 
   return (
-    <>
+    <div>
       <div className="grid grid-cols-2">
         <FormSelectorButton
           label="Logga in"
@@ -51,7 +51,7 @@ export default function AuthForm() {
           </FormSection>
         </Form>
       </Block>
-    </>
+    </div>
   );
 }
 
