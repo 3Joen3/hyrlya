@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+.btn-primary {
+  @apply rounded p-2 font-semibold;
+}
+
+.btn-color-primary {
+  @apply bg-sky-500 text-white hover:bg-sky-600;
+}

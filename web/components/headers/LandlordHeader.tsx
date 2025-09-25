@@ -71,7 +71,7 @@ function BottomNavLink({ href, label, icon, currentPath }: BottomNavLinkProps) {
   return (
     <Link
       className={`h-full flex items-center gap-2 ${
-        isActive ? "border-b border-b-sky-600 font-semibold" : ""
+        isActive ? "border-b-2 border-b-sky-500 font-semibold" : ""
       }`}
       href={href}
     >
