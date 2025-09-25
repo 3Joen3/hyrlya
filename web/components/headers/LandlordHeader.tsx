@@ -3,6 +3,7 @@
 import Link from "next/link";
 import HomeIcon from "../icons/HomeIcon";
 import DocumentIcon from "../icons/DocumentIcon";
+import UserIcon from "../icons/UserIcon";
 
 import { usePathname } from "next/navigation";
 
@@ -39,6 +40,11 @@ function BottomSection() {
       href: "/landlord/rental-units",
       label: "Hyresobjekt",
       icon: <HomeIcon className="size-6" />,
+    },
+    {
+      href: "/landlord/profile",
+      label: "Profil",
+      icon: <UserIcon className="size-6" />,
     },
   ];
 
