@@ -13,7 +13,7 @@ export default function FormSection({ heading, children }: Props) {
 
 function WithHeading({ heading, children }: { heading: string; children: React.ReactNode }) {
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <h2 className="text-xl font-semibold">{heading}</h2>
       <div className="space-y-4">{children}</div>
     </div>
