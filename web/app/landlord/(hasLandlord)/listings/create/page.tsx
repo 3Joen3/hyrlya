@@ -1,9 +1,18 @@
 import Page from "@/components/Page";
+import PageTopRow from "@/components/PageTopRow";
+import ListingForm from "@/ui/forms/ListingForm";
 
-export default function page() {
+import { getAuthenticated } from "@/lib/api/server";
+import { RentalUnitSummary } from "@/types/RentalUnit";
+
+export default async function page() {
+  const response = await getAuthenticated("my/rental-units");
+  const rentalUnits = (await response.json()) as RentalUnitSummary[];
+
   return (
     <Page>
-        <p>lol</p>
+      <PageTopRow heading="Skapa bostadsannons" />
+      <ListingForm rentalUnits={rentalUnits} />
     </Page>
-  )
+  );
 }

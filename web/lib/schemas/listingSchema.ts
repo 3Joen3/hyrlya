@@ -2,7 +2,8 @@ import { z } from "zod";
 
 export const listingSchema = z.object({
   rentalUnitId: z.string(),
-  rentalType: z.enum(["primaryResidence", "vacationHome"]),
+  price: z.number(),
+  chargeInterval: z.enum(["daily", "weekly", "monthly"]),
 });
 
 export type ListingData = z.infer<typeof listingSchema>;
