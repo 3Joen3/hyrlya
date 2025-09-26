@@ -12,6 +12,16 @@ namespace Infrastructure.Persistence.Configurations
                 .WithMany()
                 .HasForeignKey(l => l.RentalUnitId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.OwnsOne(l => l.RentalPrice, rentalPrice =>
+            {
+                rentalPrice.Property(r => r.Amount)
+                .HasColumnName("Price");
+
+                rentalPrice.Property(r => r.ChargeInterval)
+                .HasColumnName("ChargeInterval");
+            });
+
         }
     }
 }
