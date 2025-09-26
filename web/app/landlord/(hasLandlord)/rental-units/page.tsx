@@ -19,8 +19,8 @@ export default async function page() {
         </Link>
       </PageTopRow>
       <div className="space-y-4">
-        {rentalUnits.map((rentalUnit, index) => (
-          <RentalUnitContainer key={index} rentalUnit={rentalUnit} />
+        {rentalUnits.map((rentalUnit) => (
+          <RentalUnitContainer key={rentalUnit.id} rentalUnit={rentalUnit} />
         ))}
       </div>
     </Page>
