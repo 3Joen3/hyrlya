@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence.Repositories
 {
@@ -11,6 +12,13 @@ namespace Infrastructure.Persistence.Repositories
         {
             _context.Listings.Add(listing);
             return Task.CompletedTask;
+        }
+
+        public async Task<IEnumerable<Listing>> GetAllByLandlordIdAsync(Guid landlordId)
+        {
+            return await _context.Listings
+                .Where(l => l.LandlordId == landlordId)
+                .ToListAsync();
         }
     }
 }
