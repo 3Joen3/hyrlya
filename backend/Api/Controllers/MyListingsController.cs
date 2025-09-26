@@ -1,4 +1,5 @@
 ﻿using Api.Requests;
+using Api.Responses.Listings;
 using Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,18 @@ namespace Api.Controllers
             var dto = request.ToDto();
             var listing = await _myListingService.CreateAsync(IdentityId, dto);
             return Ok(listing);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetMyListings()
+        {
+            var listings = await _myListingService
+                .GetAllAsync(IdentityId);
+
+            var response = listings
+                .Select(listing => new ListingSummary(listing));
+
+            return Ok(response);
         }
     }
 }
