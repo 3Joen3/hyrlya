@@ -1,5 +1,3 @@
-import SectionHeading from "../SectionHeading";
-
 interface Props {
   heading?: string;
   children: React.ReactNode;
@@ -16,7 +14,7 @@ export default function FormSection({ heading, children }: Props) {
 function WithHeading({ heading, children }: { heading: string; children: React.ReactNode }) {
   return (
     <div className="space-y-6">
-      <SectionHeading heading={heading} />
+      <h2 className="text-xl font-semibold">{heading}</h2>
       <div className="space-y-4">{children}</div>
     </div>
   );
