@@ -18,9 +18,11 @@ export default async function page() {
           Skapa hyresobjekt
         </Link>
       </PageTopRow>
-      {rentalUnits.map((rentalUnit, index) => (
-        <RentalUnitContainer key={index} rentalUnit={rentalUnit} />
-      ))}
+      <div className="space-y-4">
+        {rentalUnits.map((rentalUnit, index) => (
+          <RentalUnitContainer key={index} rentalUnit={rentalUnit} />
+        ))}
+      </div>
     </Page>
   );
 }
@@ -30,7 +32,7 @@ function RentalUnitContainer({ rentalUnit }: { rentalUnit: RentalUnitSummary }) 
   const address = rentalUnit.address;
 
   return (
-    <Link href={`/landlord/rental-units/${rentalUnit.id}`}>
+    <Link className="block" href={`/landlord/rental-units/${rentalUnit.id}`}>
       <Block>
         <p>Typ: {swedishType}</p>
         <p>
