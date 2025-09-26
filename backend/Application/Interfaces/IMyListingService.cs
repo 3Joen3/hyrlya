@@ -6,5 +6,6 @@ namespace Application.Interfaces
     public interface IMyListingService
     {
         Task<Listing> CreateAsync(string identityId, ListingDto dto);
+        Task<IEnumerable<Listing>> GetAllAsync(string identityId);
     }
 }

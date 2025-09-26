@@ -2,6 +2,7 @@
 using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Application.Services
 {
@@ -33,6 +34,14 @@ namespace Application.Services
             await _unitOfWork.WriteChangesAsync();
 
             return listing;
+        }
+
+        public async Task<IEnumerable<Listing>> GetAllAsync(string identityId)
+        {
+            var landlordId = await _myLandlordService
+                .GetIdByIdentityIdAsync(identityId);
+
+            return await _repo.GetAllByLandlordIdAsync(landlordId);
         }
     }
 }
