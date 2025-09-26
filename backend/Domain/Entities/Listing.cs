@@ -1,4 +1,4 @@
-﻿using Domain.Enums;
+﻿using Domain.ValueObjects;
 
 namespace Domain.Entities
 {
@@ -10,13 +10,13 @@ namespace Domain.Entities
         public Guid RentalUnitId { get; private set; }
         public RentalUnit? RentalUnit { get; private set; }
 
-        public RentalType RentalType { get; set; }
+        public RentalPrice RentalPrice { get; private set; }
 
-        public Listing(Guid landlordId, Guid rentalUnitId, RentalType rentalType) 
+        public Listing(Guid landlordId, Guid rentalUnitId, RentalPrice rentalPrice) 
         {
             LandlordId = SetLandlordId(landlordId);
             RentalUnitId = SetRentalUnitId(rentalUnitId);
-            RentalType = rentalType;
+            RentalPrice = SetRentalPrice(rentalPrice);
         }
 
         private static Guid SetLandlordId(Guid landlordId)
@@ -35,9 +35,16 @@ namespace Domain.Entities
             return rentalUnitId;
         }
 
+        private static RentalPrice SetRentalPrice(RentalPrice rentalPrice)
+        {
+            ArgumentNullException.ThrowIfNull(rentalPrice);
+            return rentalPrice;
+        }
+
         private Listing()
         {
             RentalUnit = default!;
+            RentalPrice = default!;
         }
     }
 }

@@ -9,9 +9,11 @@ namespace Api.Requests
         [Required]
         public Guid RentalUnitId { get; init; }
 
+        [Required, Range(0.01, double.MaxValue)]
+        public decimal Price { get; init; }
+
         [Required]
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public RentalType RentalType { get; init; }
-
+        public ChargeInterval ChargeInterval { get; init; }
     }
 }

@@ -1,6 +1,6 @@
-﻿using Domain.Enums;
+﻿using Domain.ValueObjects;
 
 namespace Application.Dtos
 {
-    public record ListingDto(Guid RentalUnitId, RentalType RentalType);
+    public record ListingDto(Guid RentalUnitId, RentalPrice RentalPrice);
 }

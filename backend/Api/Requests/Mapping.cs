@@ -37,7 +37,9 @@ namespace Api.Requests
 
         public static ListingDto ToDto(this ListingRequest request)
         {
-            return new ListingDto(request.RentalUnitId, request.RentalType);
+            var rentalPrice = new RentalPrice(request.Price, request.ChargeInterval);
+
+            return new ListingDto(request.RentalUnitId, rentalPrice);
         }
     }
 }
