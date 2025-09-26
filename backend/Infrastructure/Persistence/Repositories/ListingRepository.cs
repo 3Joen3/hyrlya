@@ -20,5 +20,13 @@ namespace Infrastructure.Persistence.Repositories
                 .Where(l => l.LandlordId == landlordId)
                 .ToListAsync();
         }
+
+        public async Task<IEnumerable<Listing>> GetPaginatedAsync(int page, int pageSize)
+        {
+            return await _context.Listings
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
     }
 }
