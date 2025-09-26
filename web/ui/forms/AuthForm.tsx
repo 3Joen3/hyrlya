@@ -4,13 +4,14 @@ import Button from "@/components/Button";
 import Block from "@/components/Block";
 import Form from "@/components/forms/Form";
 import TextField from "@/components/forms/TextField";
+import FormSection from "@/components/forms/FormSection";
+import FormSubmit from "@/components/forms/FormSubmit";
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthData, authSchema } from "@/lib/schemas/authSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { login, register } from "@/lib/actions/auth";
-import FormSection from "@/components/forms/FormSection";
 
 export default function AuthForm() {
   const [isRegisterForm, setIsRegisterForm] = useState(true);
@@ -18,8 +19,6 @@ export default function AuthForm() {
   const methods = useForm<AuthData>({
     resolver: zodResolver(authSchema),
   });
-
-  const { isSubmitting } = methods.formState;
 
   async function handleSubmit(data: AuthData) {
     if (isRegisterForm) await register(data);
@@ -45,9 +44,10 @@ export default function AuthForm() {
           <FormSection>
             <TextField id="email" label="Ange e-postadress" />
             <TextField id="password" label="Ange lösenord" />
-            <Button className="w-full" type="submit">
-              {isSubmitting ? "Laddar..." : isRegisterForm ? "Skapa konto" : "Logga in"}
-            </Button>
+            <FormSubmit
+              label={isRegisterForm ? "Skapa konto" : "Logga in"}
+              loadingLabel={"Laddar..."}
+            />
           </FormSection>
         </Form>
       </Block>

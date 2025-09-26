@@ -5,7 +5,8 @@ import Block from "@/components/Block";
 import TextField from "@/components/forms/TextField";
 import Button from "@/components/Button";
 import ProfileImage from "../ProfileImage";
-import SectionHeading from "@/components/SectionHeading";
+import FormSection from "@/components/forms/FormSection";
+import FormSubmit from "@/components/forms/FormSubmit";
 
 import { useForm, useFormContext } from "react-hook-form";
 import { ProfileData, profileSchema } from "@/lib/schemas/profileSchema";
@@ -30,19 +31,16 @@ export default function ProfileForm({ className }: Props) {
   return (
     <Form className={`${className} space-y-6`} methods={methods} onSubmit={handleSubmit}>
       <Block className="space-y-6">
-        <div className="space-y-4">
-          <SectionHeading heading="Dina kontaktuppgifter" />
+        <FormSection>
           <TextField id="name" label="Namn" />
           <TextField id="phoneNumber" label="Telefonnummer" />
           <TextField id="emailAddress" label="Email address" />
-        </div>
+        </FormSection>
 
         <ProfileImageSection />
       </Block>
 
-      <Button className="w-full" color="secondary" type="submit">
-        Spara
-      </Button>
+      <FormSubmit label="Spara" loadingLabel="Sparar..." />
     </Form>
   );
 }
@@ -68,8 +66,7 @@ function ProfileImageSection() {
   }
 
   return (
-    <div className="space-y-4">
-      <SectionHeading heading="Profilbild" />
+    <FormSection heading="Profilbild">
       <div className="flex items-center gap-4">
         <input
           className="hidden"
@@ -83,6 +80,6 @@ function ProfileImageSection() {
           Välj profilbild
         </Button>
       </div>
-    </div>
+    </FormSection>
   );
 }

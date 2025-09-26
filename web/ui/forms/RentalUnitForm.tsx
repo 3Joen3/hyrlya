@@ -6,8 +6,8 @@ import NumberField from "@/components/forms/NumberField";
 import SelectField from "@/components/forms/SelectField";
 import TextField from "@/components/forms/TextField";
 import ImageUploader from "@/components/image-uploader/ImageUploader";
-import Button from "@/components/Button";
-import SectionHeading from "@/components/SectionHeading";
+import FormSection from "@/components/forms/FormSection";
+import FormSubmit from "@/components/forms/FormSubmit";
 
 import { useForm } from "react-hook-form";
 import { RentalUnitDetails } from "@/types/RentalUnit";
@@ -44,9 +44,7 @@ export default function RentalUnitForm({ existingData }: Props) {
         <ImageSection />
       </Block>
 
-      <Button className="w-full" type="submit" color="secondary">
-        Spara
-      </Button>
+      <FormSubmit label="Spara" loadingLabel="Sparar..." />
     </Form>
   );
 }
@@ -59,35 +57,32 @@ function AboutSection() {
   ];
 
   return (
-    <div className="space-y-4">
-      <SectionHeading heading="Om bostaden" />
+    <FormSection heading="Om bostaden">
       <SelectField id="type" label="Boendetyp" options={rentalUnitTypeOptions} />
       <div className="grid grid-cols-2 gap-4">
         <NumberField id="numberOfRooms" label="Antal rum" />
         <NumberField id="sizeSquareMeters" label="Storlek" />
       </div>
-    </div>
+    </FormSection>
   );
 }
 
 function AdressSection() {
   return (
-    <div className="space-y-4">
-      <SectionHeading heading="Adress" />
+    <FormSection heading="Adress">
       <div className="grid grid-cols-2 gap-4">
         <TextField id="address.street" label="Gatuadress" />
         <TextField id="address.houseNumber" label="Husnummer" />
       </div>
       <TextField id="address.city" label="Stad" />
-    </div>
+    </FormSection>
   );
 }
 
 function ImageSection() {
   return (
-    <div className="space-y-4">
-      <SectionHeading heading="Bilder på bostaden" />
+    <FormSection heading="Bilder på bostaden">
       <ImageUploader id="imageUrls" />
-    </div>
+    </FormSection>
   );
 }
