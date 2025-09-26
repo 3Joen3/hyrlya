@@ -3,7 +3,6 @@
 import Form from "@/components/forms/Form";
 import Block from "@/components/Block";
 import TextField from "@/components/forms/TextField";
-import Button from "@/components/Button";
 import ProfileImage from "../ProfileImage";
 import FormSection from "@/components/forms/FormSection";
 import FormSubmit from "@/components/forms/FormSubmit";

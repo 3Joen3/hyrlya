@@ -1,6 +1,5 @@
 "use client";
 
-import Button from "@/components/Button";
 import Block from "@/components/Block";
 import Form from "@/components/forms/Form";
 import TextField from "@/components/forms/TextField";
