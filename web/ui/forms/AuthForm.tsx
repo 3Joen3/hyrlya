@@ -63,16 +63,14 @@ interface FormSelectorButtonProps {
 
 function FormSelectorButton({ label, isActive, onClick }: FormSelectorButtonProps) {
   return (
-    <Button
-      color={isActive ? "secondary" : "ghost"}
-      useHoverEffects={isActive}
-      variant="none"
-      className={`rounded-t py-2 transition-colors duration-200 ${
-        isActive ? "font-semibold shadow-md" : ""
-      }`}
+    <button
       onClick={onClick}
+      type="button"
+      className={`${
+        isActive ? "btn-color-primary shadow-md" : "text-neutral-600 hover:bg-neutral-50"
+      } rounded-t py-2 transition-colors duration-200`}
     >
       {label}
-    </Button>
+    </button>
   );
 }

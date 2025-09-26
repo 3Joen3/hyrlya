@@ -76,9 +76,12 @@ function ProfileImageSection() {
           onChange={handleSelectedImage}
         />
         <ProfileImage className="h-40 w-40" imageUrl={profileImageUrl} />
-        <Button className="px-1" onClick={() => fileInputRef.current?.click()}>
+        <button
+          className="btn-primary btn-color-secondary"
+          onClick={() => fileInputRef.current?.click()}
+        >
           Välj profilbild
-        </Button>
+        </button>
       </div>
     </FormSection>
   );

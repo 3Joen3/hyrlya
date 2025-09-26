@@ -11,3 +11,7 @@
 .btn-color-primary {
   @apply bg-sky-500 text-white hover:bg-sky-600;
 }
+
+.btn-color-secondary {
+  @apply bg-neutral-700 text-white hover:bg-neutral-800
+}
