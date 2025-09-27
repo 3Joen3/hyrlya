@@ -14,9 +14,10 @@ namespace Infrastructure.Persistence.Repositories
             return Task.CompletedTask;
         }
 
-        public async Task<IEnumerable<Listing>> GetAllByLandlordIdAsync(Guid landlordId)
+        public async Task<IEnumerable<Listing>> GetFullAllByLandlordIdAsync(Guid landlordId)
         {
             return await _context.Listings
+                .Include(l => l.RentalUnit)
                 .Where(l => l.LandlordId == landlordId)
                 .ToListAsync();
         }

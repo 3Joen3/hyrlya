@@ -29,7 +29,7 @@ namespace Api.Controllers
         public async Task<IActionResult> GetMyListings()
         {
             var listings = await _myListingService
-                .GetAllAsync(IdentityId);
+                .GetFullAllAsync(IdentityId);
 
             var response = listings
                 .Select(listing => new ListingSummary(listing));

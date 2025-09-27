@@ -36,12 +36,12 @@ namespace Application.Services
             return listing;
         }
 
-        public async Task<IEnumerable<Listing>> GetAllAsync(string identityId)
+        public async Task<IEnumerable<Listing>> GetFullAllAsync(string identityId)
         {
             var landlordId = await _myLandlordService
                 .GetIdByIdentityIdAsync(identityId);
 
-            return await _repo.GetAllByLandlordIdAsync(landlordId);
+            return await _repo.GetFullAllByLandlordIdAsync(landlordId);
         }
     }
 }
