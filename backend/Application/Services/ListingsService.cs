@@ -8,6 +8,9 @@ namespace Application.Services
     {
         private readonly IListingRepository _repo = repo;
 
+        public async Task<Listing?> GetFullByIdAsync(Guid id) 
+            => await _repo.GetFullByIdAsync(id);
+
         public async Task<IEnumerable<Listing>> GetFullPaginatedAsync(int page, int pageSize)
         {
             var listings = await _repo.GetFullPaginatedAsync(page, pageSize);
