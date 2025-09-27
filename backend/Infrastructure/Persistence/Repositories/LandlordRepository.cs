@@ -22,9 +22,5 @@ namespace Infrastructure.Persistence.Repositories
             => await _context.Landlords.Where(l => l.IdentityId == identityId)
             .Select(l => l.Id)
             .SingleOrDefaultAsync();
-
-        public async Task<LandlordProfile?> GetProfileByLandlordIdAsync(Guid landlordId)
-            => await _context.LandlordProfiles
-            .SingleOrDefaultAsync(p => p.LandlordId == landlordId);
     }
 }
