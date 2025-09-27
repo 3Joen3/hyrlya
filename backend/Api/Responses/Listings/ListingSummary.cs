@@ -6,5 +6,6 @@ namespace Api.Responses.Listings
     public class ListingSummary(Listing listing)
     {
         public Guid Id { get; } = listing.Id;
+        public IEnumerable<Image> Images { get; } = listing.RentalUnit.Images;
     }
 }

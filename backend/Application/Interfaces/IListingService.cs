@@ -4,6 +4,6 @@ namespace Application.Interfaces
 {
     public interface IListingService
     {
-        Task<IEnumerable<Listing>> GetPaginatedAsync(int page, int pageSize);
+        Task<IEnumerable<Listing>> GetFullPaginatedAsync(int page, int pageSize);
     }
 }

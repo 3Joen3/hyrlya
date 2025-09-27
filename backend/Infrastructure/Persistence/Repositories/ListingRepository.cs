@@ -21,9 +21,10 @@ namespace Infrastructure.Persistence.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Listing>> GetPaginatedAsync(int page, int pageSize)
+        public async Task<IEnumerable<Listing>> GetFullPaginatedAsync(int page, int pageSize)
         {
             return await _context.Listings
+                .Include(l => l.RentalUnit)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
