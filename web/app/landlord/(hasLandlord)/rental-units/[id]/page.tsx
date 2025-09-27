@@ -17,7 +17,7 @@ export default async function page({ params }: Props) {
   const rentalUnit = (await response.json()) as RentalUnitDetails;
 
   return (
-    <Page heading="Redigera hyresobjekt" className="">
+    <Page>
       <RentalUnitForm existingData={rentalUnit} />
     </Page>
   );
