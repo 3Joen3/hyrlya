@@ -29,7 +29,8 @@ namespace Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetMyLandlord()
         {
-            var landlord = await _myLandlordService.GetByIdentityIdAsync(IdentityId);
+            var landlord = await _myLandlordService
+                .GetWithProfileByIdentityIdAsync(IdentityId);
 
             if (landlord is null)
                 return NotFound();

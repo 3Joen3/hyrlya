@@ -14,7 +14,7 @@ namespace Infrastructure.Persistence.Repositories
             return Task.CompletedTask;
         }
 
-        public async Task<Landlord?> GetByIdentityIdAsync(string identityId)
+        public async Task<Landlord?> GetWithProfileByIdentityIdAsync(string identityId)
             => await _context.Landlords.Include(l => l.Profile)
             .SingleOrDefaultAsync(l => l.IdentityId == identityId);
 

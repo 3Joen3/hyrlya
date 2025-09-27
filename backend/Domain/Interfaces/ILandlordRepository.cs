@@ -6,7 +6,7 @@ namespace Domain.Interfaces
     {
         Task AddAsync(Landlord landlord);
 
-        Task<Landlord?> GetByIdentityIdAsync(string identityId);
+        Task<Landlord?> GetWithProfileByIdentityIdAsync(string identityId);
         Task<Guid> GetIdByIdentityIdAsync(string identityId);
     }
 }

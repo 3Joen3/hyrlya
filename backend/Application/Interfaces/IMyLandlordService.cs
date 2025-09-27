@@ -6,7 +6,7 @@ namespace Application.Interfaces
     public interface IMyLandlordService
     {
         Task<Landlord> CreateAsync(string identityId, LandlordDto dto);
-        Task<Landlord?> GetByIdentityIdAsync(string identityId);
+        Task<Landlord?> GetWithProfileByIdentityIdAsync(string identityId);
         Task<Guid> GetIdByIdentityIdAsync(string identityId);
     }
 }

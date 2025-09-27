@@ -23,8 +23,8 @@ namespace Application.Services
             return landlord;
         }
 
-        public async Task<Landlord?> GetByIdentityIdAsync(string identityId)
-            => await _repo.GetByIdentityIdAsync(identityId);
+        public async Task<Landlord?> GetWithProfileByIdentityIdAsync(string identityId)
+            => await _repo.GetWithProfileByIdentityIdAsync(identityId);
 
         public async Task<Guid> GetIdByIdentityIdAsync(string identityId)
             => await _repo.GetIdByIdentityIdAsync(identityId);
