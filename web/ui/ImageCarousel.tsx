@@ -1,12 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
+import Image from "next/image";
 
 import { Image as ImageType } from "@/types/Common";
 
 interface Props {
-  className: string;
+  className?: string;
   images: ImageType[];
 }
 
