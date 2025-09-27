@@ -22,6 +22,13 @@ namespace Infrastructure.Persistence.Repositories
                 .ToListAsync();
         }
 
+        public async Task<Listing?> GetFullByIdAsync(Guid id)
+        {
+            return await _context.Listings
+                .Include(l => l.RentalUnit)
+                .FirstOrDefaultAsync(l => l.Id == id);
+        }
+
         public async Task<IEnumerable<Listing>> GetFullPaginatedAsync(int page, int pageSize)
         {
             return await _context.Listings

@@ -8,5 +8,7 @@ namespace Domain.Interfaces
 
         Task<IEnumerable<Listing>> GetFullAllByLandlordIdAsync(Guid landlordId);
         Task<IEnumerable<Listing>> GetFullPaginatedAsync(int page, int pageSize);
+
+        Task<Listing?> GetFullByIdAsync(Guid id);
     }
 }
