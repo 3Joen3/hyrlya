@@ -26,6 +26,8 @@ namespace Infrastructure.Persistence.Repositories
         {
             return await _context.Listings
                 .Include(l => l.RentalUnit)
+                .Include(l => l.Landlord)
+                .ThenInclude(l => l.Profile)
                 .FirstOrDefaultAsync(l => l.Id == id);
         }
 
