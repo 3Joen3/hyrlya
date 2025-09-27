@@ -21,7 +21,7 @@ namespace Api.Controllers
             return Ok(response);
         }
 
-        [HttpDelete("{id:guid}")]
+        [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetListingDetailsById(Guid id)
         {
             var listing = await _listingsService.GetFullByIdAsync(id);
