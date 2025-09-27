@@ -1,16 +1,26 @@
 "use client";
 
+import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 
-export default function ImageCarousel() {
+import { Image as ImageType } from "@/types/Common";
+
+interface Props {
+  className: string;
+  images: ImageType[];
+}
+
+export default function ImageCarousel({ className, images }: Props) {
   const [emblaRef] = useEmblaCarousel();
 
   return (
-    <div className="overflow-hidden" ref={emblaRef}>
+    <div className={`${className} overflow-hidden`} ref={emblaRef}>
       <div className="flex">
-        <div className="flex-none basis-full min-w-0">Slide 1</div>
-        <div className="flex-none basis-full min-w-0">Slide 2</div>
-        <div className="flex-none basis-full min-w-0">Slide 3</div>
+        {images.map((img) => (
+          <div key={img.url} className="flex-none basis-full relative aspect-square">
+            <Image fill src={img.url} alt={img.altText} />
+          </div>
+        ))}
       </div>
     </div>
   );

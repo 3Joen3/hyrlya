@@ -10,6 +10,7 @@ export interface ListingSummary {
 
 export interface ListingDetails {
   id: string;
+  images: Image[];
 }
 
 export interface RentalPrice {
