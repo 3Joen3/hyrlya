@@ -20,6 +20,19 @@ namespace Api.Controllers
 
             return Ok(response);
         }
+
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> GetListingDetailsById(Guid id)
+        {
+            var listing = await _listingsService.GetFullByIdAsync(id);
+
+            if (listing is null)
+                return NotFound();
+
+            var response = new ListingDetails(listing);
+
+            return Ok(response);
+        }
     }
 }
     
