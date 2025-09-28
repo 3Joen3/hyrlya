@@ -14,7 +14,13 @@ interface Props {
 
 export default function ImageUploader({ id }: Props) {
   const { edgestore } = useEdgeStore();
-  const { setValue, watch } = useFormContext();
+  const {
+    setValue,
+    watch,
+    formState: { errors },
+  } = useFormContext();
+
+  const error = errors[id]?.message as string;
 
   const uploadedImages = (watch(id) as string[]) ?? [];
 
@@ -47,8 +53,9 @@ export default function ImageUploader({ id }: Props) {
         {uploadedImages.map((img, index) => (
           <ImageContainer key={index} imageUrl={img} />
         ))}
-        <ButtonContainer open={open} />
+        <ButtonContainer open={open} error={error} />
       </div>
+      {error && <p className="text-red-600 mt-1">{error}</p>}
     </div>
   );
 }
@@ -69,9 +76,9 @@ function ImageContainer({ imageUrl }: { imageUrl: string }) {
   );
 }
 
-function ButtonContainer({ open }: { open: () => void }) {
+function ButtonContainer({ open, error }: { open: () => void; error?: string }) {
   return (
-    <Container className="hover:bg-neutral-300">
+    <Container className="hover:bg-neutral-300" error={error}>
       <button
         className="cursor-pointer size-full flex flex-col items-center justify-center"
         onClick={open}
@@ -83,10 +90,20 @@ function ButtonContainer({ open }: { open: () => void }) {
   );
 }
 
-function Container({ className, children }: { className: string; children: React.ReactNode }) {
+function Container({
+  className,
+  children,
+  error,
+}: {
+  className: string;
+  children: React.ReactNode;
+  error?: string;
+}) {
   return (
     <div
-      className={`${className} aspect-square rounded border border-dashed bg-neutral-100 border-neutral-300`}
+      className={`${className} ${
+        error ? "border-red-500" : "border-neutral-300"
+      } bg-neutral-100 aspect-square rounded border border-dashed`}
     >
       {children}
     </div>
