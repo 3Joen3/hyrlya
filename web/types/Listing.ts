@@ -1,5 +1,6 @@
 import { Image } from "./Common";
-import { Address } from "./RentalUnit";
+import { LandlordProfile } from "./Landlord";
+import { Address, RentalUnitDetails } from "./RentalUnit";
 
 export interface ListingSummary {
   id: string;
@@ -9,11 +10,12 @@ export interface ListingSummary {
 }
 
 export interface ListingDetails {
-  id: string;
-  images: Image[];
+  landlord: LandlordProfile;
+  rentalUnit : RentalUnitDetails;
+  rentalPrice: RentalPrice;
 }
 
 export interface RentalPrice {
   amount: number;
-  chargeInterval: string;
+  chargeInterval: "daily" | "weekly" | "monthly";
 }
