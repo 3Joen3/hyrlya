@@ -1,9 +1,11 @@
 import Page from "@/components/Page";
+import PageTopRow from "@/components/PageTopRow";
 import RentalUnitForm from "@/ui/forms/RentalUnitForm";
 
 export default async function page() {
   return (
-    <Page heading="Skapa hyresobjekt" className="">
+    <Page>
+      <PageTopRow heading="Skapa hyresobjekt" />
       <RentalUnitForm />
     </Page>
   );
