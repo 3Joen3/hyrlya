@@ -1,10 +1,11 @@
-export function TranslateRentalUnitType(englishType: string) {
-  if (englishType === "Room") return "Rum";
-  if (englishType === "Apartment") return "Lägenhet";
+export function TranslateRentalUnitType(englishVersion: string) {
+  if (englishVersion === "Room") return "Rum";
+  if (englishVersion === "Apartment") return "Lägenhet";
   return "Hus";
 }
 
-export function TranslateRentalPriceChargeInterval(chargeInterval: string) {
-  if (chargeInterval == "0")
-    return "dag"
+export function TranslateRentalPriceChargeInterval(englishVersion: string) {
+  if (englishVersion == "daily") return "dag";
+  if (englishVersion == "weekly") return "vecka";
+  if (englishVersion == "monthly") return "månad";
 }
