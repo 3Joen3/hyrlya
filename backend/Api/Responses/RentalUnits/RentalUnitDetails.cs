@@ -12,5 +12,6 @@ namespace Api.Responses.RentalUnits
         public int NumberOfRooms { get; } = rentalUnit.NumberOfRooms;
         public int SizeSquareMeters { get; } = rentalUnit.SizeSquareMeters;
         public IEnumerable<ImageResponse> Images { get; } = rentalUnit.Images.Select(img => new ImageResponse(img));
+        public string Description { get; } = rentalUnit.Description;
     }
 }
