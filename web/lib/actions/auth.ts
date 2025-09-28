@@ -1,15 +1,16 @@
 "use server";
 
-import { AuthData } from "@/lib/schemas/authSchema";
+import { LoginData } from "../schemas/loginSchema";
 import { postNoResponse, post } from "@/lib/api/client";
 import { LoginResponse } from "@/types/LoginResponse";
 import { cookies } from "next/headers";
+import { RegisterData } from "../schemas/registerSchema";
 
-export async function register(request: AuthData) {
+export async function register(request: RegisterData) {
   await postNoResponse("register", request);
 }
 
-export async function login(data: AuthData) {
+export async function login(data: LoginData) {
   const response = await post<LoginResponse>("login", data);
 
   const bufferedExpiry = response.expiresIn - 60;
