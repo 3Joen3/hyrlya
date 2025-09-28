@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import UploadIcon from "../icons/UploadIcon";
+import { ArrowUpTrayIcon } from "@heroicons/react/24/outline";
 
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
@@ -77,7 +77,7 @@ function ButtonContainer({ open }: { open: () => void }) {
         onClick={open}
         type="button"
       >
-        <UploadIcon className="size-10" />
+        <ArrowUpTrayIcon className="size-10" />
       </button>
     </Container>
   );

@@ -1,9 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import HomeIcon from "../icons/HomeIcon";
-import DocumentIcon from "../icons/DocumentIcon";
-import UserIcon from "../icons/UserIcon";
+import { UserIcon, DocumentIcon, HomeIcon } from "@heroicons/react/24/outline";
 
 import { usePathname } from "next/navigation";
 

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import UserIcon from "@/components/icons/UserIcon";
+import { UserIcon } from "@heroicons/react/24/outline";
 
 interface Props {
   className: string;

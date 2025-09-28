@@ -3,7 +3,7 @@ import PageTopRow from "@/components/PageTopRow";
 import Link from "next/link";
 
 import { getAuthenticated } from "@/lib/api/server";
-import { ListingSummary } from "@/types/Listings";
+import { ListingSummary } from "@/types/Listing";
 
 export default async function page() {
   const response = await getAuthenticated("my/listings");

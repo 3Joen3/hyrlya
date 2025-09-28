@@ -1,5 +1,4 @@
-import PhoneIcon from "@/components/icons/PhoneIcon";
-import EnvelopeIcon from "@/components/icons/EnvelopeIcon";
+import { PhoneIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 
 import { Image as ImageType } from "@/types/Common";
