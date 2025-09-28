@@ -28,7 +28,7 @@ namespace Application.Services
                 //Do Something
             }
 
-            var listing = new Listing(landlordId, rentalUnit.Id, dto.RentalPrice);
+            var listing = new Listing(landlordId, rentalUnit.Id, dto.RentalPrice, dto.LandlordNote);
 
             await _repo.AddAsync(listing);
             await _unitOfWork.WriteChangesAsync();
