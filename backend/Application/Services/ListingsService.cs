@@ -12,9 +12,6 @@ namespace Application.Services
             => await _repo.GetFullByIdAsync(id);
 
         public async Task<IEnumerable<Listing>> GetFullPaginatedAsync(int page, int pageSize)
-        {
-            var listings = await _repo.GetFullPaginatedAsync(page, pageSize);
-            return listings;
-        }
+            => await _repo.GetFullPaginatedAsync(page, pageSize);
     }
 }
