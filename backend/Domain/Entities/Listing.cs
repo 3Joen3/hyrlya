@@ -11,9 +11,9 @@ namespace Domain.Entities
         public RentalUnit? RentalUnit { get; private set; }
 
         public RentalPrice RentalPrice { get; private set; }
-        public string LandlordNote { get; private set; }
+        public string? LandlordNote { get; private set; }
 
-        public Listing(Guid landlordId, Guid rentalUnitId, RentalPrice rentalPrice, string landlordNote) 
+        public Listing(Guid landlordId, Guid rentalUnitId, RentalPrice rentalPrice, string? landlordNote) 
         {
             LandlordId = SetLandlordId(landlordId);
             RentalUnitId = SetRentalUnitId(rentalUnitId);
@@ -43,8 +43,11 @@ namespace Domain.Entities
             return rentalPrice;
         }
 
-        private static string SetLandlordNote(string landlordNote)
+        private static string? SetLandlordNote(string? landlordNote)
         {
+            if (landlordNote is null)
+                return null;
+
             ArgumentException.ThrowIfNullOrWhiteSpace(landlordNote);
             return landlordNote;
         }
@@ -53,7 +56,6 @@ namespace Domain.Entities
         {
             RentalUnit = default!;
             RentalPrice = default!;
-            LandlordNote = default!;
         }
     }
 }

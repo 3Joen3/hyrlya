@@ -2,5 +2,5 @@
 
 namespace Application.Dtos
 {
-    public record ListingDto(Guid RentalUnitId, RentalPrice RentalPrice, string LandlordNote);
+    public record ListingDto(Guid RentalUnitId, RentalPrice RentalPrice, string? LandlordNote);
 }
