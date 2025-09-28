@@ -18,8 +18,8 @@ namespace Application.Services
             var landlordId = await _myLandlordService
                 .GetIdByIdentityIdAsync(identityId);
 
-            var rentalUnit = new RentalUnit(landlordId, dto.Address, 
-                dto.Type, dto.NumberOfRooms, dto.SizeSquareMeters, dto.ImageUrls);
+            var rentalUnit = new RentalUnit(landlordId, dto.Address, dto.Type, dto.Description,
+                dto.NumberOfRooms, dto.SizeSquareMeters, dto.ImageUrls);
 
             await _repo.AddAsync(rentalUnit);
             await _unitOfWork.WriteChangesAsync();
@@ -38,6 +38,7 @@ namespace Application.Services
 
             rentalUnit.ChangeAddress(dto.Address);
             rentalUnit.ChangeType(dto.Type);
+            rentalUnit.ChangeDescription(dto.Description);
             rentalUnit.ChangeNumberOfRooms(dto.NumberOfRooms);
             rentalUnit.ChangeSizeSquareMeters(dto.SizeSquareMeters);
             rentalUnit.ReplaceImages(dto.ImageUrls);
