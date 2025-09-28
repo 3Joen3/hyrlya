@@ -21,7 +21,7 @@ export default function RegisterForm() {
     <Form methods={methods} onSubmit={handleSubmit}>
       <FormSection>
         <TextField id="email" label="Ange e-postadress" />
-        <TextField id="password" label="Ange lösenord" />
+        <TextField type="password" id="password" label="Ange lösenord" />
 
         <FormSubmit label="Skapa konto" loadingLabel="Skapar konto..." />
       </FormSection>
