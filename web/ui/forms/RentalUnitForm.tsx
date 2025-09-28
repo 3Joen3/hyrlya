@@ -8,6 +8,7 @@ import TextField from "@/components/forms/TextField";
 import ImageUploader from "@/components/image-uploader/ImageUploader";
 import FormSection from "@/components/forms/FormSection";
 import FormSubmit from "@/components/forms/FormSubmit";
+import TextAreaField from "@/components/forms/TextAreaField";
 
 import { useForm } from "react-hook-form";
 import { RentalUnitDetails } from "@/types/RentalUnit";
@@ -28,6 +29,7 @@ export default function RentalUnitForm({ existingData }: Props) {
       numberOfRooms: existingData?.numberOfRooms,
       sizeSquareMeters: existingData?.sizeSquareMeters,
       type: existingData?.type.toLowerCase() as RentalUnitData["type"],
+      description: existingData?.description,
     },
   });
 
@@ -63,6 +65,8 @@ function AboutSection() {
         <NumberField id="numberOfRooms" label="Antal rum" />
         <NumberField id="sizeSquareMeters" label="Storlek" />
       </div>
+
+      <TextAreaField id="description" label="Beskrivning" />
     </FormSection>
   );
 }
