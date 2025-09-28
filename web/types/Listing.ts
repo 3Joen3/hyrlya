@@ -11,7 +11,7 @@ export interface ListingSummary {
 
 export interface ListingDetails {
   landlord: LandlordProfile;
-  rentalUnit : RentalUnitDetails;
+  rentalUnit: RentalUnitDetails;
   rentalPrice: RentalPrice;
 }
 

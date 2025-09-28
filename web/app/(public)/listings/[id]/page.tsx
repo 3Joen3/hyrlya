@@ -22,6 +22,7 @@ export default async function page({ params }: Props) {
   return (
     <Page className="grid grid-cols-2 gap-6">
       <ImageCarousel images={listing.rentalUnit.images} />
+      <DescriptionSection description={listing.rentalUnit.description} />
 
       <div className="flex gap-4 items-start">
         <InfoSection listing={listing} />
@@ -54,6 +55,15 @@ function InfoSection({ listing }: { listing: ListingDetails }) {
           {address.street} {address.houseNumber}, {address.city}
         </p>
       </div>
+    </Block>
+  );
+}
+
+function DescriptionSection({ description }: { description: string }) {
+  return (
+    <Block>
+      <h2>Beskrivning</h2>
+      <p>{description}</p>
     </Block>
   );
 }
