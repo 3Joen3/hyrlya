@@ -13,6 +13,7 @@ export interface RentalUnitDetails {
   numberOfRooms: number;
   sizeSquareMeters: number;
   images: Image[];
+  description: string;
 }
 
 export interface Address {
