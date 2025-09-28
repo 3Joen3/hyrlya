@@ -39,7 +39,7 @@ namespace Api.Requests
         {
             var rentalPrice = new RentalPrice(request.Price, request.ChargeInterval);
 
-            return new ListingDto(request.RentalUnitId, rentalPrice);
+            return new ListingDto(request.RentalUnitId, rentalPrice, request.LandlordNote);
         }
     }
 }

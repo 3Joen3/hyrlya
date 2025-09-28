@@ -15,5 +15,8 @@ namespace Api.Requests
         [Required]
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public ChargeInterval ChargeInterval { get; init; }
+
+        [Required, MinLength(1)]
+        public string LandlordNote { get; init; } = default!;
     }
 }
