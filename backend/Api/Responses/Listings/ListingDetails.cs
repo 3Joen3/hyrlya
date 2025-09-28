@@ -1,14 +1,13 @@
-﻿using Api.Responses.Common;
-using Api.Responses.Landlords;
+﻿using Api.Responses.Landlords;
+using Api.Responses.RentalUnits;
 using Domain.Entities;
-using Domain.ValueObjects;
 
 namespace Api.Responses.Listings
 {
     public class ListingDetails(Listing listing)
-    {
-        public IEnumerable<ImageResponse> Images { get; } = listing.RentalUnit.Images.Select(img => new ImageResponse(img));
-        public LandlordProfileDetails Landlord { get; } = new LandlordProfileDetails(listing.Landlord.Profile);
-        public Address Address { get; } = listing.RentalUnit.Address;
+    { 
+        public LandlordProfileDetails Landlord { get; } = listing.Landlord is null ? throw new ArgumentException("Landlord must be loaded") :  new LandlordProfileDetails(listing.Landlord.Profile);
+        public RentalUnitDetails RentalUnit { get; } = listing.RentalUnit is null ? throw new ArgumentException("RentalUnit must be loaded") : new RentalUnitDetails(listing.RentalUnit);
+        public RentalPriceResponse RentalPrice { get; } = new RentalPriceResponse(listing.RentalPrice);
     }
 }
