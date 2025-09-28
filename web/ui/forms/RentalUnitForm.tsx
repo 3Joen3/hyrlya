@@ -24,7 +24,7 @@ export default function RentalUnitForm({ existingData }: Props) {
     resolver: zodResolver(rentalUnitSchema),
     defaultValues: {
       address: existingData?.address,
-      imageUrls: existingData?.images.map((img) => img.url),
+      imageUrls: existingData ? existingData.images.map((img) => img.url) : [],
       numberOfRooms: existingData?.numberOfRooms,
       sizeSquareMeters: existingData?.sizeSquareMeters,
       type: existingData?.type.toLowerCase() as RentalUnitData["type"],
