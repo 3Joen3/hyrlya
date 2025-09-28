@@ -5,7 +5,7 @@ export function TranslateRentalUnitType(englishVersion: string) {
 }
 
 export function TranslateRentalPriceChargeInterval(englishVersion: string) {
-  if (englishVersion == "daily") return "dag";
-  if (englishVersion == "weekly") return "vecka";
-  if (englishVersion == "monthly") return "månad";
+  if (englishVersion == "Daily") return "dag";
+  if (englishVersion == "Weekly") return "vecka";
+  if (englishVersion == "Monthly") return "månad";
 }
