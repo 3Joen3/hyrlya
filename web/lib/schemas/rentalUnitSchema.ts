@@ -2,14 +2,18 @@ import { z } from "zod";
 
 export const rentalUnitSchema = z.object({
   address: z.object({
-    street: z.string(),
-    houseNumber: z.string(),
-    city: z.string(),
+    street: z.string().min(1, "Gatuadress är obligatoriskt"),
+    houseNumber: z.string().min(1, "Husnummer är obligatoriskt"),
+    city: z.string().min(1, "Stad är obligatoriskt"),
   }),
   type: z.enum(["room", "apartment", "house"]),
-  numberOfRooms: z.number(),
-  sizeSquareMeters: z.number(),
-  imageUrls: z.array(z.string()),
+  numberOfRooms: z
+    .number("Antal rum måste vara ett nummer")
+    .positive("Antal rum måste vara över noll"),
+  sizeSquareMeters: z
+    .number("Storlek måste vara ett nummer")
+    .positive("Antal rum måste vara över noll"),
+  imageUrls: z.array(z.url()).min(1, "Minst en bild krävs"),
 });
 
 export type RentalUnitData = z.infer<typeof rentalUnitSchema>;
