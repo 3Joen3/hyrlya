@@ -10,18 +10,20 @@ namespace Domain.Entities
 
         public Address Address { get; private set; }
         public RentalUnitType Type { get; private set; }
+        public string Description { get; private set; }
         public int NumberOfRooms { get; private set; }
         public int SizeSquareMeters { get; private set; } 
 
         public Guid LandlordId { get; private set; }
         public Landlord? Landlord { get; private set; }
 
-        public RentalUnit(Guid landlordId, Address address, RentalUnitType type, 
+        public RentalUnit(Guid landlordId, Address address, RentalUnitType type, string description,
             int numberOfRooms, int sizeSquareMeters, IEnumerable<WebAddress> imageUrls)
         {
             LandlordId = SetLandlordId(landlordId);
             Address = SetAddress(address);
             Type = type;
+            Description = SetDescription(description);
             NumberOfRooms = SetNumberOfRooms(numberOfRooms);;
             SizeSquareMeters = SetSizeSquareMeters(sizeSquareMeters);
             AddImages(imageUrls);
@@ -29,6 +31,7 @@ namespace Domain.Entities
 
         public void ChangeAddress(Address newAddress) => Address = SetAddress(newAddress);
         public void ChangeType(RentalUnitType newType) => Type = newType;
+        public void ChangeDescription(string description) => Description = SetDescription(description);
         public void ChangeNumberOfRooms(int newNumberOfRooms) => NumberOfRooms = SetNumberOfRooms(newNumberOfRooms);
         public void ChangeSizeSquareMeters(int newSize) => SizeSquareMeters = SetSizeSquareMeters(newSize);
         public bool IsOwnedBy(Guid landlordId) => LandlordId == landlordId;
@@ -76,6 +79,12 @@ namespace Domain.Entities
             return address;
         }
 
+        private static string SetDescription(string description)
+        {
+            ArgumentException.ThrowIfNullOrWhiteSpace(description);
+            return description;
+        }
+
         private static int SetNumberOfRooms(int numberOfRooms)
         {
             if (numberOfRooms < 1)
@@ -92,6 +101,10 @@ namespace Domain.Entities
             return sizeSquareMeters;
         }
 
-        private RentalUnit() { Address = default!; }
+        private RentalUnit() 
+        { 
+            Address = default!;
+            Description = default!;
+        }
     }
 }
