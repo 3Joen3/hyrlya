@@ -42,7 +42,7 @@ export default function AuthForm() {
         <Form methods={methods} onSubmit={handleSubmit}>
           <FormSection>
             <TextField id="email" label="Ange e-postadress" />
-            <TextField id="password" label="Ange lösenord" />
+            <TextField type="password" id="password" label="Ange lösenord" />
             <FormSubmit
               label={isRegisterForm ? "Skapa konto" : "Logga in"}
               loadingLabel={"Laddar..."}
