@@ -13,6 +13,7 @@ export const rentalUnitSchema = z.object({
   sizeSquareMeters: z
     .number("Storlek måste vara ett nummer")
     .positive("Antal rum måste vara över noll"),
+  description: z.string().min(1, "Beskrivning är obligatoriskt"),
   imageUrls: z.array(z.url()).min(1, "Minst en bild krävs"),
 });
 
