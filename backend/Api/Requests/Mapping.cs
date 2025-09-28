@@ -31,7 +31,7 @@ namespace Api.Requests
             var imageUrls = request.ImageUrls
                 .Select(url => new WebAddress(url));
 
-            return new RentalUnitDto(address, request.Type, 
+            return new RentalUnitDto(address, request.Type, request.Description,
                 request.NumberOfRooms, request.SizeSquareMeters, imageUrls);
         }
 

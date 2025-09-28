@@ -13,6 +13,10 @@ namespace Api.Requests
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public RentalUnitType Type { get; init; }
 
+        [Required]
+        [MinLength(1)]
+        public string Description { get; init; } = default!;
+
         [Range(1, int.MaxValue)]
         public int NumberOfRooms { get; init; }
 
