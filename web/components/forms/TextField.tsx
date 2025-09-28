@@ -12,8 +12,7 @@ export default function TextField({ type = "text", id, label }: Props) {
     formState: { errors },
   } = useFormContext();
 
-  const error = errors[id]?.message as string;
-
+  const error = getError(errors, id)?.message as string | undefined;
   return (
     <div className="flex flex-col space-y-1">
       <label htmlFor={id} className="text-lg">
@@ -32,4 +31,8 @@ export default function TextField({ type = "text", id, label }: Props) {
       {error && <p className="text-red-600">{error}</p>}
     </div>
   );
+}
+
+function getError(errors: any, path: string) {
+  return path.split(".").reduce((acc, part) => acc?.[part], errors);
 }
