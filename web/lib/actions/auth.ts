@@ -6,8 +6,9 @@ import { LoginResponse } from "@/types/LoginResponse";
 import { cookies } from "next/headers";
 import { RegisterData } from "../schemas/registerSchema";
 
-export async function register(request: RegisterData) {
-  await postNoResponse("register", request);
+export async function register(data: RegisterData) {
+  await postNoResponse("register", data);
+  await login(data);
 }
 
 export async function login(data: LoginData) {
