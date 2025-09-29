@@ -45,7 +45,7 @@ namespace Domain.Entities
 
         private static string? SetLandlordNote(string? landlordNote)
         {
-            if (landlordNote is null)
+            if (landlordNote is null || landlordNote == "")
                 return null;
 
             ArgumentException.ThrowIfNullOrWhiteSpace(landlordNote);
