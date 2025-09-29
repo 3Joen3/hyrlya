@@ -9,6 +9,6 @@ namespace Api.Responses.Listings
         public Guid Id { get; } = listing.Id;
         public ImageResponse Image { get; } = listing.RentalUnit is null ? throw new ArgumentException("RentalUnit must be loaded") : new ImageResponse(listing.RentalUnit.Images[0]);
         public Address Address { get; } = listing.RentalUnit.Address;
-        public RentalPrice RentalPrice { get; } = listing.RentalPrice;  
+        public RentalPriceResponse RentalPrice { get; } = new RentalPriceResponse(listing.RentalPrice);
     }
 }
