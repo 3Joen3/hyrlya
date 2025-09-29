@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 
 export default async function page() {
   if (await getAccessToken()) {
-    redirect("/landlord");
+    redirect("/landlord/listings");
   }
 
   return (
