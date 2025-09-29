@@ -36,33 +36,6 @@ export default async function page({ params }: Props) {
   );
 }
 
-function InfoSection({ listing }: { listing: ListingDetails }) {
-  const address = listing.rentalUnit.address;
-  const rentalPrice = listing.rentalPrice;
-
-  return (
-    <Block className="w-1/2 space-y-2">
-      <h1 className="text-xl font-semibold">Info</h1>
-      <p>Antal rum: {listing.rentalUnit.numberOfRooms}</p>
-      <p>Storlek: {listing.rentalUnit.sizeSquareMeters}</p>
-
-      <div className="flex items-center gap-2">
-        <BanknotesIcon className="size-5" />
-        <p>
-          {rentalPrice.amount} kr/
-          {TranslateRentalPriceChargeInterval(rentalPrice.chargeInterval)}
-        </p>
-      </div>
-      <div className="flex items-center gap-2">
-        <MapPinIcon className="size-5" />
-        <p>
-          {address.street} {address.houseNumber}, {address.city}
-        </p>
-      </div>
-    </Block>
-  );
-}
-
 function DescriptionSection({ description }: { description: string }) {
   return (
     <Section heading="Beskrivning">
