@@ -13,6 +13,7 @@ export interface ListingDetails {
   landlord: LandlordProfile;
   rentalUnit: RentalUnitDetails;
   rentalPrice: RentalPrice;
+  landlordNote?: string;
 }
 
 export interface RentalPrice {
