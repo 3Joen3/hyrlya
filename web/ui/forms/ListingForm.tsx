@@ -6,6 +6,7 @@ import FormSection from "@/components/forms/FormSection";
 import FormSubmit from "@/components/forms/FormSubmit";
 import NumberField from "@/components/forms/NumberField";
 import SelectField from "@/components/forms/SelectField";
+import TextAreaField from "@/components/forms/TextAreaField";
 
 import { createListing } from "@/lib/actions/listings";
 import { ListingData, listingSchema } from "@/lib/schemas/listingSchema";
@@ -28,7 +29,7 @@ export default function ListingForm({ rentalUnits }: Props) {
   }
 
   return (
-    <Form className="space-y-6" methods={methods} onSubmit={handleSubmit}>
+    <Form className="space-y-6 w-1/2" methods={methods} onSubmit={handleSubmit}>
       <Block>
         <FormSection>
           <RentalUnitSelect rentalUnits={rentalUnits} />
@@ -36,6 +37,7 @@ export default function ListingForm({ rentalUnits }: Props) {
             <NumberField id="price" label="Pris" />
             <ChargeIntervalSelect />
           </div>
+          <TextAreaField id="landlordNote" label="Beskrivning" />
         </FormSection>
       </Block>
       <FormSubmit label="Spara" loadingLabel="Sparar" />
