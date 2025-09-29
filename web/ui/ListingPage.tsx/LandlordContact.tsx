@@ -14,11 +14,11 @@ interface Props {
 export default function LandlordContact({ name, phone, email, image }: Props) {
   return (
     <div className="flex gap-6">
+      <ProfileImage image={image} />
       <div className="space-y-3">
-        <h2 className="text-xl font-semibold">Kontaktuppgifter</h2>
+        <h2 className="text-xl font-semibold">Kontakta hyresvärden!</h2>
         <Icons name={name} phone={phone} email={email} />
       </div>
-      <ProfileImage image={image} />
     </div>
   );
 }
@@ -35,7 +35,7 @@ function Icons({ name, phone, email }: { name: string; phone: string; email: str
 
 function ProfileImage({ image }: { image: ImageType }) {
   return (
-    <div className="relative aspect-square rounded-full overflow-hidden w-30">
+    <div className="relative aspect-square w-30">
       <Image className="object-cover" src={image.url} alt={image.altText} fill />
     </div>
   );

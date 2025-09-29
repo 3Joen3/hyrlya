@@ -43,10 +43,12 @@ function HigherSection({ listing }: { listing: ListingDetails }) {
 
 function LowerSection({ listing }: { listing: ListingDetails }) {
   return (
-    <Block className="space-y-5 inline-block">
-      <ListingPageSection heading="Profil på önskad hyresgäst">
-        {listing.landlordNote}
-      </ListingPageSection>
+    <Block className="space-y-5">
+      {listing.landlordNote && (
+        <ListingPageSection heading="Profil på önskad hyresgäst">
+          {listing.landlordNote}
+        </ListingPageSection>
+      )}
 
       <LandlordContact {...listing.landlord} />
     </Block>
