@@ -13,14 +13,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createLandlord } from "@/lib/actions/profile";
 import { useEdgeStore } from "@/lib/edgestore";
 import { useRef, useState } from "react";
+import { LandlordProfile } from "@/types/Landlord";
 
 interface Props {
-  className: string;
+  existingData?: LandlordProfile;
 }
 
-export default function ProfileForm({ className }: Props) {
+export default function ProfileForm({ existingData }: Props) {
   const methods = useForm<ProfileData>({
     resolver: zodResolver(profileSchema),
+    defaultValues: {
+      name: existingData?.name,
+      emailAddress: existingData?.email,
+      phoneNumber: existingData?.phone,
+      profileImageUrl: existingData?.image.url,
+    },
   });
 
   async function handleSubmit(data: ProfileData) {
@@ -28,7 +35,7 @@ export default function ProfileForm({ className }: Props) {
   }
 
   return (
-    <Form className={`${className} space-y-6`} methods={methods} onSubmit={handleSubmit}>
+    <Form className={`$space-y-6`} methods={methods} onSubmit={handleSubmit}>
       <Block className="space-y-6">
         <FormSection>
           <TextField id="name" label="Namn" />
