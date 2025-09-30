@@ -83,6 +83,7 @@ function ProfileImageSection() {
         />
         <ProfileImage className="h-40 w-40" imageUrl={profileImageUrl} />
         <button
+          type="button"
           className="btn-primary btn-color-secondary"
           onClick={() => fileInputRef.current?.click()}
         >
