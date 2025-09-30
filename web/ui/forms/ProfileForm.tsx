@@ -35,7 +35,7 @@ export default function ProfileForm({ existingData }: Props) {
   }
 
   return (
-    <Form className={`$space-y-6`} methods={methods} onSubmit={handleSubmit}>
+    <Form className="space-y-6 w-1/2" methods={methods} onSubmit={handleSubmit}>
       <Block className="space-y-6">
         <FormSection>
           <TextField id="name" label="Namn" />
