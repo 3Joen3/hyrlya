@@ -10,7 +10,7 @@ export interface ListingSummary {
 }
 
 export interface ListingDetails {
-  landlord: LandlordProfile;
+  landlordProfile: LandlordProfile;
   rentalUnit: RentalUnitDetails;
   rentalPrice: RentalPrice;
   landlordNote?: string;
