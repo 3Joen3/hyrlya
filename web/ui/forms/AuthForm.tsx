@@ -40,7 +40,9 @@ function FormSelectorButton({ label, isActive, onClick }: FormSelectorButtonProp
       onClick={onClick}
       type="button"
       className={`${
-        isActive ? "btn-color-primary shadow-md" : "text-neutral-600 hover:bg-neutral-50"
+        isActive
+          ? "btn-color-primary-no-hover shadow-md"
+          : "text-neutral-600 hover:bg-neutral-50 cursor-pointer"
       } rounded-t py-2 transition-colors duration-200`}
     >
       {label}
