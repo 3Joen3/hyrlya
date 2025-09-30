@@ -8,7 +8,7 @@ interface Props {
   name: string;
   phone: string;
   email: string;
-  image: ImageType;
+  image: ImageType | null;
 }
 
 export default function LandlordContact({ name, phone, email, image }: Props) {

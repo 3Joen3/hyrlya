@@ -2,18 +2,19 @@
 
 import Form from "@/components/forms/Form";
 import Block from "@/components/Block";
-import TextField from "@/components/forms/TextField";
-import ProfileImage from "../ProfileImage";
 import FormSection from "@/components/forms/FormSection";
+import TextField from "@/components/forms/TextField";
 import FormSubmit from "@/components/forms/FormSubmit";
+import LandlordContact from "../ListingPage.tsx/LandlordContact";
+import React from "react";
 
-import { useForm, useFormContext } from "react-hook-form";
+import { LandlordProfile } from "@/types/Landlord";
+import { useForm } from "react-hook-form";
 import { ProfileData, profileSchema } from "@/lib/schemas/profileSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createLandlord } from "@/lib/actions/profile";
+import { Image } from "@/types/Common";
 import { useEdgeStore } from "@/lib/edgestore";
-import { useRef, useState } from "react";
-import { LandlordProfile } from "@/types/Landlord";
 
 interface Props {
   existingData?: LandlordProfile;
@@ -30,66 +31,80 @@ export default function ProfileForm({ existingData }: Props) {
     },
   });
 
+  const { edgestore } = useEdgeStore();
+
   async function handleSubmit(data: ProfileData) {
     await createLandlord(data);
   }
 
-  return (
-    <Form className="space-y-6 w-1/2" methods={methods} onSubmit={handleSubmit}>
-      <Block className="space-y-6">
-        <FormSection>
-          <TextField id="name" label="Namn" />
-          <TextField id="phoneNumber" label="Telefonnummer" />
-          <TextField id="emailAddress" label="Email address" />
-        </FormSection>
+  const { watch, setValue } = methods;
 
-        <ProfileImageSection />
-      </Block>
+  const watchedName = watch("name");
+  const watchedPhone = watch("phoneNumber");
+  const watchedEmail = watch("emailAddress");
+  const watchedImageUrl = watch("profileImageUrl");
 
-      <FormSubmit label="Spara" loadingLabel="Sparar..." />
-    </Form>
-  );
-}
+  let image: Image | null = null;
 
-function ProfileImageSection() {
-  const { edgestore } = useEdgeStore();
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  if (watchedImageUrl) {
+    image = {
+      url: watchedImageUrl,
+      altText: "Din profilbild",
+    };
+  }
 
-  const [profileImageUrl, setProfileImageUrl] = useState<string>();
-  const { setValue } = useFormContext();
-
-  async function handleSelectedImage(e: React.ChangeEvent<HTMLInputElement>) {
+  async function handleUploadedImage(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
 
     const response = await edgestore.publicImages.upload({
       file,
-      input: { type: "profile" },
+      input: {
+        type: "profile",
+      },
     });
-
-    setProfileImageUrl(response.url);
     setValue("profileImageUrl", response.url);
   }
 
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+
   return (
-    <FormSection heading="Profilbild">
-      <div className="flex items-center gap-4">
-        <input
-          className="hidden"
-          type="file"
-          accept="image/*"
-          ref={fileInputRef}
-          onChange={handleSelectedImage}
-        />
-        <ProfileImage className="h-40 w-40" imageUrl={profileImageUrl} />
-        <button
-          type="button"
-          className="btn-primary btn-color-secondary"
-          onClick={() => fileInputRef.current?.click()}
-        >
-          Välj profilbild
-        </button>
+    <Form className="space-y-6 w-full" methods={methods} onSubmit={handleSubmit}>
+      <div className="flex flex-col lg:flex-row w-full gap-4">
+        <Block className="flex-1">
+          <FormSection heading="Kontaktuppgifter">
+            <TextField id="name" label="Namn" />
+            <TextField id="phoneNumber" label="Telefonnummer" />
+            <TextField id="emailAddress" label="E-postadress" />
+          </FormSection>
+        </Block>
+        <div className="space-y-4">
+          <h2 className="text-2xl font-semibold underline">Ditt profilkort</h2>
+          <Block>
+            <LandlordContact
+              name={watchedName}
+              email={watchedEmail}
+              phone={watchedPhone}
+              image={image}
+            />
+          </Block>
+          <input
+            type="file"
+            className="hidden"
+            ref={fileInputRef}
+            accept="image/*"
+            onChange={handleUploadedImage}
+          />
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            type="button"
+            className="btn-primary btn-color-secondary"
+          >
+            Byt profilbild
+          </button>
+        </div>
       </div>
-    </FormSection>
+      <FormSubmit label="Spara" loadingLabel="Sparar..." />
+    </Form>
   );
 }

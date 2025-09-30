@@ -4,7 +4,7 @@ import { Image as ImageType } from "@/types/Common";
 import { UserIcon } from "@heroicons/react/24/outline";
 
 interface Props {
-  image?: ImageType;
+  image: ImageType | null;
 }
 
 export default function ProfileImage({ image }: Props) {
