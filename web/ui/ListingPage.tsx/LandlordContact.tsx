@@ -1,5 +1,5 @@
 import ListingPageIconRow from "./ListingPageIconRow";
-import Image from "next/image";
+import ProfileImage from "../ProfileImage";
 
 import { Image as ImageType } from "@/types/Common";
 import { EnvelopeIcon, PhoneIcon, UserIcon } from "@heroicons/react/24/outline";
@@ -14,7 +14,7 @@ interface Props {
 export default function LandlordContact({ name, phone, email, image }: Props) {
   return (
     <div className="flex flex-col md:flex-row gap-6">
-      <Image src={image.url} alt={image.altText} width={120} height={120} />
+      <ProfileImage image={image} />
       <div className="space-y-3">
         <h2 className="text-xl font-semibold">Kontakta hyresvärden!</h2>
         <Icons name={name} phone={phone} email={email} />
