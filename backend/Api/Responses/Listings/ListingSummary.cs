@@ -4,11 +4,22 @@ using Domain.ValueObjects;
 
 namespace Api.Responses.Listings
 {
-    public class ListingSummary(Listing listing)
+    public class ListingSummary
     {
-        public Guid Id { get; } = listing.Id;
-        public ImageResponse Image { get; } = listing.RentalUnit is null ? throw new ArgumentException("RentalUnit must be loaded") : new ImageResponse(listing.RentalUnit.Images[0]);
-        public Address Address { get; } = listing.RentalUnit.Address;
-        public RentalPriceResponse RentalPrice { get; } = new RentalPriceResponse(listing.RentalPrice);
+        public Guid Id { get; }
+        public Address Address { get; }
+        public ImageResponse Image { get; }
+        public RentalPriceResponse RentalPrice { get; }
+
+        public ListingSummary(Listing listing)
+        {
+            if (listing.RentalUnit is null)
+                throw new ArgumentException("RentalUnit must be loaded");
+
+            Id = listing.Id;
+            Address = listing.RentalUnit.Address;
+            Image = new ImageResponse(listing.RentalUnit.Images[0]);
+            RentalPrice = new RentalPriceResponse(listing.RentalPrice);
+        }
     }
 }
