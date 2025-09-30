@@ -5,7 +5,8 @@ using Domain.Entities;
 namespace Api.Responses.Listings
 {
     public class ListingDetails
-    { 
+    {
+        public Guid Id { get; }
         public LandlordProfileDetails LandlordProfile { get; }
         public RentalUnitDetails RentalUnit { get; }
         public RentalPriceResponse RentalPrice { get; }
@@ -19,6 +20,7 @@ namespace Api.Responses.Listings
             if (listing.RentalUnit is null)
                 throw new ArgumentException("RentalUnit must be loaded");
 
+            Id = listing.Id;
             LandlordProfile = new LandlordProfileDetails(listing.Landlord.Profile);
             RentalUnit = new RentalUnitDetails(listing.RentalUnit);
             RentalPrice = new RentalPriceResponse(listing.RentalPrice);
