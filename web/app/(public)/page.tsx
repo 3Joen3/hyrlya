@@ -1,10 +1,9 @@
-import Block from "@/components/Block";
+import ListingCard from "@/ui/ListingCard";
 import Page from "@/components/Page";
 import PageTopRow from "@/components/PageTopRow";
 
 import { get } from "@/lib/api/client";
 import { ListingSummary } from "@/types/Listing";
-import ListingCard from "@/ui/ListingCard";
 
 export default async function Home() {
   const listings = await get<ListingSummary[]>("listings?page=1&size=10");
@@ -14,9 +13,7 @@ export default async function Home() {
 
       <div className="grid grid-cols-4 gap-4">
         {listings.map((listing) => (
-          <Block key={listing.id}>
-            <ListingCard {...listing} image={listing.image} />
-          </Block>
+          <ListingCard key={listing.id} {...listing} image={listing.image} />
         ))}
       </div>
     </Page>
