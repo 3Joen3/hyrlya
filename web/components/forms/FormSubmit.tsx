@@ -16,7 +16,7 @@ export default function FormSubmit({
   } = useFormContext();
 
   return (
-    <button type="submit" classNasme={className}>
+    <button type="submit" className={className}>
       {isSubmitting ? loadingLabel : label}
     </button>
   );
