@@ -3,6 +3,7 @@ import RentalUnitForm from "@/ui/forms/RentalUnitForm";
 
 import { getAuthenticated } from "@/lib/api/server";
 import { RentalUnitDetails } from "@/types/RentalUnit";
+import PageTopRow from "@/components/PageTopRow";
 
 interface Props {
   params: {
@@ -18,6 +19,7 @@ export default async function page({ params }: Props) {
 
   return (
     <Page>
+      <PageTopRow heading="Redigera hyresobjekt" />
       <RentalUnitForm existingData={rentalUnit} />
     </Page>
   );
