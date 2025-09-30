@@ -13,7 +13,7 @@ interface Props {
 
 export default function LandlordContact({ name, phone, email, image }: Props) {
   return (
-    <div className="flex gap-6">
+    <div className="flex flex-col md:flex-row gap-6">
       <Image src={image.url} alt={image.altText} width={120} height={120} />
       <div className="space-y-3">
         <h2 className="text-xl font-semibold">Kontakta hyresvärden!</h2>
