@@ -23,7 +23,11 @@ export default function RegisterForm() {
         <TextField id="email" label="Ange e-postadress" />
         <TextField type="password" id="password" label="Ange lösenord" />
 
-        <FormSubmit label="Skapa konto" loadingLabel="Skapar konto..." />
+        <FormSubmit
+          className="btn-primary btn-color-secondary"
+          label="Skapa konto"
+          loadingLabel="Skapar konto..."
+        />
       </FormSection>
     </Form>
   );

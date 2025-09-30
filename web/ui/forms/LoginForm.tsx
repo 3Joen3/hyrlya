@@ -23,7 +23,7 @@ export default function LoginForm() {
         <TextField id="email" label="Ange e-postadress" />
         <TextField type="password" id="password" label="Ange lösenord" />
 
-        <FormSubmit label="Logga in" loadingLabel="Loggar in..." />
+        <FormSubmit className="btn-primary btn-color-secondary" label="Logga in" loadingLabel="Loggar in..." />
       </FormSection>
     </Form>
   );
