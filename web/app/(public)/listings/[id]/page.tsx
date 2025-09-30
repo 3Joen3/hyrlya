@@ -20,7 +20,7 @@ export default async function page({ params }: Props) {
   const listing = await get<ListingDetails>(`listings/${id}`);
 
   return (
-    <Page className="grid grid-cols-2 gap-6">
+    <Page className="flex flex-col gap-4 lg:grid lg:grid-cols-2 lg:gap-6">
       <ImageCarousel images={listing.rentalUnit.images} />
       <div className="space-y-4">
         <HigherSection listing={listing} />
