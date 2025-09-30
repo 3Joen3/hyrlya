@@ -1,9 +1,9 @@
 import Page from "@/components/Page";
 import RentalUnitForm from "@/ui/forms/RentalUnitForm";
+import PageTopRow from "@/components/PageTopRow";
 
 import { getAuthenticated } from "@/lib/api/server";
 import { RentalUnitDetails } from "@/types/RentalUnit";
-import PageTopRow from "@/components/PageTopRow";
 
 interface Props {
   params: {
