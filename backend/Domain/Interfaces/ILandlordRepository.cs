@@ -8,5 +8,6 @@ namespace Domain.Interfaces
 
         Task<Landlord?> GetWithProfileByIdentityIdAsync(string identityId);
         Task<Guid> GetIdByIdentityIdAsync(string identityId);
+        Task<LandlordProfile?> GetProfileAsync(Guid landlordId);
     }
 }
