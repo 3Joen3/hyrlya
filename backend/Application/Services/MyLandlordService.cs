@@ -23,6 +23,34 @@ namespace Application.Services
             return landlord;
         }
 
+        public async Task<LandlordProfile> UpdateProfileAsync(string identityId, LandlordDto dto)
+        {
+            var landlordId = await GetIdByIdentityIdAsync(identityId);
+            
+            if (landlordId == Guid.Empty)
+            {
+
+            }
+
+            var profile = await _repo.GetProfileAsync(landlordId);
+
+            if (profile == null)
+            {
+                //Do something
+            }
+
+            profile.SetName(dto.Name);
+            profile.SetContactDetails(dto.ContactPhone, dto.ContactEmail);
+
+            if (dto.ProfileImageUrl is not null)
+                profile.SetImage(dto.ProfileImageUrl);
+
+            await _repo.UpdateProfileAsync(profile);
+            await _unitOfWork.WriteChangesAsync();
+
+            return profile;
+        }
+
         public async Task<Landlord?> GetWithProfileByIdentityIdAsync(string identityId)
             => await _repo.GetWithProfileByIdentityIdAsync(identityId);
 
