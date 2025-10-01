@@ -20,21 +20,39 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateMyListing([FromBody] ListingRequest request)
         {
-            var dto = request.ToDto();
-            var listing = await _myListingService.CreateAsync(IdentityId, dto);
-            return Ok(listing);
+            try
+            {
+                var dto = request.ToDto();
+                var listing = await _myListingService.CreateAsync(IdentityId, dto);
+                return Ok(listing);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return Forbid();
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> GetMyListings()
         {
-            var listings = await _myListingService
-                .GetAllWithDetailsAsync(IdentityId);
+            try
+            {
+                var listings = await _myListingService
+                    .GetAllWithDetailsAsync(IdentityId);
 
-            var response = listings
-                .Select(listing => new ListingSummary(listing));
+                var response = listings
+                    .Select(listing => new ListingSummary(listing));
 
-            return Ok(response);
+                return Ok(response);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
         }
     }
 }
