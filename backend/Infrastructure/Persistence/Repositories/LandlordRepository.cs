@@ -14,6 +14,12 @@ namespace Infrastructure.Persistence.Repositories
             return Task.CompletedTask;
         }
 
+        public Task UpdateProfileAsync(LandlordProfile landlordProfile)
+        {
+            _context.LandlordProfiles.Update(landlordProfile);
+            return Task.CompletedTask;
+        }
+
         public async Task<Landlord?> GetWithProfileByIdentityIdAsync(string identityId)
             => await _context.Landlords.Include(l => l.Profile)
             .SingleOrDefaultAsync(l => l.IdentityId == identityId);
