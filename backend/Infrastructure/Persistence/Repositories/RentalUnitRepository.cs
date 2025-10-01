@@ -21,7 +21,7 @@ namespace Infrastructure.Persistence.Repositories
         }
 
         public async Task<RentalUnit?> GetByIdAsync(Guid id)
-            => await _context.RentalUnits.SingleOrDefaultAsync(r => r.Id == id);
+            => await _context.RentalUnits.FindAsync(id);
 
         public async Task<IEnumerable<RentalUnit>> GetAllByLandlordIdAsync(Guid landlordId)
             => await _context.RentalUnits
