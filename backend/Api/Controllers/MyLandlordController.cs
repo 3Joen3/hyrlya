@@ -26,6 +26,14 @@ namespace Api.Controllers
             return Ok(landlord);
         }
 
+        [HttpPut]
+        public async Task<IActionResult> UpdateMyLandlordProfile([FromBody] LandlordRequest request)
+        {
+            var dto = request.ToDto();
+            var profile = await _myLandlordService.UpdateProfileAsync(IdentityId, dto);
+            return Ok(profile);
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetMyLandlord()
         {
