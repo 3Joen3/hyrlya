@@ -42,7 +42,7 @@ namespace Api.Controllers
                 var profile = await _myLandlordService.UpdateProfileAsync(IdentityId, dto);
                 return Ok(profile);
             }
-            catch(KeyNotFoundException)
+            catch (KeyNotFoundException)
             {
                 return NotFound();
             }
