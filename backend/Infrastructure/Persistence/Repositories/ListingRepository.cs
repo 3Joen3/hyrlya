@@ -14,24 +14,26 @@ namespace Infrastructure.Persistence.Repositories
             return Task.CompletedTask;
         }
 
-        public async Task<Listing?> GetFullByIdAsync(Guid id) 
+        public async Task<Listing?> GetWithDetailsByIdAsync(Guid id) 
             => await _context.Listings
                 .Include(l => l.RentalUnit)
                 .Include(l => l.Landlord)
-                .ThenInclude(l => l.Profile)
+                .ThenInclude(l => l!.Profile)
                 .FirstOrDefaultAsync(l => l.Id == id);
 
-        public async Task<IEnumerable<Listing>> GetFullAllByLandlordIdAsync(Guid landlordId)
+        public async Task<IEnumerable<Listing>> GetAllWithDetailsByLandlordIdAsync(Guid landlordId)
             => await _context.Listings
                 .Include(l => l.RentalUnit)
                 .Where(l => l.LandlordId == landlordId)
+                .AsNoTracking()
                 .ToListAsync();
 
-        public async Task<IEnumerable<Listing>> GetFullPaginatedAsync(int page, int pageSize)
+        public async Task<IEnumerable<Listing>> GetPaginatedWithDetailsAsync(int page, int pageSize)
             => await _context.Listings
                 .Include(l => l.RentalUnit)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
+                .AsNoTracking()
                 .ToListAsync();
     }
 }

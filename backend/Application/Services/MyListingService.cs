@@ -45,7 +45,7 @@ namespace Application.Services
             if (landlordId == Guid.Empty)
                 throw new KeyNotFoundException($"Landlord with IdentityId '{identityId}' could not be found when attempting to retrieve all listings.");
 
-            return await _repo.GetFullAllByLandlordIdAsync(landlordId);
+            return await _repo.GetAllWithDetailsByLandlordIdAsync(landlordId);
         }
     }
 }
