@@ -50,7 +50,7 @@ function LowerSection({ listing }: { listing: ListingDetails }) {
         </ListingPageSection>
       )}
 
-      <LandlordContact {...listing.landlord} />
+      <LandlordContact {...listing.landlordProfile} />
     </Block>
   );
 }

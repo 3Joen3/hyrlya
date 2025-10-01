@@ -6,8 +6,8 @@ import { EnvelopeIcon, PhoneIcon, UserIcon } from "@heroicons/react/24/outline";
 
 interface Props {
   name: string;
-  phone: string;
-  email: string;
+  phone?: string;
+  email?: string;
   image: ImageType | null;
 }
 
@@ -23,12 +23,12 @@ export default function LandlordContact({ name, phone, email, image }: Props) {
   );
 }
 
-function Icons({ name, phone, email }: { name: string; phone: string; email: string }) {
+function Icons({ name, phone, email }: { name: string; phone?: string; email?: string }) {
   return (
     <div className="space-y-1">
       <ListingPageIconRow icon={UserIcon} text={name} />
-      <ListingPageIconRow icon={PhoneIcon} text={phone} />
-      <ListingPageIconRow icon={EnvelopeIcon} text={email} />
+      {phone && <ListingPageIconRow icon={PhoneIcon} text={phone} />}
+      {email && <ListingPageIconRow icon={EnvelopeIcon} text={email} />}
     </div>
   );
 }
