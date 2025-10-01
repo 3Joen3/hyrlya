@@ -1,4 +1,5 @@
 ﻿using Domain.ValueObjects;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Domain.Entities
 {
@@ -15,29 +16,43 @@ namespace Domain.Entities
         internal LandlordProfile(string name, Landlord landlord , WebAddress? imageUrl = null,
             PhoneNumber? phoneNumber = null, EmailAddress? emailAddress = null)
         {
-            ArgumentException.ThrowIfNullOrWhiteSpace(name);
-            ArgumentNullException.ThrowIfNull(landlord);
-
-            if (phoneNumber is null && emailAddress is null) 
-                throw new ArgumentException("At least one method of contact (phone or email) must be provided.");
-
-            Image? image = null;
+            SetName(name);
+            SetContactDetails(phoneNumber, emailAddress);
+            SetLandlord(landlord);
 
             if (imageUrl is not null)
-                image = BuildProfileImage(imageUrl);
-
-            Name = name;
-            Image = image;
-            PhoneNumber = phoneNumber;
-            EmailAddress = emailAddress;
-            LandlordId = landlord.Id;
-            Landlord = landlord;
+                SetImage(imageUrl);
         }
-         
-        private Image BuildProfileImage(WebAddress imageUrl)
+
+        [MemberNotNull(nameof(Name))]
+        public void SetName(string name)
+        {
+            ArgumentException.ThrowIfNullOrWhiteSpace(name);
+            Name = name;
+        }
+
+        public void SetImage(WebAddress imageUrl)
         {
             var altText = $"Hyresvärd {Name} - Profilbild";
-            return new Image(imageUrl, altText);
+            Image = new Image(imageUrl, altText);
+        }
+
+        public void SetContactDetails(PhoneNumber? phoneNumber, EmailAddress? emailAddress)
+        {
+            if (phoneNumber is null && emailAddress is null)
+                throw new ArgumentException("At least one method of contact (phone or email) must be provided.");
+
+            PhoneNumber = phoneNumber;
+            EmailAddress = emailAddress;
+        }
+
+        [MemberNotNull(nameof(Landlord))]
+        public void SetLandlord(Landlord landlord)
+        {
+            ArgumentNullException.ThrowIfNull(landlord);
+
+            Landlord = landlord;
+            LandlordId = landlord.Id;
         }
 
         private LandlordProfile() 
