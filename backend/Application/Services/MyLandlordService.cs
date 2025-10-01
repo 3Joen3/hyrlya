@@ -12,7 +12,8 @@ namespace Application.Services
 
         public async Task<Landlord> CreateAsync(string identityId, LandlordDto dto)
         {
-            //INTE HAR EN REDAN?
+            if (await _repo.GetMyIdAsync(identityId) != Guid.Empty)
+                throw new InvalidOperationException($"Landlord with IdentityId '{identityId}' already exists when attempting to create landlord.");
 
             var landlord = new Landlord(identityId, dto.Name, dto.ProfileImageUrl,
                 dto.ContactPhone, dto.ContactEmail);
@@ -23,21 +24,18 @@ namespace Application.Services
             return landlord;
         }
 
+        public async Task<Guid> GetIdAsync(string identityId)
+            => await _repo.GetMyIdAsync(identityId);
+
         public async Task<LandlordProfile> UpdateProfileAsync(string identityId, LandlordDto dto)
         {
-            var landlordId = await GetIdByIdentityIdAsync(identityId);
-            
+            var landlordId = await _repo.GetMyIdAsync(identityId);
+
             if (landlordId == Guid.Empty)
-            {
+                throw new KeyNotFoundException($"Landlord with IdentityId ´{identityId}´ could not be found when attempting to update profile.");
 
-            }
-
-            var profile = await _repo.GetProfileAsync(landlordId);
-
-            if (profile == null)
-            {
-                //Do something
-            }
+            var profile = await _repo.GetProfileByLandlordId(landlordId) 
+                ?? throw new KeyNotFoundException($"LandlordProfile with LandlordId ´{landlordId}´ could not be found when attempting to update profile.");
 
             profile.SetName(dto.Name);
             profile.SetContactDetails(dto.ContactPhone, dto.ContactEmail);
@@ -51,10 +49,14 @@ namespace Application.Services
             return profile;
         }
 
-        public async Task<Landlord?> GetWithProfileByIdentityIdAsync(string identityId)
-            => await _repo.GetWithProfileByIdentityIdAsync(identityId);
+        public async Task<LandlordProfile?> GetProfileAsync(string identityId)
+        {
+            var landlordId = await _repo.GetMyIdAsync(identityId);
 
-        public async Task<Guid> GetIdByIdentityIdAsync(string identityId)
-            => await _repo.GetIdByIdentityIdAsync(identityId);
+            if (landlordId == Guid.Empty)
+                throw new KeyNotFoundException($"Landlord with IdentityId '{identityId}' could not be found when attempting to retrieve landlord profile.");
+
+            return await _repo.GetProfileByLandlordId(landlordId);
+        }
     }
 }
