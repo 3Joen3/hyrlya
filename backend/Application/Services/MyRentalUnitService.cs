@@ -6,17 +6,17 @@ using Domain.Interfaces;
 namespace Application.Services
 {
     public class MyRentalUnitService(IRentalUnitRepository repo, IUnitOfWork unitOfWork, 
-        IMyLandlordService myLandlordService) : IMyRentalUnitService
+        ILandlordRepository landlordRepo) : IMyRentalUnitService
     {
         private readonly IRentalUnitRepository _repo = repo;
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
-        private readonly IMyLandlordService _myLandlordService = myLandlordService;
+        private readonly ILandlordRepository _landlordRepo = landlordRepo;
 
         public async Task<RentalUnit> CreateAsync(string identityId, RentalUnitDto dto)
         {
-            var landlordId = await _myLandlordService
-                .GetIdAsync(identityId);
+            var landlordId = await _landlordRepo
+                .GetMyIdAsync(identityId);
 
             if (landlordId == Guid.Empty)
                 throw new KeyNotFoundException($"Landlord with IdentityId '{identityId}' could not be found when attempting to create rental unit.");
@@ -32,14 +32,17 @@ namespace Application.Services
 
         public async Task<RentalUnit> UpdateAsync(string identityId, Guid id, RentalUnitDto dto)
         {
-            var landlordId = await _myLandlordService
-                .GetIdAsync(identityId);
+            var landlordId = await _landlordRepo
+                .GetMyIdAsync(identityId);
 
             if (landlordId == Guid.Empty)
                 throw new KeyNotFoundException($"Landlord with IdentityId '{identityId}' could not be found when attempting to update rental unit.");
 
             var rentalUnit = await _repo.GetByIdAsync(id) 
                 ?? throw new KeyNotFoundException($"RentalUnit with Id '{id}' could not be found when attempting to update rental unit.");
+
+            if (!rentalUnit.IsOwnedBy(landlordId))
+                throw new UnauthorizedAccessException($"RentalUnit with Id '{rentalUnit.Id}' is not owned by Landlord with Id '{landlordId}' when attempting to update rental unit.");
 
             rentalUnit.SetAddress(dto.Address);
             rentalUnit.SetType(dto.Type);
@@ -61,8 +64,8 @@ namespace Application.Services
             if (rentalUnit is null)
                 return null;
 
-            var landlordId = await _myLandlordService
-                .GetIdAsync(identityId);
+            var landlordId = await _landlordRepo
+                .GetMyIdAsync(identityId);
 
             if (landlordId == Guid.Empty)
                 throw new KeyNotFoundException($"Landlord with IdentityId '{identityId}' could not be found when attempting to retrieve rental unit.");
@@ -75,8 +78,8 @@ namespace Application.Services
 
         public async Task<IEnumerable<RentalUnit>> GetAllAsync(string identityId)
         {
-            var landlordId = await _myLandlordService
-                .GetIdAsync(identityId);
+            var landlordId = await _landlordRepo
+                .GetMyIdAsync(identityId);
 
             if (landlordId == Guid.Empty)
                 throw new KeyNotFoundException($"Landlord with IdentityId '{identityId}' could not be found when attempting to retrieve rental units.");
