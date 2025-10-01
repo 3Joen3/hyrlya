@@ -19,7 +19,7 @@ namespace Infrastructure.Persistence.Repositories
                 .Include(l => l.RentalUnit)
                 .Include(l => l.Landlord)
                 .ThenInclude(l => l!.Profile)
-                .FirstOrDefaultAsync(l => l.Id == id);
+                .SingleOrDefaultAsync(l => l.Id == id);
 
         public async Task<IEnumerable<Listing>> GetAllWithDetailsByLandlordIdAsync(Guid landlordId)
             => await _context.Listings
