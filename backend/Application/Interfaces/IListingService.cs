@@ -4,7 +4,7 @@ namespace Application.Interfaces
 {
     public interface IListingService
     {
-        Task<IEnumerable<Listing>> GetFullPaginatedAsync(int page, int pageSize);
-        Task<Listing?> GetFullByIdAsync(Guid id);
+        Task<Listing?> GetWithDetailsByIdAsync(Guid id);
+        Task<IEnumerable<Listing>> GetWithDetailsPaginatedAsync(int page, int pageSize);
     }
 }

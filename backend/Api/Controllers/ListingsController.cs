@@ -13,7 +13,8 @@ namespace Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetPaginated([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
-            var result = await _listingsService.GetFullPaginatedAsync(page, pageSize);
+            var result = await _listingsService
+                .GetWithDetailsPaginatedAsync(page, pageSize);
 
             var response = result
                 .Select(listing => new ListingSummary(listing));
@@ -24,7 +25,8 @@ namespace Api.Controllers
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetListingDetailsById(Guid id)
         {
-            var listing = await _listingsService.GetFullByIdAsync(id);
+            var listing = await _listingsService
+                .GetWithDetailsByIdAsync(id);
 
             if (listing is null)
                 return NotFound();
