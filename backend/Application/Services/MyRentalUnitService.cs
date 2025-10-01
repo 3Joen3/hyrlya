@@ -88,7 +88,7 @@ namespace Application.Services
         public async Task<IEnumerable<RentalUnit>> GetAllAsync(string identityId)
         {
             var landlordId = await _myLandlordService
-                .GetIdByIdentityIdAsync(identityId);
+                .GetIdAsync(identityId);
 
             return await _repo.GetAllByLandlordIdAsync(landlordId);
         }
