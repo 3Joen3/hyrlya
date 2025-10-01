@@ -2,31 +2,32 @@
 using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Application.Services
 {
     public class MyListingService(IListingRepository repo, IUnitOfWork unitOfWork, 
-        IMyLandlordService myLandlordService, IMyRentalUnitService myRentalUnitService) : IMyListingService
+        ILandlordRepository landlordRepository, IRentalUnitRepository rentalUnitRepo) : IMyListingService
     {
         private readonly IListingRepository _repo = repo;
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
-        private readonly IMyLandlordService _myLandlordService = myLandlordService;
-        private readonly IMyRentalUnitService _myRentalUnitService = myRentalUnitService;
+        private readonly ILandlordRepository _landlordRepository = landlordRepository;
+        private readonly IRentalUnitRepository _rentalUnitRepo = rentalUnitRepo;
 
         public async Task<Listing> CreateAsync(string identityId, ListingDto dto)
         {
-            var landlordId = await _myLandlordService
-                .GetIdByIdentityIdAsync(identityId);
+            var landlordId = await _landlordRepository
+                .GetMyIdAsync(identityId);
 
-            var rentalUnit = await _myRentalUnitService
-                .GetByIdAsync(landlordId, dto.RentalUnitId);
+            if (landlordId == Guid.Empty)
+                throw new KeyNotFoundException($"Landlord with IdentityId '{identityId}' could not be found when attempting to create listing.");
 
-            if (rentalUnit == null)
-            {
-                //Do Something
-            }
+            var rentalUnit = await _rentalUnitRepo
+                .GetByIdAsync(dto.RentalUnitId) 
+                ?? throw new KeyNotFoundException($"RentalUnit with Id '{dto.RentalUnitId}' could not be found when attempting to create listing.");
+
+            if (!rentalUnit.IsOwnedBy(landlordId))
+                throw new UnauthorizedAccessException($"RentalUnit with Id '{rentalUnit.Id}' is not owned by Landlord with Id '{landlordId}' when attempting to create listing.");
 
             var listing = new Listing(landlordId, rentalUnit.Id, dto.RentalPrice, dto.LandlordNote);
 
@@ -36,10 +37,13 @@ namespace Application.Services
             return listing;
         }
 
-        public async Task<IEnumerable<Listing>> GetFullAllAsync(string identityId)
+        public async Task<IEnumerable<Listing>> GetAllWithDetailsAsync(string identityId)
         {
-            var landlordId = await _myLandlordService
-                .GetIdByIdentityIdAsync(identityId);
+            var landlordId = await _landlordRepository
+                .GetMyIdAsync(identityId);
+
+            if (landlordId == Guid.Empty)
+                throw new KeyNotFoundException($"Landlord with IdentityId '{identityId}' could not be found when attempting to retrieve all listings.");
 
             return await _repo.GetFullAllByLandlordIdAsync(landlordId);
         }
