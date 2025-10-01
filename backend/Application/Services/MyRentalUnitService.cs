@@ -36,12 +36,12 @@ namespace Application.Services
                 //Do something
             }
 
-            rentalUnit.ChangeAddress(dto.Address);
-            rentalUnit.ChangeType(dto.Type);
-            rentalUnit.ChangeDescription(dto.Description);
-            rentalUnit.ChangeNumberOfRooms(dto.NumberOfRooms);
-            rentalUnit.ChangeSizeSquareMeters(dto.SizeSquareMeters);
-            rentalUnit.ReplaceImages(dto.ImageUrls);
+            rentalUnit.SetAddress(dto.Address);
+            rentalUnit.SetType(dto.Type);
+            rentalUnit.SetDescription(dto.Description);
+            rentalUnit.SetNumberOfRooms(dto.NumberOfRooms);
+            rentalUnit.SetSizeSquareMeters(dto.SizeSquareMeters);
+            rentalUnit.SetImages(dto.ImageUrls);
 
             await _repo.UpdateAsync(rentalUnit);
             await _unitOfWork.WriteChangesAsync();

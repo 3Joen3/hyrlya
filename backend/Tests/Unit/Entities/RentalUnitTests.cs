@@ -141,7 +141,7 @@ namespace Tests.Unit.Entities
             var rentalUnit = GetFullRentalUnit();
             var newAddress = new Address("ChangedStreet", "999", "Göteborg");
 
-            rentalUnit.ChangeAddress(newAddress);
+            rentalUnit.SetAddress(newAddress);
 
             Assert.Equal(newAddress, rentalUnit.Address);
         }
@@ -153,7 +153,7 @@ namespace Tests.Unit.Entities
             Address? newAddress = null;
 
             Assert.Throws<ArgumentNullException>(()
-                => rentalUnit.ChangeAddress(newAddress!));
+                => rentalUnit.SetAddress(newAddress!));
         }
 
         [Fact]
@@ -162,7 +162,7 @@ namespace Tests.Unit.Entities
             var rentalUnit = GetFullRentalUnit();
             var newType = RentalUnitType.Room;
 
-            rentalUnit.ChangeType(newType);
+            rentalUnit.SetType(newType);
 
             Assert.Equal(newType, rentalUnit.Type);
         }
@@ -173,7 +173,7 @@ namespace Tests.Unit.Entities
             var rentalUnit = GetFullRentalUnit();
             var newNumberOfRooms = 11;
 
-            rentalUnit.ChangeNumberOfRooms(newNumberOfRooms);
+            rentalUnit.SetNumberOfRooms(newNumberOfRooms);
 
             Assert.Equal(newNumberOfRooms, rentalUnit.NumberOfRooms);
         }
@@ -185,7 +185,7 @@ namespace Tests.Unit.Entities
             var newNumberOfRooms = 0;
 
             Assert.Throws<ArgumentOutOfRangeException>(()
-                => rentalUnit.ChangeNumberOfRooms(newNumberOfRooms));
+                => rentalUnit.SetNumberOfRooms(newNumberOfRooms));
         }
 
         [Fact]
@@ -194,7 +194,7 @@ namespace Tests.Unit.Entities
             var rentalUnit = GetFullRentalUnit();
             var newSizeSquareMeters = 71;
 
-            rentalUnit.ChangeSizeSquareMeters(newSizeSquareMeters);
+            rentalUnit.SetSizeSquareMeters(newSizeSquareMeters);
 
             Assert.Equal(newSizeSquareMeters, rentalUnit.SizeSquareMeters);
         }
@@ -206,7 +206,7 @@ namespace Tests.Unit.Entities
             var newSizeSquareMeters = 0;
 
             Assert.Throws<ArgumentOutOfRangeException>(()
-                => rentalUnit.ChangeSizeSquareMeters(newSizeSquareMeters));
+                => rentalUnit.SetSizeSquareMeters(newSizeSquareMeters));
         }
 
         [Fact]
@@ -215,7 +215,7 @@ namespace Tests.Unit.Entities
             var newImageUrls = new List<WebAddress>() { new("https://newexample.com/newimage/321") };
             var rentalUnit = GetFullRentalUnit();
 
-            rentalUnit.ReplaceImages(newImageUrls);
+            rentalUnit.SetImages(newImageUrls);
 
             Assert.Single(rentalUnit.Images);
             Assert.Equal(newImageUrls[0], rentalUnit.Images[0].Url);
@@ -229,7 +229,7 @@ namespace Tests.Unit.Entities
             var oldImage = rentalUnit.Images[0];
 
             Assert.Throws<ArgumentNullException>(()
-                => rentalUnit.ReplaceImages(newImageUrls!));
+                => rentalUnit.SetImages(newImageUrls!));
 
             Assert.Single(rentalUnit.Images);
             Assert.Equal(oldImage, rentalUnit.Images[0]);
@@ -243,7 +243,7 @@ namespace Tests.Unit.Entities
             var oldImage = rentalUnit.Images[0];
 
             Assert.Throws<ArgumentException>(()
-                => rentalUnit.ReplaceImages(newImageUrls));
+                => rentalUnit.SetImages(newImageUrls));
 
             Assert.Single(rentalUnit.Images);
             Assert.Equal(oldImage, rentalUnit.Images[0]);
@@ -257,7 +257,7 @@ namespace Tests.Unit.Entities
             var oldImage = rentalUnit.Images[0];
 
             Assert.Throws<ArgumentNullException>(()
-                => rentalUnit.ReplaceImages(newImageUrls!));
+                => rentalUnit.SetImages(newImageUrls!));
 
             Assert.Single(rentalUnit.Images);
             Assert.Equal(oldImage, rentalUnit.Images[0]);
@@ -291,7 +291,7 @@ namespace Tests.Unit.Entities
             var rentalUnit = GetFullRentalUnit();
             var newDescription = "This is the new description";
 
-            rentalUnit.ChangeDescription(newDescription);
+            rentalUnit.SetDescription(newDescription);
 
             Assert.Equal(newDescription, rentalUnit.Description);
         }
@@ -303,7 +303,7 @@ namespace Tests.Unit.Entities
             string? description = null;
 
             Assert.Throws<ArgumentNullException>(()
-                => rentalUnit.ChangeDescription(description!));
+                => rentalUnit.SetDescription(description!));
         }
 
         [Theory]
@@ -314,7 +314,7 @@ namespace Tests.Unit.Entities
             var rentalUnit = GetFullRentalUnit();
 
             Assert.Throws<ArgumentException>(()
-                => rentalUnit.ChangeDescription(description));
+                => rentalUnit.SetDescription(description));
         }
 
         private static RentalUnit GetFullRentalUnit(Guid? landlordId = null)

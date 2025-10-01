@@ -1,5 +1,6 @@
 ﻿using Domain.Enums;
 using Domain.ValueObjects;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Domain.Entities
 {
@@ -20,23 +21,56 @@ namespace Domain.Entities
         public RentalUnit(Guid landlordId, Address address, RentalUnitType type, string description,
             int numberOfRooms, int sizeSquareMeters, IEnumerable<WebAddress> imageUrls)
         {
-            LandlordId = SetLandlordId(landlordId);
-            Address = SetAddress(address);
-            Type = type;
-            Description = SetDescription(description);
-            NumberOfRooms = SetNumberOfRooms(numberOfRooms);;
-            SizeSquareMeters = SetSizeSquareMeters(sizeSquareMeters);
+            SetLandlordId(landlordId);
+            SetAddress(address);
+            SetType(type);
+            SetDescription(description);
+            SetNumberOfRooms(numberOfRooms);
+            SetSizeSquareMeters(sizeSquareMeters);
             AddImages(imageUrls);
         }
 
-        public void ChangeAddress(Address newAddress) => Address = SetAddress(newAddress);
-        public void ChangeType(RentalUnitType newType) => Type = newType;
-        public void ChangeDescription(string description) => Description = SetDescription(description);
-        public void ChangeNumberOfRooms(int newNumberOfRooms) => NumberOfRooms = SetNumberOfRooms(newNumberOfRooms);
-        public void ChangeSizeSquareMeters(int newSize) => SizeSquareMeters = SetSizeSquareMeters(newSize);
-        public bool IsOwnedBy(Guid landlordId) => LandlordId == landlordId;
+        private void SetLandlordId(Guid landlordId)
+        {
+            if (landlordId == Guid.Empty)
+                throw new ArgumentException("LandlordId can't be empty.", nameof(landlordId));
 
-        public void ReplaceImages(IEnumerable<WebAddress> imageUrls)
+            LandlordId = landlordId;
+        }
+
+        public void SetType(RentalUnitType type) => Type = type; 
+
+        [MemberNotNull(nameof(Address))]
+        public void SetAddress(Address address)
+        {
+            ArgumentNullException.ThrowIfNull(address);
+            Address = address;
+        }
+
+        [MemberNotNull(nameof(Description))]
+        public void SetDescription(string description)
+        {
+            ArgumentException.ThrowIfNullOrWhiteSpace(description);
+            Description = description;
+        }
+
+        public void SetNumberOfRooms(int numberOfRooms)
+        {
+            if (numberOfRooms < 1)
+                throw new ArgumentOutOfRangeException(nameof(numberOfRooms), "NumberOfRooms can't be under 1.");
+
+            NumberOfRooms = numberOfRooms;
+        }
+
+        public void SetSizeSquareMeters(int sizeSquareMeters)
+        {
+            if (sizeSquareMeters < 1)
+                throw new ArgumentOutOfRangeException(nameof(sizeSquareMeters), "SizeSquareMeters can't be under 1.");
+
+            SizeSquareMeters = sizeSquareMeters;
+        }
+
+        public void SetImages(IEnumerable<WebAddress> imageUrls)
         {
             ArgumentNullException.ThrowIfNull(imageUrls);
 
@@ -48,6 +82,8 @@ namespace Domain.Entities
             _images.Clear();
             _images.AddRange(images);
         }
+
+        public bool IsOwnedBy(Guid landlordId) => LandlordId == landlordId;
 
         private void AddImages(IEnumerable<WebAddress> imageUrls)
         {
@@ -63,42 +99,6 @@ namespace Domain.Entities
         private static IEnumerable<Image> BuildImages(IEnumerable<WebAddress> imageUrls)
         {
             return [.. imageUrls.Select(url => new Image(url, "Bild från bostadsannons"))];
-        }
-
-        private static Guid SetLandlordId(Guid landlordId)
-        {
-            if (landlordId == Guid.Empty)
-                throw new ArgumentException("LandlordId can't be empty.", nameof(landlordId));
-
-            return landlordId;
-        }
-
-        private static Address SetAddress(Address address)
-        {
-            ArgumentNullException.ThrowIfNull(address);
-            return address;
-        }
-
-        private static string SetDescription(string description)
-        {
-            ArgumentException.ThrowIfNullOrWhiteSpace(description);
-            return description;
-        }
-
-        private static int SetNumberOfRooms(int numberOfRooms)
-        {
-            if (numberOfRooms < 1)
-                throw new ArgumentOutOfRangeException(nameof(numberOfRooms), "NumberOfRooms can't be under 1.");
-
-            return numberOfRooms;
-        }
-
-        private static int SetSizeSquareMeters(int sizeSquareMeters)
-        {
-            if (sizeSquareMeters < 1)
-                throw new ArgumentOutOfRangeException(nameof(sizeSquareMeters), "SizeSquareMeters can't be under 1.");
-
-            return sizeSquareMeters;
         }
 
         private RentalUnit() 
