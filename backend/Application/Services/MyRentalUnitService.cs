@@ -16,7 +16,10 @@ namespace Application.Services
         public async Task<RentalUnit> CreateAsync(string identityId, RentalUnitDto dto)
         {
             var landlordId = await _myLandlordService
-                .GetIdByIdentityIdAsync(identityId);
+                .GetIdAsync(identityId);
+
+            if (landlordId == Guid.Empty)
+                throw new KeyNotFoundException($"Landlord with IdentityId ´{identityId}´ could not be found when attempting to create rental unit.");
 
             var rentalUnit = new RentalUnit(landlordId, dto.Address, dto.Type, dto.Description,
                 dto.NumberOfRooms, dto.SizeSquareMeters, dto.ImageUrls);
