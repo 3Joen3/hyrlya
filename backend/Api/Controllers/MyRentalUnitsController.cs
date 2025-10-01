@@ -20,46 +20,82 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateMyRentalUnit([FromBody] RentalUnitRequest request)
         {
-            var dto = request.ToDto();
-            var rentalUnit = await _myRentalUnitService.CreateAsync(IdentityId, dto);
+            try
+            {
+                var dto = request.ToDto();
+                var rentalUnit = await _myRentalUnitService.CreateAsync(IdentityId, dto);
 
-            return Ok(rentalUnit);
+                return Ok(rentalUnit);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
         }
 
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> UpdateMyRentalUnit(Guid id, [FromBody] RentalUnitRequest request)
         {
-            var dto = request.ToDto();
-            var rentalUnit = await _myRentalUnitService.UpdateAsync(IdentityId, id, dto);
+            try
+            {
+                var dto = request.ToDto();
+                var rentalUnit = await _myRentalUnitService.UpdateAsync(IdentityId, id, dto);
 
-            return Ok(rentalUnit);
+                return Ok(rentalUnit);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return Forbid();
+            }
         }
 
 
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetMyRentalUnitById(Guid id)
         {
-            var rentalUnit = await _myRentalUnitService
-                .GetByIdAsync(IdentityId, id);
+            try
+            {
+                var rentalUnit = await _myRentalUnitService
+                    .GetByIdAsync(IdentityId, id);
 
-            if (rentalUnit == null)
+                if (rentalUnit == null)
+                    return NotFound();
+
+                var response = new RentalUnitDetails(rentalUnit);
+
+                return Ok(response);
+            }
+            catch (KeyNotFoundException)
+            {
                 return NotFound();
-
-            var response = new RentalUnitDetails(rentalUnit);
-
-            return Ok(response);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return Forbid();
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> GetMyRentalUnits()
         {
-            var rentalUnits = await _myRentalUnitService
-                .GetAllAsync(IdentityId);
+            try
+            {
+                var rentalUnits = await _myRentalUnitService
+                    .GetAllAsync(IdentityId);
 
-            var response = rentalUnits
-                .Select(rentalUnit => new RentalUnitSummary(rentalUnit));
+                var response = rentalUnits
+                    .Select(rentalUnit => new RentalUnitSummary(rentalUnit));
 
-            return Ok(response);
+                return Ok(response);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
         }
     }
 }
