@@ -21,11 +21,12 @@ namespace Infrastructure.Persistence.Repositories
         }
 
         public async Task<RentalUnit?> GetByIdAsync(Guid id)
-            => await _context.RentalUnits.FirstOrDefaultAsync(r => r.Id == id);
+            => await _context.RentalUnits.SingleOrDefaultAsync(r => r.Id == id);
 
-        public async Task<IEnumerable<RentalUnit>> GetAllByLandlordIdAsync(Guid landlordId) 
+        public async Task<IEnumerable<RentalUnit>> GetAllByLandlordIdAsync(Guid landlordId)
             => await _context.RentalUnits
                 .Where(r => r.LandlordId == landlordId)
+                .AsNoTracking()
                 .ToListAsync();
     }
 }
