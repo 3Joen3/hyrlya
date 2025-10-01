@@ -12,7 +12,7 @@ import { LandlordProfile } from "@/types/Landlord";
 import { useForm } from "react-hook-form";
 import { ProfileData, profileSchema } from "@/lib/schemas/profileSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createLandlord } from "@/lib/actions/profile";
+import { createLandlord, updateLandlord } from "@/lib/actions/profile";
 import { Image } from "@/types/Common";
 import { useEdgeStore } from "@/lib/edgestore";
 
@@ -27,14 +27,15 @@ export default function ProfileForm({ existingData }: Props) {
       name: existingData?.name,
       emailAddress: existingData?.email,
       phoneNumber: existingData?.phone,
-      profileImageUrl: existingData?.image.url,
+      profileImageUrl: existingData?.image?.url,
     },
   });
 
   const { edgestore } = useEdgeStore();
 
   async function handleSubmit(data: ProfileData) {
-    await createLandlord(data);
+    if (existingData) await updateLandlord(data);
+    else await createLandlord(data);
   }
 
   const { watch, setValue } = methods;
