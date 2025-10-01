@@ -32,12 +32,14 @@ namespace Application.Services
 
         public async Task<RentalUnit> UpdateAsync(string identityId, Guid id, RentalUnitDto dto)
         {
-            var rentalUnit = await GetByIdAsync(identityId, id);
+            var landlordId = await _myLandlordService
+                .GetIdAsync(identityId);
 
-            if (rentalUnit is null)
-            {
-                //Do something
-            }
+            if (landlordId == Guid.Empty)
+                throw new KeyNotFoundException($"Landlord with IdentityId '{identityId}' could not be found when attempting to update rental unit.");
+
+            var rentalUnit = await _repo.GetByIdAsync(id) 
+                ?? throw new KeyNotFoundException($"RentalUnit with Id '{id}' could not be found when attempting to update rental unit.");
 
             rentalUnit.SetAddress(dto.Address);
             rentalUnit.SetType(dto.Type);
@@ -60,27 +62,13 @@ namespace Application.Services
                 return null;
 
             var landlordId = await _myLandlordService
-                .GetIdByIdentityIdAsync(identityId);
-                
-            if (!rentalUnit.IsOwnedBy(landlordId))
-            {
-                //Do something
-            }
+                .GetIdAsync(identityId);
 
-            return rentalUnit;
-        }
-
-        public async Task<RentalUnit?> GetByIdAsync(Guid landlordId, Guid id)
-        {
-            var rentalUnit = await _repo.GetByIdAsync(id);
-
-            if (rentalUnit is null)
-                return null;
+            if (landlordId == Guid.Empty)
+                throw new KeyNotFoundException($"Landlord with IdentityId '{identityId}' could not be found when attempting to retrieve rental unit.");
 
             if (!rentalUnit.IsOwnedBy(landlordId))
-            {
-                //Do Something
-            }
+                throw new UnauthorizedAccessException($"RentalUnit with Id '{id}' is not owned by Landlord with Id '{landlordId}' when attempting to retrieve rental unit.");
 
             return rentalUnit;
         }
@@ -89,6 +77,9 @@ namespace Application.Services
         {
             var landlordId = await _myLandlordService
                 .GetIdAsync(identityId);
+
+            if (landlordId == Guid.Empty)
+                throw new KeyNotFoundException($"Landlord with IdentityId '{identityId}' could not be found when attempting to retrieve rental units.");
 
             return await _repo.GetAllByLandlordIdAsync(landlordId);
         }
