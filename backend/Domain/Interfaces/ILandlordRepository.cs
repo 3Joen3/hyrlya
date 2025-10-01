@@ -5,11 +5,9 @@ namespace Domain.Interfaces
     public interface ILandlordRepository
     {
         Task AddAsync(Landlord landlord);
+        Task<Guid> GetMyIdAsync(string identityId);
+
         Task UpdateProfileAsync(LandlordProfile landlordProfile);
-
-        Task<Landlord?> GetWithProfileByIdentityIdAsync(string identityId);
-        Task<Guid> GetIdByIdentityIdAsync(string identityId);
-
-        Task<LandlordProfile?> GetMyProfileAsync(string identityId);
+        Task<LandlordProfile?> GetProfileByLandlordId(Guid landlordId);
     }
 }
