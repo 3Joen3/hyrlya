@@ -32,10 +32,10 @@ namespace Application.Services
             var landlordId = await _repo.GetMyIdAsync(identityId);
 
             if (landlordId == Guid.Empty)
-                throw new KeyNotFoundException($"Landlord with IdentityId ´{identityId}´ could not be found when attempting to update profile.");
+                throw new KeyNotFoundException($"Landlord with IdentityId '{identityId}' could not be found when attempting to update profile.");
 
             var profile = await _repo.GetProfileByLandlordId(landlordId) 
-                ?? throw new KeyNotFoundException($"LandlordProfile with LandlordId ´{landlordId}´ could not be found when attempting to update profile.");
+                ?? throw new KeyNotFoundException($"LandlordProfile with LandlordId '{landlordId}' could not be found when attempting to update profile.");
 
             profile.SetName(dto.Name);
             profile.SetContactDetails(dto.ContactPhone, dto.ContactEmail);
