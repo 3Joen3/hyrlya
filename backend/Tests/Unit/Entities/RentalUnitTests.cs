@@ -136,7 +136,7 @@ namespace Tests.Unit.Entities
         }
 
         [Fact]
-        public void ChangeAddress_WithValidAddress_ShouldSucceed()
+        public void SetAddress_WithValidAddress_ShouldSucceed()
         {
             var rentalUnit = GetFullRentalUnit();
             var newAddress = new Address("ChangedStreet", "999", "Göteborg");
@@ -147,7 +147,7 @@ namespace Tests.Unit.Entities
         }
 
         [Fact]
-        public void ChangeAddress_WithNullAddress_ShouldThrow()
+        public void SetAddress_WithNullAddress_ShouldThrow()
         {
             var rentalUnit = GetFullRentalUnit();
             Address? newAddress = null;
@@ -157,7 +157,7 @@ namespace Tests.Unit.Entities
         }
 
         [Fact]
-        public void ChangeType_WithValidType_ShouldSucceed()
+        public void SetType_WithValidType_ShouldSucceed()
         {
             var rentalUnit = GetFullRentalUnit();
             var newType = RentalUnitType.Room;
@@ -168,7 +168,7 @@ namespace Tests.Unit.Entities
         }
 
         [Fact]
-        public void ChangeNumberOfRooms_WithValidValue_ShouldSucceed()
+        public void SetNumberOfRooms_WithValidValue_ShouldSucceed()
         {
             var rentalUnit = GetFullRentalUnit();
             var newNumberOfRooms = 11;
@@ -179,7 +179,7 @@ namespace Tests.Unit.Entities
         }
 
         [Fact]
-        public void ChangeNumberOfRooms_WithInvalidValue_ShouldThrow()
+        public void SetNumberOfRooms_WithInvalidValue_ShouldThrow()
         {
             var rentalUnit = GetFullRentalUnit();
             var newNumberOfRooms = 0;
@@ -189,7 +189,7 @@ namespace Tests.Unit.Entities
         }
 
         [Fact]
-        public void ChangeSizeSquareMeters_WithValidValue_ShouldSucceed()
+        public void SetSizeSquareMeters_WithValidValue_ShouldSucceed()
         {
             var rentalUnit = GetFullRentalUnit();
             var newSizeSquareMeters = 71;
@@ -200,7 +200,7 @@ namespace Tests.Unit.Entities
         }
 
         [Fact]
-        public void ChangeSizeSquareMeters_WithInvalidValue_ShouldThrow()
+        public void SetSizeSquareMeters_WithInvalidValue_ShouldThrow()
         {
             var rentalUnit = GetFullRentalUnit();
             var newSizeSquareMeters = 0;
@@ -210,7 +210,7 @@ namespace Tests.Unit.Entities
         }
 
         [Fact]
-        public void ReplaceImages_WithValidImageUrls_ShouldSucceed()
+        public void SetImages_WithValidImageUrls_ShouldSucceed()
         {
             var newImageUrls = new List<WebAddress>() { new("https://newexample.com/newimage/321") };
             var rentalUnit = GetFullRentalUnit();
@@ -222,7 +222,7 @@ namespace Tests.Unit.Entities
         }
 
         [Fact]
-        public void ReplaceImages_WithNullImageUrls_ShouldThrow()
+        public void SetImages_WithNullImageUrls_ShouldThrow()
         {
             List<WebAddress>? newImageUrls = null;
             var rentalUnit = GetFullRentalUnit();
@@ -236,7 +236,7 @@ namespace Tests.Unit.Entities
         }
 
         [Fact]
-        public void ReplaceImages_WithEmptyImageUrls_ShouldThrow()
+        public void SetImages_WithEmptyImageUrls_ShouldThrow()
         {
             var newImageUrls = new List<WebAddress>() { };
             var rentalUnit = GetFullRentalUnit();
@@ -250,7 +250,7 @@ namespace Tests.Unit.Entities
         }
 
         [Fact]
-        public void ReplaceImages_WithNullImageUrl_ShouldThrow()
+        public void SetImages_WithNullImageUrl_ShouldThrow()
         {
             var newImageUrls = new List<WebAddress?>() { null };
             var rentalUnit = GetFullRentalUnit();
@@ -286,7 +286,7 @@ namespace Tests.Unit.Entities
         }
 
         [Fact]
-        public void ChangeDescription_WithValidDescription_ShouldSucceed()
+        public void SetDescription_WithValidDescription_ShouldSucceed()
         {
             var rentalUnit = GetFullRentalUnit();
             var newDescription = "This is the new description";
@@ -297,7 +297,7 @@ namespace Tests.Unit.Entities
         }
 
         [Fact]
-        public void ChangeDescription_WithNullDescription_ShouldThrow()
+        public void SetDescription_WithNullDescription_ShouldThrow()
         {
             var rentalUnit = GetFullRentalUnit();
             string? description = null;
@@ -309,7 +309,7 @@ namespace Tests.Unit.Entities
         [Theory]
         [InlineData("")]
         [InlineData(" ")]
-        public void ChangeDescription_WithEmptyDescription_ShouldThrow(string description)
+        public void SetDescription_WithEmptyDescription_ShouldThrow(string description)
         {
             var rentalUnit = GetFullRentalUnit();
 
