@@ -15,12 +15,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createLandlord, updateLandlord } from "@/lib/actions/profile";
 import { Image } from "@/types/Common";
 import { useEdgeStore } from "@/lib/edgestore";
+import { useRouter } from "next/navigation";
 
 interface Props {
   existingData?: LandlordProfile;
 }
 
 export default function ProfileForm({ existingData }: Props) {
+  const router = useRouter();
+
   const methods = useForm<ProfileData>({
     resolver: zodResolver(profileSchema),
     defaultValues: {

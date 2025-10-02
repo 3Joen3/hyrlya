@@ -15,12 +15,15 @@ import { RentalUnitDetails } from "@/types/RentalUnit";
 import { RentalUnitData, rentalUnitSchema } from "@/lib/schemas/rentalUnitSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createRentalUnit, updateRentalUnit } from "@/lib/actions/rental-units";
+import { useRouter } from "next/navigation";
 
 interface Props {
   existingData?: RentalUnitDetails;
 }
 
 export default function RentalUnitForm({ existingData }: Props) {
+  const router = useRouter();
+
   const methods = useForm<RentalUnitData>({
     resolver: zodResolver(rentalUnitSchema),
     defaultValues: {
@@ -36,6 +39,7 @@ export default function RentalUnitForm({ existingData }: Props) {
   async function handleSubmit(data: RentalUnitData) {
     if (existingData) await updateRentalUnit(data, existingData.id);
     else await createRentalUnit(data);
+    router.push("/landlord/rental-units");
   }
 
   return (

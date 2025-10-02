@@ -14,18 +14,22 @@ import { TranslateRentalUnitType } from "@/lib/utils";
 import { RentalUnitSummary } from "@/types/RentalUnit";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 interface Props {
   rentalUnits: RentalUnitSummary[];
 }
 
 export default function ListingForm({ rentalUnits }: Props) {
+  const router = useRouter();
+
   const methods = useForm<ListingData>({
     resolver: zodResolver(listingSchema),
   });
 
   async function handleSubmit(data: ListingData) {
     await createListing(data);
+    router.push("/landlord/listings");
   }
 
   return (
