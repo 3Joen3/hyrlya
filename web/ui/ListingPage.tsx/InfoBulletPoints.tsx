@@ -1,8 +1,13 @@
 import ListingPageSection from "./ListingPageSection";
 import ListingPageIconRow from "./ListingPageIconRow";
 
-import { ArrowsPointingOutIcon, BanknotesIcon, MapPinIcon } from "@heroicons/react/24/outline";
-import { TranslateRentalPriceChargeInterval } from "@/lib/utils";
+import {
+  ArrowsPointingOutIcon,
+  BanknotesIcon,
+  MapPinIcon,
+  HomeModernIcon,
+} from "@heroicons/react/24/outline";
+import { TranslateRentalPriceChargeInterval, TranslateRentalUnitType } from "@/lib/utils";
 import { RentalPrice } from "@/types/Listing";
 import { RentalUnitDetails } from "@/types/RentalUnit";
 
@@ -19,12 +24,14 @@ export default function InfoBulletPoints({ rentalUnit, rentalPrice }: Props) {
     rentalPrice.chargeInterval
   )}`;
   const sizeText = `${rentalUnit.numberOfRooms} rum, ${rentalUnit.sizeSquareMeters} m²`;
+  const typeText = TranslateRentalUnitType(rentalUnit.type);
 
   return (
     <ListingPageSection heading="Info">
+      <ListingPageIconRow icon={HomeModernIcon} text={typeText} />
+      <ListingPageIconRow icon={ArrowsPointingOutIcon} text={sizeText} />
       <ListingPageIconRow icon={MapPinIcon} text={addressText} />
       <ListingPageIconRow icon={BanknotesIcon} text={priceText} />
-      <ListingPageIconRow icon={ArrowsPointingOutIcon} text={sizeText} />
     </ListingPageSection>
   );
 }
