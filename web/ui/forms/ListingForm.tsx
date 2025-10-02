@@ -41,7 +41,7 @@ export default function ListingForm({ rentalUnits }: Props) {
             <NumberField id="price" label="Pris" />
             <ChargeIntervalSelect />
           </div>
-          <TextAreaField id="landlordNote" label="Beskrivning" />
+          <TextAreaField id="landlordNote" label="Profil på hyresgäst" />
         </FormSection>
       </Block>
       <FormSubmit label="Spara" loadingLabel="Sparar" />
