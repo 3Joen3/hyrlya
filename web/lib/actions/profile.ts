@@ -21,5 +21,5 @@ export async function createLandlord(data: ProfileData) {
     //Do Something
   }
 
-  redirect("/landlord");
+  redirect("/landlord/profile");
 }
