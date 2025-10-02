@@ -1,9 +1,11 @@
 import Page from "@/components/Page";
 import PageTopRow from "@/components/PageTopRow";
 import Link from "next/link";
+import Block from "@/components/Block";
 
 import { getAuthenticated } from "@/lib/api/server";
 import { ListingSummary } from "@/types/Listing";
+import { TranslateRentalPriceChargeInterval } from "@/lib/utils";
 
 export default async function page() {
   const response = await getAuthenticated("my/listings");
@@ -30,5 +32,16 @@ export default async function page() {
 }
 
 function ListingContainer({ listing }: { listing: ListingSummary }) {
-  return <div>{listing.id}</div>;
+  const address = listing.address;
+  const rentalPeriod = TranslateRentalPriceChargeInterval(listing.rentalPrice.chargeInterval);
+  return (
+    <Link href={`/landlord/listings/${listing.id}`}>
+      <Block>
+        <p>Uthyrningsperiod: {rentalPeriod!.charAt(0).toUpperCase() + rentalPeriod!.slice(1)}</p>
+        <p>
+          Adress: {address.street} {address.houseNumber}, {address.city}
+        </p>
+      </Block>
+    </Link>
+  );
 }
