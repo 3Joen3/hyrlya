@@ -18,11 +18,15 @@ export default async function page() {
           Skapa hyresobjekt
         </Link>
       </PageTopRow>
-      <div className="space-y-4">
-        {rentalUnits.map((rentalUnit) => (
-          <RentalUnitContainer key={rentalUnit.id} rentalUnit={rentalUnit} />
-        ))}
-      </div>
+      {rentalUnits.length === 0 ? (
+        <p>Du har inga hyresobjekt ännu. Skapa ett!</p>
+      ) : (
+        <div className="space-y-4">
+          {rentalUnits.map((rentalUnit) => (
+            <RentalUnitContainer key={rentalUnit.id} rentalUnit={rentalUnit} />
+          ))}
+        </div>
+      )}
     </Page>
   );
 }

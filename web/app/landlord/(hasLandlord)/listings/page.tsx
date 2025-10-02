@@ -16,11 +16,15 @@ export default async function page() {
           Skapa annons
         </Link>
       </PageTopRow>
-      <div className="space-y-4">
-        {listings.map((listing) => (
-          <ListingContainer key={listing.id} listing={listing} />
-        ))}
-      </div>
+      {listings.length === 0 ? (
+        <p>Du har inga annonser ännu. Skapa en!</p>
+      ) : (
+        <div className="space-y-4">
+          {listings.map((listing) => (
+            <ListingContainer key={listing.id} listing={listing} />
+          ))}
+        </div>
+      )}
     </Page>
   );
 }
